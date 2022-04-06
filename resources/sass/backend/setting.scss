@@ -1,0 +1,158 @@
+body{
+		margin:0px;
+		padding:0px;
+  	font-family: 'Inter';
+  	font-weight:400;
+  	background: #fafafa;
+}
+
+h1,h2,h3,h4,h5,h6{
+	margin:0px;
+  font-family: 'Open Sans';
+  font-weight:700;
+}
+p{
+	margin:0px;
+}
+a{
+	display:inline-block;
+	text-decoration:none;
+}
+
+ul,ol{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+
+:root {
+  --bodyBg: #f2f7fb;
+  --black: #000;
+  --white: #fff;
+  --sidebariconColor: #fff;
+  --sidebarhover:#2e3cb3;
+  --themecolor:rgb(57, 106, 159);
+  --primaryButton: #1890ff;
+  --dangerButton: #ff4949;
+  --warningButton: #ffba00;
+  --successButton: #13ce66;
+  --titleColor: #606266;
+
+}
+
+.row-wrapper{
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.greenGradient{
+	background-image: linear-gradient(195deg,#66bb6a,#43a047);
+}
+.blueGradient{
+	background-image: linear-gradient(195deg,#49a3f1,#1a73e8);
+}
+.pinkGradient{
+	background: linear-gradient(195deg,#ec407a,#d81b60);
+}
+
+.blackGradient{
+	background: linear-gradient(195deg,#42424a,#191919);
+}
+
+
+.w-65{
+	width: 65%;
+}
+.status-active {
+	color: var(--successButton);
+}
+
+.status-not-active{
+	color: var(--dangerButton);
+}
+.btn{
+	height: 30px;
+	font-size:14px;
+	color: var(--white);
+	background:none;
+	border: 0px;
+	display: flex;
+	align-items: center;
+	padding: 0px 15px;
+}
+.btn-edit{
+	background:var( --primaryButton);
+}
+.btn-delete{
+	background: var(--dangerButton);
+}
+.btn-success {
+	background: var(--successButton);
+	font-size: 18px;
+	color: var(--white);
+	padding: 6px 20px;
+	border-radius: 20px;
+	border:0px;
+}
+.btn-warning{
+	background: var(--warningButton);
+	font-size: 18px;
+	color: var(--white);
+	padding: 6px 20px;
+	border-radius: 20px;
+		border:0px;
+}
+.btn-danger{
+	background: var(--dangerButton);
+	font-size: 18px;
+	color: var(--white);
+	padding: 6px 20px;
+	border-radius: 20px;
+		border:0px;
+}
+
+.form-row {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+}
+.form-label{
+	width: 25%;
+}
+.form-label label{
+	font-size: 18px;
+
+}
+.form-control{
+	width:50%;
+
+}
+.form-control .form-input{
+	width: 100%;
+	padding: 0px;
+	text-indent: 10px;
+	line-height: 40px;
+	border: 1px solid #ddd;
+	outline: none;
+
+}
+.form-control.form-action button {
+	width: 100%;
+	margin-top: 20px;
+	border-radius: 0px;
+	border-radius: 4px;
+	padding: 10px 0px;
+}
+
+table{
+	width: 100%;
+	border-collapse: collapse;
+
+
+}
+tr,thead,tbody{
+	width: 100% !important;
+	text-align: left;
+	border: 1px solid #ddd;
+
+}
