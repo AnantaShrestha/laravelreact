@@ -3,6 +3,7 @@ import {Link } from "react-router-dom";
 import {useSelector,useDispatch} from 'react-redux'
 import { useNavigate } from "react-router";
 import {RouteListAction,CreatePermissionAction} from '@/services/redux/permission/PermissionAction'
+import useForm from '@/hooks/useForm'
 import Button from '@/components/admin/Button'
 
 const PermissionForm =()=>{
@@ -10,33 +11,41 @@ const PermissionForm =()=>{
 	const navigate=useNavigate()
 	//dispatch
 	const dispatch=useDispatch()
+	const validation={
+		name:{
+			required:true
+		}
+	}
+	const permissionForm = () =>{
+		console.log(values)
+		if(Object.keys(errors).length  === 0){
+			//dispatch(CreatePermissionAction(values,navigate));
+		}
+	}
+	const {isLoading,isDisable,values,errors,handleChange,handleSubmit} = useForm(permissionForm,validation);
 	//selector
 	const routeLists=useSelector((state) => state.permission.routeLists)
 	//state
-	const [permissionFormState,setPermissionFormState] = useState({
-		name:'',
-		access_uri:[]
-	})
 	//get route list
 	 useEffect(() => {
 	 	let isMounted = true;          
 		dispatch(RouteListAction())
 	 },[dispatch]);
 	 //submit permission form
-	const handleCheckBox = (e) =>{
-		const { value, checked } = e.target;
-		const { access_uri } = permissionFormState;
-		 if (checked) {
-		    setPermissionFormState({
-		        access_uri: [...access_uri, value],
-		    });
-		}
+	// const handleCheckBox = (e) =>{
+	// 	const { value, checked } = e.target;
+	// 	const { access_uri } = permissionFormState;
+	// 	 if (checked) {
+	// 	    setPermissionFormState({
+	// 	        access_uri: [...access_uri, value],
+	// 	    });
+	// 	}
 		
-	}
-	const handlePermissionForm = (e) =>{
-	 	e.preventDefault()
-	 	dispatch(CreatePermissionAction(permissionFormState,navigate))
-	}
+	// }
+	// const handlePermissionForm = (e) =>{
+	//  	e.preventDefault()
+	//  	dispatch(CreatePermissionAction(permissionFormState,navigate))
+	// }
 	return (
 		<div className="content-body">
 			<>
@@ -49,17 +58,14 @@ const PermissionForm =()=>{
 				</div>
 			</div>
 			<div className="content-box-wrapper">
-				<form method='post' onSubmit={handlePermissionForm}>
+				<form method='post' onSubmit={handleSubmit}>
 					<div className="form-wrapper">
 						<div className="form-row">
 							<div className="form-label">
 								<label>Permission Name</label>
 							</div>
 							<div className="form-control">
-									<input name="name"  placeholder="Permission Name" type="text" className="form-input" onChange={(e)=>{
-										const name=e.target.value
-										setPermissionFormState({...permissionFormState,...{name}})
-									}} />
+									<input name="name"  placeholder="Permission Name" type="text" className="form-input" onChange={handleChange} />
 							</div>
 						</div>
 						<div className="form-permission-list-wrapper">
@@ -80,7 +86,7 @@ const PermissionForm =()=>{
 																<li key={index}>
 																	<>
 																	<div className="checklist-wrapper">
-																		<input name="access_uri" value={route} type="checkbox" onChange={handleCheckBox} />
+																		<input name="access_uri" value={route} type="checkbox" onChange={handleChange} />
 																		<span>{type} {title}</span>
 																	</div>
 																	</>
@@ -100,7 +106,7 @@ const PermissionForm =()=>{
 							<div className="form-label">
 							</div>
 							<div className="form-control form-action">
-								<Button type="submit" className="btn-success" name="Create" />
+								<Button isLoading={isLoading} isDisable={isDisable} type="submit" className="btn-success" name="Create" />
 							</div>
 						</div>
 					</div>

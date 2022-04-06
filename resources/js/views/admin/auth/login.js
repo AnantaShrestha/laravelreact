@@ -10,18 +10,28 @@ const Login = (props) =>{
 	const authImage='/images/loginimage.svg'
 	const navigate =useNavigate()
 	const dispatch=useDispatch()
-	const formLogin = () => {
-		return dispatch(LoginAuthAction(values,navigate))
+	const validation={
+  		username:{
+  			required:true
+  		},
+  		password:{
+  			required:true
+  		}
   	}
-	const {isLoading,isDisable,values,errors,handleChange,handleSubmit} = useForm(formLogin);
+	const formLogin = () => {
+		if(Object.keys(errors).length == 0)
+			dispatch(LoginAuthAction(values,navigate))
+  	}
+	const {isLoading,isDisable,values,errors,handleChange,handleSubmit} = useForm(formLogin,validation);
 	const isAuthenticate = useSelector(
-			(state) => state.auth.isLoggedIn
-		)
+		(state) => state.auth.isLoggedIn
+	)
 	return (
 		<>
 		  {
 		  	!isAuthenticate ? 
 		  	(
+
 		  		<div className="auth-wrapper">
 					<div className="flex-row">
 						<div className="auth-image">
@@ -31,11 +41,17 @@ const Login = (props) =>{
 							<form method="post" onSubmit={handleSubmit}>
 								<div className="auth-row">
 									<label>Username</label>
-									<input type="text" name="username" placeholder="Username" className="form-control" onChange={handleChange} rules="required" />
+									<input type="text" name="username" placeholder="Username" className={`form-control ${errors.username && 'invalid'}`} onChange={handleChange} rules="required" />
+									{
+										errors?.username && (<div className="validation-wrapper"><span>{errors.username}</span></div>)
+									}
 								</div>
 								<div className="auth-row">
 									<label>Password</label>
-									<input type="password" name="password" placeholder="Password" className="form-control"  onChange={handleChange} rules="required"  />
+									<input type="password" name="password" placeholder="Password" className={`form-control ${errors.password && 'invalid'}`}  onChange={handleChange} rules="required"  />
+									{
+										errors?.password && (<div className="validation-wrapper"><span>{errors.password}</span></div>)
+									}
 								</div>
 								<div className="auth-action-wrapper">
 									<Button isLoading={isLoading} isDisable={isDisable} type="submit" name="Login" className="auth-btn" />

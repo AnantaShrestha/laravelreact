@@ -456,6 +456,10 @@ ul, ol {
   padding: 10px 0px;
 }
 
+.form-control.invalid {
+  border-color: red !important;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -465,6 +469,14 @@ tr, thead, tbody {
   width: 100% !important;
   text-align: left;
   border: 1px solid #ddd;
+}
+
+.validation-wrapper {
+  margin-top: 5px;
+}
+.validation-wrapper span {
+  font-size: 14px;
+  color: red;
 }
 
 .auth-wrapper {
@@ -813,14 +825,6 @@ tr, thead, tbody {
   align-items: center;
   -moz-column-gap: 7px;
        column-gap: 7px;
-}
-
-.permission-checkbox-wrapper {
-  display: flex;
-  -moz-column-gap: 7px;
-       column-gap: 7px;
-  font-size: 15px;
-  align-items: center;
 }
 
 /** end of table css **/

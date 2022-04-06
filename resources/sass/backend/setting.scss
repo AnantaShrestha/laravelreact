@@ -136,6 +136,7 @@ ul,ol{
 	outline: none;
 
 }
+
 .form-control.form-action button {
 	width: 100%;
 	margin-top: 20px;
@@ -143,7 +144,10 @@ ul,ol{
 	border-radius: 4px;
 	padding: 10px 0px;
 }
+.form-control.invalid{
+	border-color:red !important;
 
+}
 table{
 	width: 100%;
 	border-collapse: collapse;
@@ -155,4 +159,12 @@ tr,thead,tbody{
 	text-align: left;
 	border: 1px solid #ddd;
 
+}
+
+.validation-wrapper{
+	margin-top:5px;
+	span{
+		font-size:14px;
+		color:red;
+	}
 }

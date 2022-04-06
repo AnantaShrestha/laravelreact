@@ -2,7 +2,7 @@ export const AuthActionType = {
 	LOGIN_SUCCESS:"LOGIN_SUCCESS",
 	LOGIN_FAILED:"LOGIN_FAILED",
 	LOGOUT_SUCCESS:'LOGOUT_SUCCESS',
-	LOGOUT_FAILED:'LOGOUT_FAILED'
+	LOGOUT_FAILED:'LOGOUT_FAILED',
 };
 
 //login action
@@ -25,7 +25,6 @@ export const LoginAuthAction =(loginState, navigate) => (dispatch) =>{
 
 
 //logout action
-
 export const LogoutAuthAction = (navigate) => (dispatch)=>{
 	return new Promise((resolve,reject)=>{
 		Api.get('/admin/logout').then(resp=>{
