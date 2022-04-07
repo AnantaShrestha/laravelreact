@@ -10,6 +10,7 @@ const PrivateLayout = ({children}) =>{
 	);
 	return (
 		<>
+		<FlashMessage />
 			{
 				isAuthenticate ? 
 				(
@@ -25,7 +26,7 @@ const PrivateLayout = ({children}) =>{
 				) :
 				(<Navigate to="/admin/login"></Navigate>)
 			}
-			<FlashMessage />
+			
 		</>
 	);
 }

@@ -12,14 +12,10 @@ class PermissionRepository{
 	* @return 
 	* get list of permission
 	*/
-	public function getPermission($data){
+	public function getPermission(){
 		$permission=$this->permission
 						->select('id','name','access_uri','created_at');
-		if(!empty($data['search'])){
-			$permission=$permission->where('name','LIKE','%'.$data['search'].'%');
-		}
-		return $permission->orderBy('created_at','desc')
-						  ->paginate($data['length'],['*'],'page',$data['page']);
+		return $permission->orderBy('created_at','desc')->get();
 	}
 	/**
 	 * @return find permission according to id

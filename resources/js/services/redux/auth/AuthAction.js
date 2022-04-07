@@ -16,6 +16,7 @@ export const LoginAuthAction =(loginState, navigate) => (dispatch) =>{
 				type:'success',message:resp.data.message
 			}})
 			navigate('/admin/dashboard')
+			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
@@ -43,6 +44,7 @@ export const LogoutAuthAction = (navigate) => (dispatch)=>{
 				type:'success',message:resp.data.message
 			}})
 			navigate('/admin/login')
+			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
 				dispatch({

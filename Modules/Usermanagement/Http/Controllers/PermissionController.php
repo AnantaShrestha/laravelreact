@@ -16,12 +16,7 @@ class PermissionController extends Controller
     }
     public function index(){
     	try{
-            $data=[
-                'length'=>$_GET['length'] ?? 2,
-                'page' =>$_GET['page'] ?? 1,
-                'search'=>$_GET['search'] ?? null
-            ];
-            $permissions= $this->permissionRepo->getPermission($data);
+            $permissions= $this->permissionRepo->getPermission();
             return $this->apiResponse->responseSuccess($permissions,'Success',SUCCESS);
         }catch(Exception $e){
             return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
@@ -33,7 +28,7 @@ class PermissionController extends Controller
      * store permission 
     */
     public function store(PermissionRequest $request){
-         try {
+        try {
             $permission=$this->permissionRepo->storePermission($request->validated());
             return $this->apiResponse->responseSuccess($permission,'Permission created successfully',SUCCESS);
         } catch (Exception $e) {

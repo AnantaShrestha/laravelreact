@@ -7,7 +7,8 @@ class Permission extends Model
 
     public function setAccessUriAttribute($value)
     {
-        $this->attributes['access_uri'] =implode(',',$value);
+        if(count($value) > 1)
+            $this->attributes['access_uri'] =implode(',',$value ?? []);
     }
 
     public function getAccessUriAttribute($value)

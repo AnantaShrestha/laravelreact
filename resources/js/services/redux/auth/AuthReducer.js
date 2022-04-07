@@ -44,12 +44,14 @@ const AuthReducer = (state=newAuth,action)=>{
 				isLoggedIn:true,
 				user:action.payload.data.user,
 			}
+			break;
 		case AuthActionType.LOGIN_FAILED:
 			return {
 				...state,
 				isLoggedIn:false,
 				user:{}
 			}
+			break;
 		case AuthActionType.LOGOUT_SUCCESS:
 			localStorage.removeItem('token')
 			delete axios.defaults.headers.common['Authorization']
@@ -58,9 +60,11 @@ const AuthReducer = (state=newAuth,action)=>{
 				isLoggedIn:false,
 				user:null
 			}
+			break;
 
 		default:
 			return state
+			break;
 	}
 }
 

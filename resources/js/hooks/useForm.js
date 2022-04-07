@@ -8,20 +8,44 @@ const useForm = (callback,validation) =>{
     //form button loading and disable
     const [isLoading,setLoading]=useState(false)
 	const [isDisable,setDisable]=useState(false)
+    const findInputType = (event) =>{
+        let name=event.target.name
+        let val=event.target.value
+        switch(event.target.type){
+            case 'checkbox':
+                if(!values[name]){
+                    setValues({...values,[name]:[val]})
+                }
+                else{
+                    if(values.hasOwnProperty(name) && event.target.checked){
+                        values[name] = [].concat(values[name],val); 
+                    }
+                    else{
+                        let index=values[name].indexOf(val)
+                        if (index > -1) {
+                            values[name].splice(index, 1);
+                        }
+                    }
+                }
+                break;
+            default:
+                setValues({...values,[name]:val})
+                break;
+
+        }
+        
+                
+
+    }
     //input change handler
     const handleChange = (event) =>{
         event.persist();
-        let name = event.target.name;
-        let val = event.target.value;
-        setValues({
-            ...values,
-            [name]:val,
-        })
-        validate(name,val)
+        findInputType(event)
+        validate(event.target.name,event.target.value)
     }
     //validate form
     const joinObject = (key)=>{
-       if(key)  Object.assign(errors,{[key]:key+' field is required'})
+       if(key)  Object.assign(errors,{[key]:key.toUpperCase()+' field is required'})
     }
     const validate = (name,val) =>{
         Object.entries(validation).map(([key,attr],i)=>{

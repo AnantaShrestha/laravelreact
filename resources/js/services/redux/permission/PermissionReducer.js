@@ -2,8 +2,8 @@ import {PermissionActionType} from './PermissionAction'
 const permissionState= {
 	routeLists:{},
 	permissions:{},
+	permission:{},
 	errors:{},
-	message:''
 }
 
 const PermissionReducer = (state=permissionState,action) =>{
@@ -13,24 +13,28 @@ const PermissionReducer = (state=permissionState,action) =>{
 				...state,
 				routeLists:action.payload.data
 			}
-		case PermissionActionType.CREATED_SUCCESS:
-			setTimeout(function(){
-				navigate('/admin/permission')
-			},2500)
+			break;
+		case PermissionActionType.SET_PERMISSIONS:
 			return{
 				...state,
-				permissions:action.payload.data,
-				message:action.payload.messge
+				permissions:action.payload.data
 			}
+			break;
+		case PermissionActionType.CREATED_SUCCESS:
+			return{
+				...state,
+				permission:action.payload.data
+			}
+			break;
 		case PermissionActionType.CREATED_FAILED:
-			console.log(action.payload)
 			return{
 				...state,
 				errors:action.payload.errors,
-				message:action.payload.message
 			}
+			break;
 		default:
 			return state
+			break;
 	}
 }	
 

@@ -448,6 +448,10 @@ ul, ol {
   outline: none;
 }
 
+.form-input.invalid {
+  border-color: red !important;
+}
+
 .form-control.form-action button {
   width: 100%;
   margin-top: 20px;

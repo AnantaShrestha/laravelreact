@@ -17,9 +17,8 @@ const PermissionForm =()=>{
 		}
 	}
 	const permissionForm = () =>{
-		console.log(values)
 		if(Object.keys(errors).length  === 0){
-			//dispatch(CreatePermissionAction(values,navigate));
+			dispatch(CreatePermissionAction(values,navigate));
 		}
 	}
 	const {isLoading,isDisable,values,errors,handleChange,handleSubmit} = useForm(permissionForm,validation);
@@ -31,21 +30,7 @@ const PermissionForm =()=>{
 	 	let isMounted = true;          
 		dispatch(RouteListAction())
 	 },[dispatch]);
-	 //submit permission form
-	// const handleCheckBox = (e) =>{
-	// 	const { value, checked } = e.target;
-	// 	const { access_uri } = permissionFormState;
-	// 	 if (checked) {
-	// 	    setPermissionFormState({
-	// 	        access_uri: [...access_uri, value],
-	// 	    });
-	// 	}
-		
-	// }
-	// const handlePermissionForm = (e) =>{
-	//  	e.preventDefault()
-	//  	dispatch(CreatePermissionAction(permissionFormState,navigate))
-	// }
+	 
 	return (
 		<div className="content-body">
 			<>
@@ -65,7 +50,10 @@ const PermissionForm =()=>{
 								<label>Permission Name</label>
 							</div>
 							<div className="form-control">
-									<input name="name"  placeholder="Permission Name" type="text" className="form-input" onChange={handleChange} />
+								<input name="name"  placeholder="Permission Name" type="text" className={`form-input ${errors?.name && 'invalid'}`} onChange={handleChange} />
+								{
+										errors?.name && (<div className="validation-wrapper"><span>{errors.name}</span></div>)
+								}
 							</div>
 						</div>
 						<div className="form-permission-list-wrapper">
