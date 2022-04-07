@@ -29,7 +29,6 @@ const useForm = (callback,validation) =>{
                 joinObject(key)
             }
         })
-
         if(val && name){
             delete errors[name];
         }else{

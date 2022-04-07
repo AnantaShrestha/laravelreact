@@ -1,3 +1,5 @@
+import {NotificationActionType} from '../notification/notificationAction'
+
 export const AuthActionType = {
 	LOGIN_SUCCESS:"LOGIN_SUCCESS",
 	LOGIN_FAILED:"LOGIN_FAILED",
@@ -10,6 +12,9 @@ export const LoginAuthAction =(loginState, navigate) => (dispatch) =>{
 	return new Promise((resolve,reject)=>{
 		Api.post('/admin/login',loginState).then(resp=>{
 			dispatch({type:AuthActionType.LOGIN_SUCCESS,payload:resp.data})
+			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+				type:'success',message:resp.data.message
+			}})
 			navigate('/admin/dashboard')
 		}).catch(err=>{
 			if(err.response){
@@ -17,6 +22,11 @@ export const LoginAuthAction =(loginState, navigate) => (dispatch) =>{
 					type:AuthActionType.LOGIN_FAILED,
 					payload:err.response
 				})
+				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+					type:'danger',message:"Something were wrong"
+				}})
+
+
 			}
 			reject(err)
 		})
@@ -29,6 +39,9 @@ export const LogoutAuthAction = (navigate) => (dispatch)=>{
 	return new Promise((resolve,reject)=>{
 		Api.get('/admin/logout').then(resp=>{
 			dispatch({type:AuthActionType.LOGOUT_SUCCESS,payload:resp.data})
+			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+				type:'success',message:resp.data.message
+			}})
 			navigate('/admin/login')
 		}).catch(err=>{
 			if(err.response){
@@ -36,6 +49,9 @@ export const LogoutAuthAction = (navigate) => (dispatch)=>{
 					type:AuthActionType.LOGOUT_FAILED,
 					payload:err.response
 				})
+				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+					type:'danger',message:"Something were wrong"
+				}})
 			}
 			reject(err)
 		})

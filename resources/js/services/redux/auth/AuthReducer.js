@@ -1,4 +1,5 @@
 import {AuthActionType} from './AuthAction'
+
 const authState= {
 	isLoggedIn:false,
 	user:{},

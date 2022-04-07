@@ -3,15 +3,13 @@ import {useSelector} from "react-redux";
 import {Navigate} from 'react-router-dom'
 import SideBar from '@/components/admin/SideNav'
 import TopHeader from '@/components/admin/TopHeader'
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import FlashMessage from '@/components/admin/FlashMessage'
 const PrivateLayout = ({children}) =>{
 	const isAuthenticate =useSelector(
 		(state) => state.auth.isLoggedIn
 	);
 	return (
 		<>
-			<ToastContainer />
 			{
 				isAuthenticate ? 
 				(
@@ -27,6 +25,7 @@ const PrivateLayout = ({children}) =>{
 				) :
 				(<Navigate to="/admin/login"></Navigate>)
 			}
+			<FlashMessage />
 		</>
 	);
 }

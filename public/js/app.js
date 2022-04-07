@@ -2484,6 +2484,47 @@ var Button = function Button(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/FlashMessage/index.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/admin/FlashMessage/index.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
+/* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+var FlashMessage = function FlashMessage(props) {
+  var messageObj = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.notification.message_obj;
+  });
+  console.log(messageObj.type);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (messageObj.type === 'danger') react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.error(messageObj.message);
+    if (messageObj.type === 'success') react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.success(messageObj.message);
+  }, [messageObj.message]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_toastify__WEBPACK_IMPORTED_MODULE_2__.ToastContainer, {})
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FlashMessage);
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/SideNav/NavList.js":
 /*!**********************************************************!*\
   !*** ./resources/js/components/admin/SideNav/NavList.js ***!
@@ -2908,13 +2949,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var _components_admin_SideNav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/admin/SideNav */ "./resources/js/components/admin/SideNav/index.js");
 /* harmony import */ var _components_admin_TopHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/admin/TopHeader */ "./resources/js/components/admin/TopHeader/index.js");
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
-/* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
+/* harmony import */ var _components_admin_FlashMessage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/admin/FlashMessage */ "./resources/js/components/admin/FlashMessage/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -2930,19 +2969,19 @@ var PrivateLayout = function PrivateLayout(_ref) {
   var isAuthenticate = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.auth.isLoggedIn;
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_toastify__WEBPACK_IMPORTED_MODULE_4__.ToastContainer, {}), isAuthenticate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [isAuthenticate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "body-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_admin_SideNav__WEBPACK_IMPORTED_MODULE_2__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_admin_SideNav__WEBPACK_IMPORTED_MODULE_2__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "main-content-wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_admin_TopHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_admin_TopHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "content-box",
           children: children
         })]
       })]
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Navigate, {
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Navigate, {
       to: "/admin/login"
-    })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_admin_FlashMessage__WEBPACK_IMPORTED_MODULE_4__["default"], {})]
   });
 };
 
@@ -2962,17 +3001,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_admin_FlashMessage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/admin/FlashMessage */ "./resources/js/components/admin/FlashMessage/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 
 var PublicLayout = function PublicLayout(_ref) {
   var children = _ref.children;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "body-wrapper",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-      children: children
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+      children: [children, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_admin_FlashMessage__WEBPACK_IMPORTED_MODULE_1__["default"], {})]
     })
   });
 };
@@ -3100,6 +3142,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "LoginAuthAction": () => (/* binding */ LoginAuthAction),
 /* harmony export */   "LogoutAuthAction": () => (/* binding */ LogoutAuthAction)
 /* harmony export */ });
+/* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
+
 var AuthActionType = {
   LOGIN_SUCCESS: "LOGIN_SUCCESS",
   LOGIN_FAILED: "LOGIN_FAILED",
@@ -3115,12 +3159,26 @@ var LoginAuthAction = function LoginAuthAction(loginState, navigate) {
           type: AuthActionType.LOGIN_SUCCESS,
           payload: resp.data
         });
+        dispatch({
+          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          payload: {
+            type: 'success',
+            message: resp.data.message
+          }
+        });
         navigate('/admin/dashboard');
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
             type: AuthActionType.LOGIN_FAILED,
             payload: err.response
+          });
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: "Something were wrong"
+            }
           });
         }
 
@@ -3138,12 +3196,26 @@ var LogoutAuthAction = function LogoutAuthAction(navigate) {
           type: AuthActionType.LOGOUT_SUCCESS,
           payload: resp.data
         });
+        dispatch({
+          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          payload: {
+            type: 'success',
+            message: resp.data.message
+          }
+        });
         navigate('/admin/login');
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
             type: AuthActionType.LOGOUT_FAILED,
             payload: err.response
+          });
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: "Something were wrong"
+            }
           });
         }
 
@@ -3242,6 +3314,68 @@ var AuthReducer = function AuthReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthReducer);
+
+/***/ }),
+
+/***/ "./resources/js/services/redux/notification/notificationAction.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/services/redux/notification/notificationAction.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NotificationActionType": () => (/* binding */ NotificationActionType)
+/* harmony export */ });
+var NotificationActionType = {
+  MESSAGE_OBJ: "MESSAGE_OBJ"
+};
+
+/***/ }),
+
+/***/ "./resources/js/services/redux/notification/notificationReducer.js":
+/*!*************************************************************************!*\
+  !*** ./resources/js/services/redux/notification/notificationReducer.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var notificationState = {
+  message_obj: {}
+};
+
+var NotificationReducer = function NotificationReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : notificationState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        message_obj: {
+          type: action.payload.type,
+          message: action.payload.message
+        }
+      });
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NotificationReducer);
 
 /***/ }),
 
@@ -3408,15 +3542,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _services_redux_auth_AuthReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/services/redux/auth/AuthReducer */ "./resources/js/services/redux/auth/AuthReducer.js");
-/* harmony import */ var _services_redux_permission_PermissionReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/services/redux/permission/PermissionReducer */ "./resources/js/services/redux/permission/PermissionReducer.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _services_redux_notification_notificationReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/services/redux/notification/notificationReducer */ "./resources/js/services/redux/notification/notificationReducer.js");
+/* harmony import */ var _services_redux_auth_AuthReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/services/redux/auth/AuthReducer */ "./resources/js/services/redux/auth/AuthReducer.js");
+/* harmony import */ var _services_redux_permission_PermissionReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/services/redux/permission/PermissionReducer */ "./resources/js/services/redux/permission/PermissionReducer.js");
 
 
 
-var RootReducers = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
-  auth: _services_redux_auth_AuthReducer__WEBPACK_IMPORTED_MODULE_0__["default"],
-  permission: _services_redux_permission_PermissionReducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+
+var RootReducers = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+  notification: _services_redux_notification_notificationReducer__WEBPACK_IMPORTED_MODULE_0__["default"],
+  auth: _services_redux_auth_AuthReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  permission: _services_redux_permission_PermissionReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RootReducers);
 
@@ -67216,7 +67353,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_args":[["axios@0.21.4","E:\\\\wampp\\\\www\\\\laravelreact"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"E:\\\\wampp\\\\www\\\\laravelreact","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ })
 
