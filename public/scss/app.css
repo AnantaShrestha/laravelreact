@@ -755,80 +755,19 @@ tr, thead, tbody {
 
 /** end of permission list **/
 /** table css **/
-.datatable thead {
-  background: var(--themecolor);
-}
-
-.datatable thead tr th {
-  font-size: 14px;
-  color: var(--white);
-  padding: 12px 10px;
-}
-
-.datatable tbody tr td {
-  font-size: 14px;
-  color: var(--black);
-  padding: 12px 10px;
-}
-
-.datatable tbody tr:nth-child(even) {
-  background: #f5f5f5;
-}
-
-.table-footer-wrapper {
-  margin-top: 20px;
-  display: flex;
+.datatable-table {
   width: 100%;
-  align-items: center;
+  margin-top: 30px;
+  border-collapse: collapse;
 }
-
-.pagination-wrapper {
-  margin-left: auto;
-}
-
-.pagination-wrapper ul {
-  display: flex;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
-}
-
-.pagination-wrapper ul li button {
-  height: 40px;
-  background: none;
+.datatable-table thead {
   border: 1px solid #ddd;
-  padding: 0px 17px;
 }
-
-.page-item.active {
-  background: var(--themecolor);
-  color: var(--white);
-  border: 1px solid var(--themecolor);
-}
-
-.table-head-action-wrapper {
-  display: flex;
-  margin-bottom: 15px;
-}
-
-.search-wrapper {
-  margin-left: auto;
-}
-
-.search-input {
+.datatable-table tbody {
   border: 1px solid #ddd;
-  height: 37px;
-  text-indent: 10px;
-  font-size: 17px;
-  border-radius: 8px;
-  width: 250px;
-  outline: none;
 }
-
-.table-action-wrapper {
-  display: flex;
-  align-items: center;
-  -moz-column-gap: 7px;
-       column-gap: 7px;
+.datatable-table tr, .datatable-table th {
+  border: 1px solid #ddd;
 }
 
 /** end of table css **/
