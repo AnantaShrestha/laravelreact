@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from 'react'
-import {Link } from "react-router-dom";
+import {Link,useParams } from "react-router-dom";
 import {useSelector,useDispatch} from 'react-redux'
 import { useNavigate } from "react-router";
-import {RouteListAction,CreatePermissionAction} from '@/services/redux/permission/PermissionAction'
+import {RouteListAction,CreatePermissionAction,EditPermissionAction} from '@/services/redux/permission/PermissionAction'
 import useForm from '@/hooks/useForm'
 import Button from '@/components/admin/Button'
 
@@ -11,32 +11,50 @@ const PermissionForm =()=>{
 	const navigate=useNavigate()
 	//dispatch
 	const dispatch=useDispatch()
+	//param
+	const {id}=useParams()
+	const isAddMode = !id
+	//use form
+	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(permissionForm,validation);
+	//validation
 	const validation={
 		name:{
 			required:true
 		}
 	}
+	//form submit callback
 	const permissionForm = () =>{
 		if(Object.keys(errors).length  === 0){
 			dispatch(CreatePermissionAction(values,navigate));
 		}
 	}
-	const {isLoading,isDisable,values,errors,handleChange,handleSubmit} = useForm(permissionForm,validation);
-	//selector
-	const routeLists=useSelector((state) => state.permission.routeLists)
-	//state
-	//get route list
-	 useEffect(() => {
+	//use effect
+	useEffect(() => {
 	 	let isMounted = true;          
 		dispatch(RouteListAction())
-	 },[dispatch]);
-	 
+		
+	 },[]);
+	useEffect(()=>{
+		if(!isAddMode){
+			dispatch(EditPermissionAction(values,id,navigate))
+		}
+	},[])
+	//selector
+	const routeLists=useSelector((state) => state.permission.routeLists)
+	const permission=useSelector((state)=>state.permission.permission)
+	useEffect(()=>{
+		setValues({
+				name:permission.name,
+				access_uri:permission.access_uri
+		})
+	},[permission])
+	//get route list
 	return (
 		<div className="content-body">
 			<>
 			<div className="page-heading-wrapper">
 				<div className="page-title-wrapper">
-					<h1>Create Permission</h1>
+					<h1>{id ? 'Edit Permission' : 'Create Permission'}</h1>
 				</div>
 				<div className="action-wrapper">
 					<Link to="/admin/permission" className="btn-warning">Back</Link>
@@ -50,7 +68,7 @@ const PermissionForm =()=>{
 								<label>Permission Name</label>
 							</div>
 							<div className="form-control">
-								<input name="name"  placeholder="Permission Name" type="text" className={`form-input ${errors?.name && 'invalid'}`} onChange={handleChange} />
+								<input  name="name"  placeholder="Permission Name" type="text" className={`form-input ${errors?.name && 'invalid'}`} onChange={handleChange} />
 								{
 										errors?.name && (<div className="validation-wrapper"><span>{errors.name}</span></div>)
 								}
@@ -94,7 +112,7 @@ const PermissionForm =()=>{
 							<div className="form-label">
 							</div>
 							<div className="form-control form-action">
-								<Button isLoading={isLoading} isDisable={isDisable} type="submit" className="btn-success" name="Create" />
+								<Button isLoading={isLoading} isDisable={isDisable} type="submit" className="btn-success" name={id ? 'Update' : 'Create'} />
 							</div>
 						</div>
 					</div>

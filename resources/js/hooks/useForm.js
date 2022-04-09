@@ -74,6 +74,7 @@ const useForm = (callback,validation) =>{
     }
     return {
         values,
+        setValues,
         errors,
         isLoading,
         isDisable,

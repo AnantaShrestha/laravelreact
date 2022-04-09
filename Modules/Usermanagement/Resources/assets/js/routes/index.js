@@ -13,5 +13,11 @@ export default[
 		exact:true,
 		auth:true,
 		component:<PermissionForm />
+	},
+	{
+		path:'/admin/permission/edit/:id',
+		exact:true,
+		auth:true,
+		component:<PermissionForm />
 	}
 ];

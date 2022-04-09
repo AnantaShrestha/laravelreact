@@ -182,18 +182,53 @@
  
 
  /** table css **/
- 	.datatable-table{
+.datatable-wrapper{
+	.datatable-action-header-wrapper{
+		margin-bottom:20px;
+		.datatable-search-wrapper{
+			input{
+				width: 250px;
+				height: 37px;
+				border-radius: 8px;
+				border: 1px solid #ccc;
+				font-size: 16px;
+				text-indent: 10px;
+				outline: none;
+				&:placeholder{
+					color:var(--white);
+				}
+			}
+		}
+	}
+	.datatable-table{
  		width:100%;
- 		margin-top:30px;
  		border-collapse: collapse;
  		thead{
  			border:1px solid #ddd;
+			height: 40px;
+			background: var(--themecolor);
+			tr{
+				th{
+					padding:0px 10px;
+					color:var(--white);
+					font-size:16px;
+				}
+			}
  		}
  		tbody{
  			border:1px solid #ddd;
- 		}
- 		tr,th{
- 			border:1px solid #ddd;
+ 			tr{
+				td{
+					padding:20px 10px;
+					font-size: 14px;
+				}
+				&:nth-child(even){
+					background:#f4f4f4;
+				}
+			}
+
  		}
  	}
+}
+ 	
  /** end of table css **/

@@ -18,6 +18,8 @@ require('./bootstrap');
 // Axios.defaults.baseURL= 'http://developed.test/api/'
 import Api from './core/Api'
 window.Api = new Api
+import Helper from './core/Helper'
+window.Helper =new Helper
 import axios from 'axios'
 axios.defaults.withCredentials = true
 axios.defaults.baseURL= 'http://developed.test/api/'

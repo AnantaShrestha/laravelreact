@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {Link } from "react-router-dom";
 import {useDispatch,useSelector} from "react-redux";
+import {FaTrashAlt,FaPen} from 'react-icons/fa'
 import {PermissionsListAction} from '@/services/redux/permission/PermissionAction'
 import DataTable from '@/components/admin/DataTable'
 const PermissionList =()=>{
@@ -17,8 +18,24 @@ const PermissionList =()=>{
 		},
 		{
 			key:'access_uri',title:'Access Uri'
+		},
+		{
+			key:'action',
+			title:'Action',
+			action: (id) =>{
+				return (
+					<div className="table-action-wrapper">
+						<Link className="table-edit-btn" to={`/admin/permission/edit/${id}`} ><FaPen /></Link>
+			    		<button className="table-delete-btn" onClick={() => handleDeleteButton(id)} ><FaTrashAlt /></button>
+			    	</div>
+				)
+			}
+  			
 		}
 	]
+	const handleDeleteButton = (id) =>{
+		console.log(id)
+	}
 	return (
 		<div className="content-body">
 			<div className="page-heading-wrapper">
@@ -29,8 +46,10 @@ const PermissionList =()=>{
 					<Link to="/admin/permission/create" className="btn-success">Create</Link>
 				</div>
 			</div>
-			<div className="table-wrapper">
-				<DataTable columns={columns} rows={permissionsList} />
+			<div className="content-box-wrapper">
+				<div className="table-wrapper">
+					<DataTable columns={columns} rows={permissionsList} />
+				</div>
 			</div>
 		</div>
 	);

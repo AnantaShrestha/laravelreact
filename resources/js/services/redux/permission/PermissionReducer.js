@@ -32,6 +32,18 @@ const PermissionReducer = (state=permissionState,action) =>{
 				errors:action.payload.errors,
 			}
 			break;
+		case PermissionActionType.EDIT_SUCCESS:
+			return{
+				...state,
+				permission:action.payload.data
+			}
+			break;
+		case PermissionActionType.EDIT_FAILED:
+			return{
+				...state,
+				errors:action.payload.errors,
+			}
+			break;
 		default:
 			return state
 			break;

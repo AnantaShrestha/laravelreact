@@ -421,6 +421,22 @@ ul, ol {
   border: 0px;
 }
 
+.table-delete-btn {
+  height: 22px;
+  background: none;
+  border: 0px;
+  font-size: 18px;
+  color: red;
+}
+
+.table-edit-btn {
+  height: 22px;
+  background: none;
+  border: 0px;
+  font-size: 18px;
+  color: blue;
+}
+
 .form-row {
   display: flex;
   flex-flow: row wrap;
@@ -755,19 +771,44 @@ tr, thead, tbody {
 
 /** end of permission list **/
 /** table css **/
-.datatable-table {
+.datatable-wrapper .datatable-action-header-wrapper {
+  margin-bottom: 20px;
+}
+.datatable-wrapper .datatable-action-header-wrapper .datatable-search-wrapper input {
+  width: 250px;
+  height: 37px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  text-indent: 10px;
+  outline: none;
+}
+.datatable-wrapper .datatable-action-header-wrapper .datatable-search-wrapper input:placeholder {
+  color: var(--white);
+}
+.datatable-wrapper .datatable-table {
   width: 100%;
-  margin-top: 30px;
   border-collapse: collapse;
 }
-.datatable-table thead {
+.datatable-wrapper .datatable-table thead {
+  border: 1px solid #ddd;
+  height: 40px;
+  background: var(--themecolor);
+}
+.datatable-wrapper .datatable-table thead tr th {
+  padding: 0px 10px;
+  color: var(--white);
+  font-size: 16px;
+}
+.datatable-wrapper .datatable-table tbody {
   border: 1px solid #ddd;
 }
-.datatable-table tbody {
-  border: 1px solid #ddd;
+.datatable-wrapper .datatable-table tbody tr td {
+  padding: 20px 10px;
+  font-size: 14px;
 }
-.datatable-table tr, .datatable-table th {
-  border: 1px solid #ddd;
+.datatable-wrapper .datatable-table tbody tr:nth-child(even) {
+  background: #f4f4f4;
 }
 
 /** end of table css **/

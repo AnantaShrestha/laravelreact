@@ -110,7 +110,20 @@ ul,ol{
 	border-radius: 20px;
 		border:0px;
 }
-
+.table-delete-btn {
+	height: 22px;
+	background: none;
+	border: 0px;
+	font-size: 18px;
+	color: red;
+}
+.table-edit-btn {
+	height: 22px;
+	background: none;
+	border: 0px;
+	font-size: 18px;
+	color:blue;
+}
 .form-row {
 	display: flex;
 	flex-flow: row wrap;

@@ -9,9 +9,19 @@ const Rows = (props) =>{
 							<tr key={i}>
 								<td>{i + 1}</td>
 								{
-									Object.entries(columns)?.map(([columnIndex,column],j)=>{	
+									Object.entries(columns)?.map(([columnIndex,column],j)=>{
+
 										return(
-											<td key={j}>{row[column.key]}</td>
+											Helper.isObject(row[column.key]) ? 
+												(
+													<td key={j}>{row[column.key].join(',')}</td>
+												) 
+											: 
+
+												(
+													<td key={j}>{column.key=='action' ? column.action(row.id) : row[column.key]}</td>
+
+												)
 										)
 									})
 
