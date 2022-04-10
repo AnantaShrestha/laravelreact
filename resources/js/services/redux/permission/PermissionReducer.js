@@ -44,6 +44,18 @@ const PermissionReducer = (state=permissionState,action) =>{
 				errors:action.payload.errors,
 			}
 			break;
+		case PermissionActionType.UPDATE_SUCCESS:
+			return{
+				...state,
+				permission:action.payloas.data
+			}
+			break;
+		case PermissionActionType.UPDATE_FAILED:
+			return{
+				...state,
+				errors:action.payload.errors,
+			}
+			break;
 		default:
 			return state
 			break;

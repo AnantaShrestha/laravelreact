@@ -34,7 +34,7 @@ const PermissionList =()=>{
 		}
 	]
 	const handleDeleteButton = (id) =>{
-		console.log(id)
+		
 	}
 	return (
 		<div className="content-body">

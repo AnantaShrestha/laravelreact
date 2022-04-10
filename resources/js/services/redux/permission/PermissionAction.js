@@ -10,6 +10,8 @@ export const PermissionActionType={
 	CREATED_FAILED:"CREATED_FAILED",
 	EDIT_SUCCESS:"UPDATED_SUCCESS",
 	EDIT_FAILED:"UPDATED_FAILED",
+	UPDATE_SUCCESS:"UPDATED_SUCCESS",
+	UPDATE_FAILED:"UPDATED_FAILED",
 	DELETED_SUCCESS:"DELETED_SUCCESS"
 
 }
@@ -85,7 +87,7 @@ export const CreatePermissionAction = (permissionFormState,navigate) => (dispatc
 	})
 }
 
-//update permission
+//edit permission
 export const EditPermissionAction = (permissionsFormState,id,navigate) => (dispatch) =>{
 	return new Promise((resolve,reject) =>{
 		Api.get('/admin/permission/edit/'+id).then(resp=>{
@@ -97,6 +99,33 @@ export const EditPermissionAction = (permissionsFormState,id,navigate) => (dispa
 			if(err.response){
 				dispatch({
 					type:PermissionActionType.EDIT_FAILED,payload:err.response.data
+				})
+				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+					type:'danger',message:err.response.data.message
+				}})
+				
+			}
+			reject(err)
+		})
+	})
+}
+
+// update permission
+export const UpdatePermissionAction = (permissionFormState,id,navigate) => (dispatch) =>{
+	return new Promise((resolve,reject)=>{
+		Api.put('/admin/permission/edit/'+id).then(resp=>{
+			dispatch({
+				type:PermissionActionType.UPDATE_SUCCESS,payload:resp.data
+			})
+			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+				type:'success',message:resp.data.message
+			}})
+			navigate('/admin/permission')
+			resolve(resp)
+		}).catch(err=>{
+			if(err.response){
+				dispatch({
+					type:PermissionActionType.UPDATE_FAILED,payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message

@@ -2145,6 +2145,12 @@ var PermissionForm = function PermissionForm() {
 
   var isAddMode = !id; //use form
 
+  var validation = {
+    name: {
+      required: true
+    }
+  };
+
   var _useForm = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_3__["default"])(permissionForm, validation),
       isLoading = _useForm.isLoading,
       isDisable = _useForm.isDisable,
@@ -2152,18 +2158,16 @@ var PermissionForm = function PermissionForm() {
       setValues = _useForm.setValues,
       errors = _useForm.errors,
       handleChange = _useForm.handleChange,
-      handleSubmit = _useForm.handleSubmit; //validation
+      handleSubmit = _useForm.handleSubmit; //form submit callback
 
-
-  var validation = {
-    name: {
-      required: true
-    }
-  }; //form submit callback
 
   var permissionForm = function permissionForm() {
-    if (Object.keys(errors).length === 0) {
+    if (Object.keys(errors).length === 0 && isAddMode) {
       dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_2__.CreatePermissionAction)(values, navigate));
+    }
+
+    if (Object.keys(errors).length === 0 && !isAddMode) {
+      dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_2__.UpdatePermissionAction)(values, id, navigate));
     }
   }; //use effect
 
@@ -2185,10 +2189,12 @@ var PermissionForm = function PermissionForm() {
     return state.permission.permission;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setValues({
-      name: permission.name,
-      access_uri: permission.access_uri
-    });
+    if (!isAddMode) {// setValues({
+      // 		...values,
+      // 		name:permission.name,
+      // 		access_uri:permission.access_uri
+      // })
+    }
   }, [permission]); //get route list
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -2372,9 +2378,7 @@ var PermissionList = function PermissionList() {
     }
   }];
 
-  var handleDeleteButton = function handleDeleteButton(id) {
-    console.log(id);
-  };
+  var handleDeleteButton = function handleDeleteButton(id) {};
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "content-body",
@@ -3734,7 +3738,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "EditPermissionAction": () => (/* binding */ EditPermissionAction),
 /* harmony export */   "PermissionActionType": () => (/* binding */ PermissionActionType),
 /* harmony export */   "PermissionsListAction": () => (/* binding */ PermissionsListAction),
-/* harmony export */   "RouteListAction": () => (/* binding */ RouteListAction)
+/* harmony export */   "RouteListAction": () => (/* binding */ RouteListAction),
+/* harmony export */   "UpdatePermissionAction": () => (/* binding */ UpdatePermissionAction)
 /* harmony export */ });
 /* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
 
@@ -3748,6 +3753,8 @@ var PermissionActionType = {
   CREATED_FAILED: "CREATED_FAILED",
   EDIT_SUCCESS: "UPDATED_SUCCESS",
   EDIT_FAILED: "UPDATED_FAILED",
+  UPDATE_SUCCESS: "UPDATED_SUCCESS",
+  UPDATE_FAILED: "UPDATED_FAILED",
   DELETED_SUCCESS: "DELETED_SUCCESS"
 }; //route list action
 
@@ -3840,7 +3847,7 @@ var CreatePermissionAction = function CreatePermissionAction(permissionFormState
       });
     });
   };
-}; //update permission
+}; //edit permission
 
 var EditPermissionAction = function EditPermissionAction(permissionsFormState, id, navigate) {
   return function (dispatch) {
@@ -3855,6 +3862,44 @@ var EditPermissionAction = function EditPermissionAction(permissionsFormState, i
         if (err.response) {
           dispatch({
             type: PermissionActionType.EDIT_FAILED,
+            payload: err.response.data
+          });
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: err.response.data.message
+            }
+          });
+        }
+
+        reject(err);
+      });
+    });
+  };
+}; // update permission
+
+var UpdatePermissionAction = function UpdatePermissionAction(permissionFormState, id, navigate) {
+  return function (dispatch) {
+    return new Promise(function (resolve, reject) {
+      Api.put('/admin/permission/edit/' + id).then(function (resp) {
+        dispatch({
+          type: PermissionActionType.UPDATE_SUCCESS,
+          payload: resp.data
+        });
+        dispatch({
+          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          payload: {
+            type: 'success',
+            message: resp.data.message
+          }
+        });
+        navigate('/admin/permission');
+        resolve(resp);
+      })["catch"](function (err) {
+        if (err.response) {
+          dispatch({
+            type: PermissionActionType.UPDATE_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -3936,6 +3981,18 @@ var PermissionReducer = function PermissionReducer() {
       break;
 
     case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.EDIT_FAILED:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        errors: action.payload.errors
+      });
+      break;
+
+    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.UPDATE_SUCCESS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        permission: action.payloas.data
+      });
+      break;
+
+    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.UPDATE_FAILED:
       return _objectSpread(_objectSpread({}, state), {}, {
         errors: action.payload.errors
       });

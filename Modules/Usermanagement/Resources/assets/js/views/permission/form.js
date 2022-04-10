@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react'
 import {Link,useParams } from "react-router-dom";
 import {useSelector,useDispatch} from 'react-redux'
 import { useNavigate } from "react-router";
-import {RouteListAction,CreatePermissionAction,EditPermissionAction} from '@/services/redux/permission/PermissionAction'
+import {RouteListAction,CreatePermissionAction,EditPermissionAction,UpdatePermissionAction} from '@/services/redux/permission/PermissionAction'
 import useForm from '@/hooks/useForm'
 import Button from '@/components/admin/Button'
 
@@ -14,19 +14,25 @@ const PermissionForm =()=>{
 	//param
 	const {id}=useParams()
 	const isAddMode = !id
+
 	//use form
-	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(permissionForm,validation);
-	//validation
 	const validation={
 		name:{
 			required:true
 		}
 	}
+	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(permissionForm,validation);
+	
 	//form submit callback
 	const permissionForm = () =>{
-		if(Object.keys(errors).length  === 0){
+		if(Object.keys(errors).length  === 0 && isAddMode){
 			dispatch(CreatePermissionAction(values,navigate));
 		}
+		if(Object.keys(errors).length  === 0 && !isAddMode){
+			dispatch(UpdatePermissionAction(values,id,navigate));
+		}
+
+
 	}
 	//use effect
 	useEffect(() => {
@@ -43,10 +49,13 @@ const PermissionForm =()=>{
 	const routeLists=useSelector((state) => state.permission.routeLists)
 	const permission=useSelector((state)=>state.permission.permission)
 	useEffect(()=>{
-		setValues({
-				name:permission.name,
-				access_uri:permission.access_uri
-		})
+		if(!isAddMode){
+			// setValues({
+			// 		...values,
+			// 		name:permission.name,
+			// 		access_uri:permission.access_uri
+			// })
+		}
 	},[permission])
 	//get route list
 	return (
@@ -92,7 +101,7 @@ const PermissionForm =()=>{
 																<li key={index}>
 																	<>
 																	<div className="checklist-wrapper">
-																		<input name="access_uri" value={route} type="checkbox" onChange={handleChange} />
+																		<input name="access_uri" value={route} type="checkbox" onChange={handleChange}  />
 																		<span>{type} {title}</span>
 																	</div>
 																	</>
