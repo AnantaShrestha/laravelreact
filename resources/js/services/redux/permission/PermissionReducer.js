@@ -56,6 +56,18 @@ const PermissionReducer = (state=permissionState,action) =>{
 				errors:action.payload.errors,
 			}
 			break;
+		case PermissionActionType.DELETED_SUCCESS:
+    		return{
+    			...state,
+    			permissions:state.permissions.filter(permission => permission.id != action.payload.id)
+    		}
+    		break
+    	case PermissionActionType.DELETE_FAILED:
+    		return{
+				...state,
+				errors:action.payload.errors,
+			}
+			break;
 		default:
 			return state
 			break;

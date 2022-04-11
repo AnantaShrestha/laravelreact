@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {Link } from "react-router-dom";
 import {useDispatch,useSelector} from "react-redux";
 import {FaTrashAlt,FaPen} from 'react-icons/fa'
-import {PermissionsListAction} from '@/services/redux/permission/PermissionAction'
+import {PermissionsListAction,DeletePermissionAction} from '@/services/redux/permission/PermissionAction'
 import DataTable from '@/components/admin/DataTable'
 const PermissionList =()=>{
 	const dispatch = useDispatch()
@@ -34,7 +34,7 @@ const PermissionList =()=>{
 		}
 	]
 	const handleDeleteButton = (id) =>{
-		
+		dispatch(DeletePermissionAction(id))
 	}
 	return (
 		<div className="content-body">

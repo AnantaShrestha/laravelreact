@@ -15,15 +15,19 @@ const useForm = (callback,validation) =>{
             case 'checkbox':
                 if(!values[name]){
                     setValues({...values,[name]:[val]})
+                    event.target.setAttribute('checked','checked')
                 }
                 else{
                     if(values.hasOwnProperty(name) && event.target.checked){
                         values[name] = [].concat(values[name],val); 
+                        event.target.setAttribute('checked','checked')
                     }
                     else{
                         let index=values[name].indexOf(val)
                         if (index > -1) {
                             values[name].splice(index, 1);
+                            event.target.removeAttribute('checked')
+
                         }
                     }
                 }

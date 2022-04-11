@@ -12,7 +12,8 @@ export const PermissionActionType={
 	EDIT_FAILED:"UPDATED_FAILED",
 	UPDATE_SUCCESS:"UPDATED_SUCCESS",
 	UPDATE_FAILED:"UPDATED_FAILED",
-	DELETED_SUCCESS:"DELETED_SUCCESS"
+	DELETED_SUCCESS:"DELETED_SUCCESS",
+	DELETED_FAILED:"DELETED_FAILED"
 
 }
 //route list action
@@ -113,7 +114,7 @@ export const EditPermissionAction = (permissionsFormState,id,navigate) => (dispa
 // update permission
 export const UpdatePermissionAction = (permissionFormState,id,navigate) => (dispatch) =>{
 	return new Promise((resolve,reject)=>{
-		Api.put('/admin/permission/edit/'+id).then(resp=>{
+		Api.put('/admin/permission/edit/'+id,permissionFormState).then(resp=>{
 			dispatch({
 				type:PermissionActionType.UPDATE_SUCCESS,payload:resp.data
 			})
@@ -126,6 +127,32 @@ export const UpdatePermissionAction = (permissionFormState,id,navigate) => (disp
 			if(err.response){
 				dispatch({
 					type:PermissionActionType.UPDATE_FAILED,payload:err.response.data
+				})
+				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+					type:'danger',message:err.response.data.message
+				}})
+				
+			}
+			reject(err)
+		})
+	})
+}
+//deleted permission
+export const DeletePermissionAction = (id) => (dispatch) =>{
+	return new Promise((resolve,reject)=>{
+		Api.delete('/admin/permission/delete/'+id).then(resp =>{
+			dispatch({
+				type:PermissionActionType.DELETED_SUCCESS,
+				payload:{id:id}
+			})
+			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+				type:'danger',message:resp.data.message
+			}})
+
+		}).catch(err=>{
+			if(err.response){
+				dispatch({
+					type:PermissionActionType.DELETE_FAILED,payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message

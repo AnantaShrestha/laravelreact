@@ -14,26 +14,20 @@ const PermissionForm =()=>{
 	//param
 	const {id}=useParams()
 	const isAddMode = !id
-
 	//use form
 	const validation={
 		name:{
 			required:true
 		}
 	}
-	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(permissionForm,validation);
-	
 	//form submit callback
 	const permissionForm = () =>{
-		if(Object.keys(errors).length  === 0 && isAddMode){
-			dispatch(CreatePermissionAction(values,navigate));
+		if(Object.keys(errors).length  === 0){
+			dispatch(isAddMode ? CreatePermissionAction(values,navigate) : UpdatePermissionAction(values,id,navigate) );
 		}
-		if(Object.keys(errors).length  === 0 && !isAddMode){
-			dispatch(UpdatePermissionAction(values,id,navigate));
-		}
-
-
 	}
+	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(permissionForm,validation);
+
 	//use effect
 	useEffect(() => {
 	 	let isMounted = true;          
@@ -50,11 +44,11 @@ const PermissionForm =()=>{
 	const permission=useSelector((state)=>state.permission.permission)
 	useEffect(()=>{
 		if(!isAddMode){
-			// setValues({
-			// 		...values,
-			// 		name:permission.name,
-			// 		access_uri:permission.access_uri
-			// })
+			setValues({
+				...values,
+				name:permission.name || '',
+				access_uri:permission.access_uri || []
+			})
 		}
 	},[permission])
 	//get route list
@@ -77,7 +71,7 @@ const PermissionForm =()=>{
 								<label>Permission Name</label>
 							</div>
 							<div className="form-control">
-								<input  name="name"  placeholder="Permission Name" type="text" className={`form-input ${errors?.name && 'invalid'}`} onChange={handleChange} />
+								<input value={values.name || ''}  name="name"  placeholder="Permission Name" type="text" className={`form-input ${errors?.name && 'invalid'}`} onChange={handleChange} />
 								{
 										errors?.name && (<div className="validation-wrapper"><span>{errors.name}</span></div>)
 								}
@@ -101,7 +95,17 @@ const PermissionForm =()=>{
 																<li key={index}>
 																	<>
 																	<div className="checklist-wrapper">
-																		<input name="access_uri" value={route} type="checkbox" onChange={handleChange}  />
+																		{
+																			isAddMode ? 
+																			(<input  name="access_uri" value={route} type="checkbox" onChange={handleChange}   />)
+																			:
+																			(
+																				values.access_uri && values.access_uri.includes(route) ? 
+																				(<input checked  name="access_uri" value={route} type="checkbox" onChange={handleChange}   />)
+																				:
+																				(<input  name="access_uri" value={route} type="checkbox" onChange={handleChange}   />)
+																			)
+																		}
 																		<span>{type} {title}</span>
 																	</div>
 																	</>

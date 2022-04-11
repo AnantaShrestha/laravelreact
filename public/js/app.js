@@ -2123,6 +2123,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2149,6 +2155,12 @@ var PermissionForm = function PermissionForm() {
     name: {
       required: true
     }
+  }; //form submit callback
+
+  var permissionForm = function permissionForm() {
+    if (Object.keys(errors).length === 0) {
+      dispatch(isAddMode ? (0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_2__.CreatePermissionAction)(values, navigate) : (0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_2__.UpdatePermissionAction)(values, id, navigate));
+    }
   };
 
   var _useForm = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_3__["default"])(permissionForm, validation),
@@ -2158,18 +2170,7 @@ var PermissionForm = function PermissionForm() {
       setValues = _useForm.setValues,
       errors = _useForm.errors,
       handleChange = _useForm.handleChange,
-      handleSubmit = _useForm.handleSubmit; //form submit callback
-
-
-  var permissionForm = function permissionForm() {
-    if (Object.keys(errors).length === 0 && isAddMode) {
-      dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_2__.CreatePermissionAction)(values, navigate));
-    }
-
-    if (Object.keys(errors).length === 0 && !isAddMode) {
-      dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_2__.UpdatePermissionAction)(values, id, navigate));
-    }
-  }; //use effect
+      handleSubmit = _useForm.handleSubmit; //use effect
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -2189,11 +2190,11 @@ var PermissionForm = function PermissionForm() {
     return state.permission.permission;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (!isAddMode) {// setValues({
-      // 		...values,
-      // 		name:permission.name,
-      // 		access_uri:permission.access_uri
-      // })
+    if (!isAddMode) {
+      setValues(_objectSpread(_objectSpread({}, values), {}, {
+        name: permission.name || '',
+        access_uri: permission.access_uri || []
+      }));
     }
   }, [permission]); //get route list
 
@@ -2232,6 +2233,7 @@ var PermissionForm = function PermissionForm() {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                 className: "form-control",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                  value: values.name || '',
                   name: "name",
                   placeholder: "Permission Name",
                   type: "text",
@@ -2271,7 +2273,18 @@ var PermissionForm = function PermissionForm() {
                             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
                               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                                 className: "checklist-wrapper",
-                                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                                children: [isAddMode ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                                  name: "access_uri",
+                                  value: route,
+                                  type: "checkbox",
+                                  onChange: handleChange
+                                }) : values.access_uri && values.access_uri.includes(route) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                                  checked: true,
+                                  name: "access_uri",
+                                  value: route,
+                                  type: "checkbox",
+                                  onChange: handleChange
+                                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
                                   name: "access_uri",
                                   value: route,
                                   type: "checkbox",
@@ -2378,7 +2391,9 @@ var PermissionList = function PermissionList() {
     }
   }];
 
-  var handleDeleteButton = function handleDeleteButton(id) {};
+  var handleDeleteButton = function handleDeleteButton(id) {
+    dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_2__.DeletePermissionAction)(id));
+  };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "content-body",
@@ -3198,14 +3213,17 @@ var useForm = function useForm(callback, validation) {
       case 'checkbox':
         if (!values[name]) {
           setValues(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, [val])));
+          event.target.setAttribute('checked', 'checked');
         } else {
           if (values.hasOwnProperty(name) && event.target.checked) {
             values[name] = [].concat(values[name], val);
+            event.target.setAttribute('checked', 'checked');
           } else {
             var index = values[name].indexOf(val);
 
             if (index > -1) {
               values[name].splice(index, 1);
+              event.target.removeAttribute('checked');
             }
           }
         }
@@ -3735,6 +3753,7 @@ var NotificationReducer = function NotificationReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CreatePermissionAction": () => (/* binding */ CreatePermissionAction),
+/* harmony export */   "DeletePermissionAction": () => (/* binding */ DeletePermissionAction),
 /* harmony export */   "EditPermissionAction": () => (/* binding */ EditPermissionAction),
 /* harmony export */   "PermissionActionType": () => (/* binding */ PermissionActionType),
 /* harmony export */   "PermissionsListAction": () => (/* binding */ PermissionsListAction),
@@ -3755,7 +3774,8 @@ var PermissionActionType = {
   EDIT_FAILED: "UPDATED_FAILED",
   UPDATE_SUCCESS: "UPDATED_SUCCESS",
   UPDATE_FAILED: "UPDATED_FAILED",
-  DELETED_SUCCESS: "DELETED_SUCCESS"
+  DELETED_SUCCESS: "DELETED_SUCCESS",
+  DELETED_FAILED: "DELETED_FAILED"
 }; //route list action
 
 var RouteListAction = function RouteListAction() {
@@ -3882,7 +3902,7 @@ var EditPermissionAction = function EditPermissionAction(permissionsFormState, i
 var UpdatePermissionAction = function UpdatePermissionAction(permissionFormState, id, navigate) {
   return function (dispatch) {
     return new Promise(function (resolve, reject) {
-      Api.put('/admin/permission/edit/' + id).then(function (resp) {
+      Api.put('/admin/permission/edit/' + id, permissionFormState).then(function (resp) {
         dispatch({
           type: PermissionActionType.UPDATE_SUCCESS,
           payload: resp.data
@@ -3900,6 +3920,44 @@ var UpdatePermissionAction = function UpdatePermissionAction(permissionFormState
         if (err.response) {
           dispatch({
             type: PermissionActionType.UPDATE_FAILED,
+            payload: err.response.data
+          });
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: err.response.data.message
+            }
+          });
+        }
+
+        reject(err);
+      });
+    });
+  };
+}; //deleted permission
+
+var DeletePermissionAction = function DeletePermissionAction(id) {
+  return function (dispatch) {
+    return new Promise(function (resolve, reject) {
+      Api["delete"]('/admin/permission/delete/' + id).then(function (resp) {
+        dispatch({
+          type: PermissionActionType.DELETED_SUCCESS,
+          payload: {
+            id: id
+          }
+        });
+        dispatch({
+          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          payload: {
+            type: 'danger',
+            message: resp.data.message
+          }
+        });
+      })["catch"](function (err) {
+        if (err.response) {
+          dispatch({
+            type: PermissionActionType.DELETE_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -3993,6 +4051,20 @@ var PermissionReducer = function PermissionReducer() {
       break;
 
     case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.UPDATE_FAILED:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        errors: action.payload.errors
+      });
+      break;
+
+    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.DELETED_SUCCESS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        permissions: state.permissions.filter(function (permission) {
+          return permission.id != action.payload.id;
+        })
+      });
+      break;
+
+    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.DELETE_FAILED:
       return _objectSpread(_objectSpread({}, state), {}, {
         errors: action.payload.errors
       });
