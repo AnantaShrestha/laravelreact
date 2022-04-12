@@ -26,22 +26,10 @@ const PermissionReducer = (state=permissionState,action) =>{
 				permission:action.payload.data
 			}
 			break;
-		case PermissionActionType.CREATED_FAILED:
-			return{
-				...state,
-				errors:action.payload.errors,
-			}
-			break;
 		case PermissionActionType.EDIT_SUCCESS:
 			return{
 				...state,
 				permission:action.payload.data
-			}
-			break;
-		case PermissionActionType.EDIT_FAILED:
-			return{
-				...state,
-				errors:action.payload.errors,
 			}
 			break;
 		case PermissionActionType.UPDATE_SUCCESS:
@@ -50,20 +38,14 @@ const PermissionReducer = (state=permissionState,action) =>{
 				permission:action.payloas.data
 			}
 			break;
-		case PermissionActionType.UPDATE_FAILED:
-			return{
-				...state,
-				errors:action.payload.errors,
-			}
-			break;
 		case PermissionActionType.DELETED_SUCCESS:
     		return{
     			...state,
     			permissions:state.permissions.filter(permission => permission.id != action.payload.id)
     		}
     		break
-    	case PermissionActionType.DELETE_FAILED:
-    		return{
+    	case PermissionActionType.SET_FAILED:
+			return{
 				...state,
 				errors:action.payload.errors,
 			}

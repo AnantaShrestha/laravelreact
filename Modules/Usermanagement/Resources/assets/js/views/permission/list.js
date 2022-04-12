@@ -7,8 +7,7 @@ import DataTable from '@/components/admin/DataTable'
 const PermissionList =()=>{
 	const dispatch = useDispatch()
 	const permissionsList =useSelector((state) =>state.permission.permissions)
-	useEffect(()=>{
-		let isMounted = true;    
+	useEffect(()=>{   
 		dispatch(PermissionsListAction())
 	},[])
 	//table columns

@@ -2188,7 +2188,6 @@ var PermissionForm = function PermissionForm() {
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var isMounted = true;
     dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_2__.RouteListAction)());
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -2374,7 +2373,6 @@ var PermissionList = function PermissionList() {
     return state.permission.permissions;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var isMounted = true;
     dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_2__.PermissionsListAction)());
   }, []); //table columns
 
@@ -2455,12 +2453,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _hooks_useForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/hooks/useForm */ "./resources/js/hooks/useForm.js");
 /* harmony import */ var _components_admin_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/admin/Button */ "./resources/js/components/admin/Button/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_admin_Select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/admin/Select */ "./resources/js/components/admin/Select/index.js");
+/* harmony import */ var _services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/services/redux/permission/PermissionAction */ "./resources/js/services/redux/permission/PermissionAction.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
@@ -2473,11 +2475,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var RoleForm = function RoleForm() {
   //navigate
-  var navigate = (0,react_router__WEBPACK_IMPORTED_MODULE_5__.useNavigate)(); //dispatch
+  var navigate = (0,react_router__WEBPACK_IMPORTED_MODULE_7__.useNavigate)(); //dispatch
 
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(); //param
 
-  var _useParams = (0,react_router__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
+  var _useParams = (0,react_router__WEBPACK_IMPORTED_MODULE_7__.useParams)(),
       id = _useParams.id;
 
   var isAddMode = !id; //use form
@@ -2499,63 +2501,85 @@ var RoleForm = function RoleForm() {
       setValues = _useForm.setValues,
       errors = _useForm.errors,
       handleChange = _useForm.handleChange,
-      handleSubmit = _useForm.handleSubmit;
+      handleSubmit = _useForm.handleSubmit; //selector
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+
+  var permissions = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.permission.permissions;
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_5__.PermissionsListAction)());
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
     className: "content-body",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "page-heading-wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "page-title-wrapper",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
             children: id ? 'Edit Role' : 'Create Role'
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "action-wrapper",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
             to: "/admin/role",
             className: "btn-warning",
             children: "Back"
           })
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "content-box-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("form", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("form", {
           method: "post",
           onSubmit: handleSubmit,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "form-wrapper",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "form-row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-label",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
                   children: "Role Name"
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                 className: "form-control",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
                   value: values.name || '',
                   name: "name",
                   placeholder: "Role Name",
                   type: "text",
                   className: "form-input ".concat((errors === null || errors === void 0 ? void 0 : errors.name) && 'invalid'),
                   onChange: handleChange
-                }), (errors === null || errors === void 0 ? void 0 : errors.name) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                }), (errors === null || errors === void 0 ? void 0 : errors.name) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                   className: "validation-wrapper",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                     children: errors.name
                   })
                 })]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "form-row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                className: "form-label",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+                  children: "Permissions"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                className: "form-control",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_admin_Select__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                  className: "select-wrapper",
+                  multiple: "true",
+                  data: permissions
+                })
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "form-row",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-label"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-control form-action",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_admin_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_admin_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
                   isLoading: isLoading,
                   isDisable: isDisable,
                   type: "submit",
@@ -3001,6 +3025,39 @@ var FlashMessage = function FlashMessage(props) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FlashMessage);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/Select/index.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/admin/Select/index.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var Select = function Select(props) {
+  var multiple = props.multiple,
+      data = props.data,
+      className = props.className,
+      setValues = props.setValues;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: className
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Select);
 
 /***/ }),
 
@@ -3963,18 +4020,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var PermissionActionType = {
   SET_ROUTELIST: "SET_ROUTELIST",
-  SET_ROUTELIST_FAILED: "SET_ROUTELIST_FAILED",
   SET_PERMISSIONS: "SET_PERMISSIONS",
-  SET_PERMISSION_FAILED: "SET_PERMISSION_FAILED",
   SET_PERMISSION: "SET_PERMISSION",
   CREATED_SUCCESS: "CREATED_SUCCESS",
-  CREATED_FAILED: "CREATED_FAILED",
   EDIT_SUCCESS: "UPDATED_SUCCESS",
-  EDIT_FAILED: "UPDATED_FAILED",
   UPDATE_SUCCESS: "UPDATED_SUCCESS",
-  UPDATE_FAILED: "UPDATED_FAILED",
   DELETED_SUCCESS: "DELETED_SUCCESS",
-  DELETED_FAILED: "DELETED_FAILED"
+  SET_FAILED: "SET_FAILED"
 }; //route list action
 
 var RouteListAction = function RouteListAction() {
@@ -3989,7 +4041,7 @@ var RouteListAction = function RouteListAction() {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.SET_ROUTELIST_FAILED,
+            type: PermissionActionType.SET_FAILED,
             payload: err.response.message
           });
         }
@@ -4050,7 +4102,7 @@ var CreatePermissionAction = function CreatePermissionAction(permissionFormState
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.CREATED_FAILED,
+            type: PermissionActionType.SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -4080,7 +4132,7 @@ var EditPermissionAction = function EditPermissionAction(permissionsFormState, i
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.EDIT_FAILED,
+            type: PermissionActionType.SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -4118,7 +4170,7 @@ var UpdatePermissionAction = function UpdatePermissionAction(permissionFormState
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.UPDATE_FAILED,
+            type: PermissionActionType.SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -4156,7 +4208,7 @@ var DeletePermissionAction = function DeletePermissionAction(id) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.DELETE_FAILED,
+            type: PermissionActionType.SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -4225,33 +4277,15 @@ var PermissionReducer = function PermissionReducer() {
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.CREATED_FAILED:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        errors: action.payload.errors
-      });
-      break;
-
     case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.EDIT_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permission: action.payload.data
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.EDIT_FAILED:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        errors: action.payload.errors
-      });
-      break;
-
     case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.UPDATE_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permission: action.payloas.data
-      });
-      break;
-
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.UPDATE_FAILED:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        errors: action.payload.errors
       });
       break;
 
@@ -4263,7 +4297,7 @@ var PermissionReducer = function PermissionReducer() {
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.DELETE_FAILED:
+    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.SET_FAILED:
       return _objectSpread(_objectSpread({}, state), {}, {
         errors: action.payload.errors
       });
@@ -4276,6 +4310,116 @@ var PermissionReducer = function PermissionReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PermissionReducer);
+
+/***/ }),
+
+/***/ "./resources/js/services/redux/role/RoleAction.js":
+/*!********************************************************!*\
+  !*** ./resources/js/services/redux/role/RoleAction.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CreateRoleAction": () => (/* binding */ CreateRoleAction),
+/* harmony export */   "RoleActionType": () => (/* binding */ RoleActionType)
+/* harmony export */ });
+/* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
+
+var RoleActionType = {
+  SET_ROLES: "SET_ROLES",
+  SET_ROLE: "SET_ROLE",
+  SET_FAILED: "SET_FAILED",
+  CREATED_SUCCESS: "CREATED_SUCCESS",
+  EDIT_SUCCESS: "UPDATED_SUCCESS",
+  UPDATE_SUCCESS: "UPDATED_SUCCESS",
+  DELETED_SUCCESS: "DELETED_SUCCESS"
+}; //create role action
+
+var CreateRoleAction = function CreateRoleAction(roleFormState, navigate) {
+  return function (dispatch) {
+    return new Promise(function (resolve, reject) {
+      Api.post('admin/role/store', roleFormState).then(function (resp) {
+        dispatch({
+          type: RoleActionType.CREATED_SUCCESS,
+          payload: resp.data
+        });
+        dispatch({
+          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          payload: {
+            type: 'success',
+            message: resp.data.message
+          }
+        });
+        navigate('/admin/permission');
+        resolve(resp);
+      })["catch"](function (err) {
+        if (err.response) {
+          dispatch({
+            type: RoleActionType.SET_FAILED,
+            payload: err.response.data
+          });
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: err.response.data.message
+            }
+          });
+        }
+
+        reject(err);
+      });
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./resources/js/services/redux/role/roleReducer.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/services/redux/role/roleReducer.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RoleAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoleAction */ "./resources/js/services/redux/role/RoleAction.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var roleState = {
+  roles: {},
+  role: {},
+  errors: {}
+};
+
+var RoleReducer = function RoleReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : roleState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.CREATED_SUCCESS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        roles: action.payload.data
+      });
+      break;
+
+    default:
+      return state;
+      break;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RoleReducer);
 
 /***/ }),
 
@@ -4313,18 +4457,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _services_redux_notification_notificationReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/services/redux/notification/notificationReducer */ "./resources/js/services/redux/notification/notificationReducer.js");
 /* harmony import */ var _services_redux_auth_AuthReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/services/redux/auth/AuthReducer */ "./resources/js/services/redux/auth/AuthReducer.js");
 /* harmony import */ var _services_redux_permission_PermissionReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/services/redux/permission/PermissionReducer */ "./resources/js/services/redux/permission/PermissionReducer.js");
+/* harmony import */ var _services_redux_role_roleReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/services/redux/role/roleReducer */ "./resources/js/services/redux/role/roleReducer.js");
 
 
 
 
-var RootReducers = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+
+var RootReducers = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
   notification: _services_redux_notification_notificationReducer__WEBPACK_IMPORTED_MODULE_0__["default"],
   auth: _services_redux_auth_AuthReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  permission: _services_redux_permission_PermissionReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  permission: _services_redux_permission_PermissionReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  role: _services_redux_role_roleReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RootReducers);
 
@@ -68124,7 +68271,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
+module.exports = JSON.parse('{"_args":[["axios@0.21.4","E:\\\\wampp\\\\www\\\\laravelreact"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"E:\\\\wampp\\\\www\\\\laravelreact","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 

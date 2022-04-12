@@ -2,19 +2,13 @@ import {NotificationActionType} from '../notification/notificationAction'
 
 export const PermissionActionType={
 	SET_ROUTELIST:"SET_ROUTELIST",
-	SET_ROUTELIST_FAILED:"SET_ROUTELIST_FAILED",
 	SET_PERMISSIONS:"SET_PERMISSIONS",
-	SET_PERMISSION_FAILED:"SET_PERMISSION_FAILED",
 	SET_PERMISSION:"SET_PERMISSION",
 	CREATED_SUCCESS:"CREATED_SUCCESS",
-	CREATED_FAILED:"CREATED_FAILED",
 	EDIT_SUCCESS:"UPDATED_SUCCESS",
-	EDIT_FAILED:"UPDATED_FAILED",
 	UPDATE_SUCCESS:"UPDATED_SUCCESS",
-	UPDATE_FAILED:"UPDATED_FAILED",
 	DELETED_SUCCESS:"DELETED_SUCCESS",
-	DELETED_FAILED:"DELETED_FAILED"
-
+	SET_FAILED:"SET_FAILED"
 }
 //route list action
 export const RouteListAction = () => (dispatch) =>{
@@ -29,7 +23,7 @@ export const RouteListAction = () => (dispatch) =>{
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.SET_ROUTELIST_FAILED,
+					type:PermissionActionType.SET_FAILED,
 					payload:err.response.message
 				})
 			}
@@ -76,7 +70,7 @@ export const CreatePermissionAction = (permissionFormState,navigate) => (dispatc
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.CREATED_FAILED,payload:err.response.data
+					type:PermissionActionType.SET_FAILED,payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
@@ -99,7 +93,7 @@ export const EditPermissionAction = (permissionsFormState,id,navigate) => (dispa
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.EDIT_FAILED,payload:err.response.data
+					type:PermissionActionType.SET_FAILED,payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
@@ -126,7 +120,7 @@ export const UpdatePermissionAction = (permissionFormState,id,navigate) => (disp
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.UPDATE_FAILED,payload:err.response.data
+					type:PermissionActionType.SET_FAILED,payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
@@ -152,7 +146,7 @@ export const DeletePermissionAction = (id) => (dispatch) =>{
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.DELETE_FAILED,payload:err.response.data
+					type:PermissionActionType.SET_FAILED,payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message

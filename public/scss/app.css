@@ -437,10 +437,19 @@ ul, ol {
   color: blue;
 }
 
+.form-wrapper .form-row {
+  margin-bottom: 20px;
+}
+
+.form-wrapper .form-row:last-child {
+  margin-bottom: 0px;
+}
+
 .form-row {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+  width: 100%;
 }
 
 .form-label {
@@ -464,13 +473,18 @@ ul, ol {
   outline: none;
 }
 
+.form-control select.form-input {
+  height: 40px;
+  background: none;
+  text-indent: 4px;
+}
+
 .form-input.invalid {
   border-color: red !important;
 }
 
 .form-control.form-action button {
   width: 100%;
-  margin-top: 20px;
   border-radius: 0px;
   border-radius: 4px;
   padding: 10px 0px;

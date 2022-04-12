@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 
 import useForm from '@/hooks/useForm'
 import Button from '@/components/admin/Button'
+import Select from '@/components/admin/Select'
+import {PermissionsListAction} from '@/services/redux/permission/PermissionAction'
 
 const RoleForm = () =>{
 	//navigate
@@ -27,6 +29,12 @@ const RoleForm = () =>{
 		}
 	}
 	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(roleForm,validation);
+
+	//selector
+	const permissions=useSelector((state)=>state.permission.permissions)
+	useEffect(()=>{  
+		dispatch(PermissionsListAction())
+	},[])
 	return(
 		<div className="content-body">
 			<>
@@ -50,6 +58,14 @@ const RoleForm = () =>{
 								{
 										errors?.name && (<div className="validation-wrapper"><span>{errors.name}</span></div>)
 								}
+							</div>
+						</div>
+						<div className="form-row">
+							<div className="form-label">
+								<label>Permissions</label>
+							</div>
+							<div className="form-control">
+								<Select className="select-wrapper" multiple='true' data={permissions} />
 							</div>
 						</div>
 						<div className="form-row">

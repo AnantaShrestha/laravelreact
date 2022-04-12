@@ -29,8 +29,7 @@ const PermissionForm =()=>{
 	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(permissionForm,validation);
 
 	//use effect
-	useEffect(() => {
-	 	let isMounted = true;          
+	useEffect(() => {        
 		dispatch(RouteListAction())
 		
 	 },[]);
