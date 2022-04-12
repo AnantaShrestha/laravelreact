@@ -125,7 +125,7 @@ const PermissionForm =()=>{
 							<div className="form-label">
 							</div>
 							<div className="form-control form-action">
-								<Button isLoading={isLoading} isDisable={isDisable} type="submit" className="btn-success" name={id ? 'Update' : 'Create'} />
+								<Button isLoading={isLoading} isDisable={isDisable} type="submit" className="btn-success" name={!isAddMode ? 'Update' : 'Create'} />
 							</div>
 						</div>
 					</div>
