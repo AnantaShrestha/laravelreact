@@ -25,7 +25,7 @@ const RoleForm = () =>{
 	//form submit callback
 	const roleForm = () =>{
 		if(Object.keys(errors).length  === 0){
-			
+		
 		}
 	}
 	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(roleForm,validation);
@@ -65,12 +65,11 @@ const RoleForm = () =>{
 								<label>Permissions</label>
 							</div>
 							<div className="form-control">
-								<Select className="select-wrapper" multiple='true' data={permissions} />
+								<Select datas={permissions} handleChange={handleChange} />
 							</div>
 						</div>
 						<div className="form-row">
-							<div className="form-label">
-							</div>
+							<div className="form-label"></div>
 							<div className="form-control form-action">
 								<Button isLoading={isLoading} isDisable={isDisable} type="submit" className="btn-success" name={!isAddMode ? 'Update' : 'Create'} />
 							</div>
