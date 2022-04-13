@@ -37,9 +37,6 @@ const useForm = (callback,validation) =>{
                 break;
 
         }
-        
-                
-
     }
     //input change handler
     const handleChange = (event) =>{
@@ -52,7 +49,7 @@ const useForm = (callback,validation) =>{
        if(key)  Object.assign(errors,{[key]:key.toUpperCase()+' field is required'})
     }
     const validate = (name,val) =>{
-        Object.entries(validation).map(([key,attr],i)=>{
+        validation && Object.entries(validation).map(([key,attr],i)=>{
             if(attr.required && (values[key]==undefined || values[key] == '')){
                 joinObject(key)
             }
@@ -73,7 +70,8 @@ const useForm = (callback,validation) =>{
             validate()
     		setLoading(false)
     		setDisable(false)
-           	return callback();
+           	if(callback())
+                callback()
     	},2000)
     }
     return {

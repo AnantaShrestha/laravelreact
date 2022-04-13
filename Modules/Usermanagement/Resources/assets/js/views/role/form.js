@@ -25,7 +25,7 @@ const RoleForm = () =>{
 	//form submit callback
 	const roleForm = () =>{
 		if(Object.keys(errors).length  === 0){
-		
+			console.log(values)
 		}
 	}
 	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(roleForm,validation);
@@ -56,7 +56,7 @@ const RoleForm = () =>{
 							<div className="form-control">
 								<input value={values.name || ''}  name="name"  placeholder="Role Name" type="text" className={`form-input ${errors?.name && 'invalid'}`} onChange={handleChange} />
 								{
-										errors?.name && (<div className="validation-wrapper"><span>{errors.name}</span></div>)
+									errors?.name && (<div className="validation-wrapper"><span>{errors.name}</span></div>)
 								}
 							</div>
 						</div>
@@ -65,7 +65,7 @@ const RoleForm = () =>{
 								<label>Permissions</label>
 							</div>
 							<div className="form-control">
-								<Select datas={permissions} handleChange={handleChange} />
+								<Select multiple="true" datas={permissions} handleChange={handleChange} selectedValue={values.permissions}/>
 							</div>
 						</div>
 						<div className="form-row">

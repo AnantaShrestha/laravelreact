@@ -23,12 +23,8 @@ class RoleRepository{
 	public function storeRole(array $data){
 		$role=$this->role->create($data);
 		$permissions=$data->permissions ?? [];
-		$users=$data->users ?? [];
 		if($permissions){
 			$role->attach($permissions);
-		}
-		if($user){
-			$role->attach($user);
 		}
 		return $role;
 	}
@@ -49,11 +45,8 @@ class RoleRepository{
 		$role=$this->findRole($id);
 		$role->update($data);
 		$permissions=$data->permissions ?? [];
-		$users=$data->users ?? [];
-			$role->permissions()->detach();
-			$role->permissions()->attach($permissions);
-			$role->users()->detach();
-			$role->users()->attach($users);
+		$role->permissions()->detach();
+		$role->permissions()->attach($permissions);
 		return $role;
 	}
 
@@ -64,7 +57,6 @@ class RoleRepository{
 	public function deleteRole($id){
 		$role=$this->findRole($id);
 		$role->permissions->detach();
-		$role->users->detach();
 		return $role->delete();
 	}
 }
