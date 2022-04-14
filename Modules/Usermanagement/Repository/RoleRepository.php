@@ -5,13 +5,14 @@ use Modules\Usermanagement\Entities\Role;
 class RoleRepository{
 	private $role;
 
-	public function __construct()){
+	public function __construct(){
 		$this->role=new Role();
 	}
 
 
-	public function getRole($data){
+	public function getRole(){
 		$role=$this->role
+				->with('permissions')
 				->select('id','name','created_at');
 		return $role->orderBy('created_at','desc')->get();
 	}
@@ -21,10 +22,12 @@ class RoleRepository{
 	 * store role in database
 	 */
 	public function storeRole(array $data){
-		$role=$this->role->create($data);
-		$permissions=$data->permissions ?? [];
+		$role=$this->role->create([
+			'name'=>$data['name']
+		]);
+		$permissions=$data['permissions'] ?? [];
 		if($permissions){
-			$role->attach($permissions);
+			$role->permissions()->attach($permissions);
 		}
 		return $role;
 	}
@@ -33,7 +36,7 @@ class RoleRepository{
 	 * @return role according to id
 	 */
 	public function findRole($id){
-		return $this->role->findOrFail($id);
+		return $this->role->with('permissions')->findOrFail($id);
 	}
 
 
@@ -44,7 +47,7 @@ class RoleRepository{
 	public function updateRole($id,array $data){
 		$role=$this->findRole($id);
 		$role->update($data);
-		$permissions=$data->permissions ?? [];
+		$permissions=$data['permissions'] ?? [];
 		$role->permissions()->detach();
 		$role->permissions()->attach($permissions);
 		return $role;
@@ -56,7 +59,7 @@ class RoleRepository{
 	 */
 	public function deleteRole($id){
 		$role=$this->findRole($id);
-		$role->permissions->detach();
+		$role->permissions()->detach();
 		return $role->delete();
 	}
 }

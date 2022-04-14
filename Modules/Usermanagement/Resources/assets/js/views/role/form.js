@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import useForm from '@/hooks/useForm'
 import Button from '@/components/admin/Button'
 import Select from '@/components/admin/Select'
+import {CreateRoleAction,EditRoleAction} from '@/services/redux/role/RoleAction'
 import {PermissionsListAction} from '@/services/redux/permission/PermissionAction'
 
 const RoleForm = () =>{
@@ -25,16 +26,37 @@ const RoleForm = () =>{
 	//form submit callback
 	const roleForm = () =>{
 		if(Object.keys(errors).length  === 0){
-			console.log(values)
+			dispatch(CreateRoleAction(values,navigate))
 		}
 	}
 	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(roleForm,validation);
 
 	//selector
-	const permissions=useSelector((state)=>state.permission.permissions)
+	const permissionLists=useSelector((state)=>state.permission.permissions)
 	useEffect(()=>{  
 		dispatch(PermissionsListAction())
 	},[])
+	useEffect(()=>{
+		if(!isAddMode){
+			dispatch(EditRoleAction(id))
+		}
+	},[])
+	const role=useSelector((state)=>state.role.role)
+	useEffect(()=>{
+		if(!isAddMode){
+			let permissions=[]
+			setValues({
+				...values,
+				name:role.name  || '',
+				permissions:permissions || []
+			}) 
+			role.permissions && Object.entries(role.permissions).map(([key,permission],i)=>{
+				permissions.push(permission.id)
+			})
+
+		}
+	},[role])
+	
 	return(
 		<div className="content-body">
 			<>
@@ -65,7 +87,7 @@ const RoleForm = () =>{
 								<label>Permissions</label>
 							</div>
 							<div className="form-control">
-								<Select multiple="true" datas={permissions} handleChange={handleChange} selectedValue={values.permissions}/>
+								<Select multiple="true" datas={permissionLists} handleChange={handleChange} selectedValue={values.permissions}/>
 							</div>
 						</div>
 						<div className="form-row">

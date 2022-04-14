@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Usermanagement\Entities\Permission;
 use Modules\Usermanagement\Observers\PermissionObserver;
+use Modules\Usermanagement\Observers\RoleObserver;
+use Modules\Usermanagement\Entities\Role;
+
 
 class UsermanagementServiceProvider extends ServiceProvider
 {
@@ -31,7 +34,8 @@ class UsermanagementServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
         Permission::observe(PermissionObserver::class);
-    }
+        Role::observe(RoleObserver::class);
+    }   
 
     /**
      * Register the service provider.

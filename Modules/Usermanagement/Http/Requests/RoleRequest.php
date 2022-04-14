@@ -17,6 +17,7 @@ class RoleRequest extends FormRequest
     {
         return [
             'name'=>'required',
+            'permissions'=>'nullable|array'
         ];
     }
 

@@ -5,7 +5,6 @@ const Select = (props) =>{
 	const [checkedValues,setCheckedValue]=useState([])
 
 	const handleClick = (e) =>{
-		let id=e.target.getAttribute('for')
 		let value=e.target.lastChild.data
 		let index =  checkedValues.indexOf(value);
 		if (index > -1) {
@@ -43,7 +42,13 @@ const Select = (props) =>{
 						Object.entries(datas).map(([key,data],i)=>{
 							return(
 								<div key={i} className="select-option">
-									<input name="permissions" onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} />
+									{
+										selectedValue && selectedValue.includes(data.id) ? 
+											(<input checked name="permissions" onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} />)
+											:
+											(<input name="permissions" onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} />)
+									}
+									
 									<label onClick={handleClick} htmlFor={data.id}>{data.name}</label>
 								</div>
 							)

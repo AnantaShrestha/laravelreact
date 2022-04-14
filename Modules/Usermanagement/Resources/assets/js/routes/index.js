@@ -33,5 +33,11 @@ export default[
 		exact:true,
 		auth:true,
 		component:<RoleForm/>
+	},
+	{
+		path:'/admin/role/edit/:id',
+		exact:true,
+		auth:true,
+		component:<RoleForm />
 	}
 ];

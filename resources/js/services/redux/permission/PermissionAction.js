@@ -43,7 +43,7 @@ export const PermissionsListAction = () => (dispatch) =>{
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.SET_PERMISSIONS,
+					type:PermissionActionType.SET_FAILED,
 					payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
@@ -83,7 +83,7 @@ export const CreatePermissionAction = (permissionFormState,navigate) => (dispatc
 }
 
 //edit permission
-export const EditPermissionAction = (permissionsFormState,id,navigate) => (dispatch) =>{
+export const EditPermissionAction = (id) => (dispatch) =>{
 	return new Promise((resolve,reject) =>{
 		Api.get('/admin/permission/edit/'+id).then(resp=>{
 			dispatch({

@@ -2,8 +2,56 @@ import React, {useEffect} from 'react'
 import {Link } from "react-router-dom"
 import {useDispatch,useSelector} from "react-redux";
 import {FaTrashAlt,FaPen} from 'react-icons/fa'
+import DataTable from '@/components/admin/DataTable'
+import {RolesListAction} from '@/services/redux/role/RoleAction'
 
 const RoleList = () =>{
+	const dispatch = useDispatch()
+	const rolesList =useSelector((state) =>state.role.roles)
+	useEffect(()=>{   
+		dispatch(RolesListAction())
+	},[])
+
+	//table columns
+	const columns=[
+		{
+			key:'name',title:'Role Name',
+			render:(row)=>{
+				return(
+					<span>{row.name}</span>
+				)
+			}
+		},
+		{
+			key:'permissions',title:'Permissions',
+			render:(row)=>{
+				return(
+					<div className="table-permission-list">
+						{
+							Object.entries(row.permissions).map(([key,permission],index)=>{
+								return(
+									<span key={index}>{permission.name}</span>
+								)
+							})
+						}
+					</div>
+				)
+	
+			}
+		},
+		{
+			key:'action',title:'Action',
+			render: (row) =>{
+				return (
+					<div className="table-action-wrapper">
+						<Link className="table-edit-btn" to={`/admin/role/edit/${row.id}`} ><FaPen /></Link>
+			    		<button className="table-delete-btn"><FaTrashAlt /></button>
+			    	</div>
+				)
+			}
+  			
+		}
+	]
 	return(
 		<div className="content-body">
 			<div className="page-heading-wrapper">
@@ -16,6 +64,7 @@ const RoleList = () =>{
 			</div>
 			<div className="content-box-wrapper">
 				<div className="table-wrapper">
+					<DataTable columns={columns} rows={rolesList} />
 				</div>
 			</div>
 		</div>

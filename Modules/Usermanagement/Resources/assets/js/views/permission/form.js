@@ -35,7 +35,7 @@ const PermissionForm =()=>{
 	 },[]);
 	useEffect(()=>{
 		if(!isAddMode){
-			dispatch(EditPermissionAction(values,id,navigate))
+			dispatch(EditPermissionAction( id))
 		}
 	},[])
 	//selector

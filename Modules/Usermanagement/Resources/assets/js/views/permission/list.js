@@ -13,19 +13,29 @@ const PermissionList =()=>{
 	//table columns
 	const columns=[
 		{
-			key:'name',title:'Permisssion Name'
+			key:'name',title:'Permisssion Name',
+			render: (row) =>{
+				return(
+					<span>{row.name}</span>
+				)
+			}
 		},
 		{
-			key:'access_uri',title:'Access Uri'
+			key:'access_uri',title:'Access Uri',
+			render:(row)=>{
+				return(
+					<span>{row.access_uri.join(',')}</span>
+				)
+			}
 		},
 		{
 			key:'action',
 			title:'Action',
-			action: (id) =>{
+			render: (row) =>{
 				return (
 					<div className="table-action-wrapper">
-						<Link className="table-edit-btn" to={`/admin/permission/edit/${id}`} ><FaPen /></Link>
-			    		<button className="table-delete-btn" onClick={() => handleDeleteButton(id)} ><FaTrashAlt /></button>
+						<Link className="table-edit-btn" to={`/admin/permission/edit/${row.id}`} ><FaPen /></Link>
+			    		<button className="table-delete-btn" onClick={() => handleDeleteButton(row.id)} ><FaTrashAlt /></button>
 			    	</div>
 				)
 			}

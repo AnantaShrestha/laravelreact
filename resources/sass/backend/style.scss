@@ -296,5 +296,16 @@
 		}
 	}
  }
+.table-permission-list{
+	display: flex;
+	column-gap:5px;
+
+	span{
+		background:var(--themecolor);
+		padding:3px 5px;
+		color:var(--white);
+		border-radius: 4px;
+	}
+}
 
  /** end of custom select option **/
