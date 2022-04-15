@@ -41,12 +41,17 @@ const Select = (props) =>{
 					{
 						Object.entries(datas).map(([key,data],i)=>{
 							return(
+
 								<div key={i} className="select-option">
 									{
 										selectedValue && selectedValue.includes(data.id) ? 
-											(<input checked name="permissions" onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} />)
+											(
+												<input name="permissions" onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} checked="checked" />
+											)
 											:
-											(<input name="permissions" onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} />)
+											(
+												<input name="permissions" onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} />
+											)
 									}
 									
 									<label onClick={handleClick} htmlFor={data.id}>{data.name}</label>

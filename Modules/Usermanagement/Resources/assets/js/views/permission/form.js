@@ -50,7 +50,6 @@ const PermissionForm =()=>{
 			})
 		}
 	},[permission])
-	//get route list
 	return (
 		<div className="content-body">
 			<>
@@ -70,7 +69,7 @@ const PermissionForm =()=>{
 								<label>Permission Name</label>
 							</div>
 							<div className="form-control">
-								<input value={values.name || ''}  name="name"  placeholder="Permission Name" type="text" className={`form-input ${errors?.name && 'invalid'}`} onChange={handleChange} />
+								<input value={values.name ?? ''}  name="name"  placeholder="Permission Name" type="text" className={`form-input ${errors?.name && 'invalid'}`} onChange={handleChange} />
 								{
 										errors?.name && (<div className="validation-wrapper"><span>{errors.name}</span></div>)
 								}
@@ -95,15 +94,11 @@ const PermissionForm =()=>{
 																	<>
 																	<div className="checklist-wrapper">
 																		{
-																			isAddMode ? 
-																			(<input  name="access_uri" value={route} type="checkbox" onChange={handleChange}   />)
-																			:
-																			(
-																				values.access_uri && values.access_uri.includes(route) ? 
-																				(<input checked  name="access_uri" value={route} type="checkbox" onChange={handleChange}   />)
+																			values.access_uri && values.access_uri.includes(route) ? 
+																				(<input  name="access_uri" value={route} type="checkbox" onChange={handleChange}  checked="checked"   />)
 																				:
 																				(<input  name="access_uri" value={route} type="checkbox" onChange={handleChange}   />)
-																			)
+																		
 																		}
 																		<span>{type} {title}</span>
 																	</div>

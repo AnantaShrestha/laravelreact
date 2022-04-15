@@ -28,7 +28,7 @@ const RoleList = () =>{
 				return(
 					<div className="table-permission-list">
 						{
-							Object.entries(row.permissions).map(([key,permission],index)=>{
+							row.permissions && Object.entries(row.permissions).map(([key,permission],index)=>{
 								return(
 									<span key={index}>{permission.name}</span>
 								)
