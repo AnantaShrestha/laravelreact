@@ -30,6 +30,14 @@ const RoleReducer = (state=roleState,action) =>{
 				...state,
 				role:action.payload.data
 			}
+			break;
+		case RoleActionType.DELETED_SUCCESS:
+			console.log(action.payload.id)
+			return {
+				...state,
+				roles:state.roles.filter(role => role.id != action.payload.id)
+			}
+			break
 		default:
 			return state;
 			break;

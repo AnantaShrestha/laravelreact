@@ -48,4 +48,16 @@ class RoleController extends Controller
             return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
         }
     }
+
+    /** 
+     * @return delete role form database
+     */
+    public function delete($id){
+         try{
+            $this->roleRepo->deleteRole($id);
+            return $this->apiResponse->responseSuccess([],'Role delete successfully',SUCCESS);
+        }catch(Exception $e){
+            return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
+        }
+    }
 }

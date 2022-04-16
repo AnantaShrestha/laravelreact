@@ -1,7 +1,6 @@
 <?php
 namespace Modules\Usermanagement\Repository;
 use Modules\Usermanagement\Entities\Role;
-
 class RoleRepository{
 	private $role;
 
@@ -9,12 +8,11 @@ class RoleRepository{
 		$this->role=new Role();
 	}
 
-
+	/**
+	 * get role with permission
+	 */
 	public function getRole(){
-		$role=$this->role
-				->with('permissions')
-				->select('id','name','created_at');
-		return $role->orderBy('created_at','desc')->get();
+		return $this->role->with('permissions')->orderBy('created_at','desc')->get();
 	}
 
 	/**

@@ -33,6 +33,15 @@ $router->prefix('admin')->name('admin.')->group(function() use($router){
         $router->post('store',['as'=>'store','uses'=>'RoleController@store']);
         $router->get('edit/{id}',['as'=>'edit','uses'=>'RoleController@edit']);
         $router->put('edit/{id}',['as'=>'update','uses'=>'RoleController@update']);
-        $router->delete('delete',['as'=>'delete','uses'=>'RoleController@delete']);
+        $router->delete('delete/{id}',['as'=>'delete','uses'=>'RoleController@delete']);
+    });
+
+    //user routes
+    $router->prefix('user')->name('user.')->group(function() use($router){
+        $router->get('/',['as'=>'index','uses'=>'UserController@index']);
+        $router->post('store',['as'=>'store','uses'=>'UserController@store']);
+        $router->get('edit/{id}',['as'=>'edit','uses'=>'UserController@edit']);
+        $router->put('edit/{id}',['as'=>'update','uses'=>'UserController@update']);
+        $router->delete('delete',['as'=>'delete','uses'=>'UserController@delete']);
     });
 });

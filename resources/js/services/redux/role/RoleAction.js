@@ -96,3 +96,29 @@ export const UpdateRoleAction = (roleFormState,id,navigate) => (dispatch) =>{
 		})
 	})
 }
+
+//delete role action
+export const DeleteRoleAction = (id) => (dispatch) =>{
+	return new Promise((resolve,reject)=>{
+		Api.delete('admin/role/delete/'+id).then(resp=>{
+			dispatch({
+				type:RoleActionType.DELETED_SUCCESS,
+				payload:{id:id}
+			})
+			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+				type:'danger',message:resp.data.message
+			}})
+		}).catch(err=>{
+			if(err.response){
+				dispatch({
+					type:RoleActionType.SET_FAILED,payload:err.response.data
+				})
+				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+					type:'danger',message:err.response.data.message
+				}})
+				
+			}
+			reject(err)
+		})
+	})
+}

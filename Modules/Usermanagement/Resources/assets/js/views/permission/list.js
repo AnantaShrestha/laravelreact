@@ -35,14 +35,14 @@ const PermissionList =()=>{
 				return (
 					<div className="table-action-wrapper">
 						<Link className="table-edit-btn" to={`/admin/permission/edit/${row.id}`} ><FaPen /></Link>
-			    		<button className="table-delete-btn" onClick={() => handleDeleteButton(row.id)} ><FaTrashAlt /></button>
+			    		<button className="table-delete-btn" onClick={() => handlePermissionDeleteButton(row.id)} ><FaTrashAlt /></button>
 			    	</div>
 				)
 			}
   			
 		}
 	]
-	const handleDeleteButton = (id) =>{
+	const handlePermissionDeleteButton = (id) =>{
 		dispatch(DeletePermissionAction(id))
 	}
 	return (
