@@ -38,6 +38,10 @@ const useForm = (callback,validation) =>{
 
         }
     }
+    //reset form
+    const reset = () =>{
+        return setValues({})
+    }
     //input change handler
     const handleChange = (event) =>{
         event.persist();
@@ -81,7 +85,7 @@ const useForm = (callback,validation) =>{
         isLoading,
         isDisable,
         handleChange,
-        handleSubmit
+        handleSubmit,
     }
 }
 

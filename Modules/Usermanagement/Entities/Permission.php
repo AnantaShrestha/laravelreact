@@ -13,7 +13,7 @@ class Permission extends Model
 
     public function getAccessUriAttribute($value)
     {
-        return explode(',',$value);
+        return $value ?  explode(',',$value) : [];
     }
 
 

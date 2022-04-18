@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import {RouteListAction,CreatePermissionAction,EditPermissionAction,UpdatePermissionAction} from '@/services/redux/permission/PermissionAction'
 import useForm from '@/hooks/useForm'
 import Button from '@/components/admin/Button'
+import CheckBox from '@/components/admin/checkBox'
 
 const PermissionForm =()=>{
 	//navigate
@@ -31,16 +32,13 @@ const PermissionForm =()=>{
 	//use effect
 	useEffect(() => {        
 		dispatch(RouteListAction())
-		
-	 },[]);
-	useEffect(()=>{
 		if(!isAddMode){
-			dispatch(EditPermissionAction( id))
+			dispatch(EditPermissionAction(id))
 		}
-	},[])
+	 },[]);
 	//selector
 	const routeLists=useSelector((state) => state.permission.routeLists)
-	const permission=useSelector((state)=>state.permission.permission)
+	const permission= !isAddMode ? useSelector((state)=>state.permission.permission) : []
 	useEffect(()=>{
 		if(!isAddMode){
 			setValues({
@@ -93,13 +91,7 @@ const PermissionForm =()=>{
 																<li key={index}>
 																	<>
 																	<div className="checklist-wrapper">
-																		{
-																			values.access_uri && values.access_uri.includes(route) ? 
-																				(<input  name="access_uri" value={route} type="checkbox" onChange={handleChange}  checked="checked"   />)
-																				:
-																				(<input  name="access_uri" value={route} type="checkbox" onChange={handleChange}   />)
-																		
-																		}
+																		<CheckBox name="access_uri" value={route} handleChange={handleChange} checked={values.access_uri && values.access_uri.includes(route) ? true : false} />
 																		<span>{type} {title}</span>
 																	</div>
 																	</>
