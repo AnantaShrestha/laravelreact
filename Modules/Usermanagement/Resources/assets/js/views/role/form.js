@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import useForm from '@/hooks/useForm'
 import Button from '@/components/admin/Button'
 import Select from '@/components/admin/Select'
-import {CreateRoleAction,EditRoleAction} from '@/services/redux/role/RoleAction'
+import {CreateRoleAction,EditRoleAction,UpdateRoleAction} from '@/services/redux/role/RoleAction'
 import {PermissionsListAction} from '@/services/redux/permission/PermissionAction'
 
 const RoleForm = () =>{
@@ -17,23 +17,22 @@ const RoleForm = () =>{
 	//param
 	const {id}=useParams()
 	const isAddMode = !id
-	//use form
-	const validation={
-		name:{
-			required:true
-		}
-	}
 	//form submit callback
 	const roleForm = () =>{
 		if(Object.keys(errors).length  === 0){
-			dispatch(CreateRoleAction(values,navigate))
+			isAddMode ? dispatch(CreateRoleAction(values,navigate)) : dispatch(UpdateRoleAction(values,id,navigate))
 		}
 	}
-	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(roleForm,validation);
+	const {isLoading,isDisable,values,setValues,setValidation,errors,handleChange,handleSubmit} = useForm(roleForm);
 
 	//selector
 	const permissionLists=useSelector((state)=>state.permission.permissions)
-	useEffect(()=>{  
+	useEffect(()=>{
+		setValidation({
+			name:{
+				rules:'required'
+			}
+		})
 		dispatch(PermissionsListAction())
 	},[])
 	useEffect(()=>{
@@ -84,7 +83,7 @@ const RoleForm = () =>{
 						</div>
 						<div className="form-row">
 							<div className="form-label">
-								<label>Permissions</label>
+								<label>Role</label>
 							</div>
 							<div className="form-control">
 								<Select multiple="true" datas={permissionLists} handleChange={handleChange} selectedValue={values.permissions}/>

@@ -49,6 +49,18 @@ class RoleController extends Controller
         }
     }
 
+    /**
+     * @return update role according to id
+     */
+    public function update(RoleRequest $request,$id){
+        try {
+            $role=$this->roleRepo->updateRole($id,$request->validated());
+            return $this->apiResponse->responseSuccess($role,'Role updated successfully',SUCCESS);
+        } catch (Exception $e) {
+            return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
+        }
+    }
+
     /** 
      * @return delete role form database
      */

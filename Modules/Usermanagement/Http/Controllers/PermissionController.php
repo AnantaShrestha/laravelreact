@@ -54,7 +54,7 @@ class PermissionController extends Controller
      * @return update permission
      */
     public function update(PermissionRequest $request,$id){
-         try {
+        try {
             $permission=$this->permissionRepo->updatePermission($id,$request->validated());
             return $this->apiResponse->responseSuccess($permission,'Permission updated successfully',SUCCESS);
         } catch (Exception $e) {

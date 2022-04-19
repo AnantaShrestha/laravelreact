@@ -4,6 +4,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router";
 import useForm from '@/hooks/useForm'
 import Button from '@/components/admin/Button'
+import Select from '@/components/admin/Select'
+
+import {RoleListAction} from '@/services/redux/role/RoleAction'
+
 const UserForm = () => {
     //navigate
     const navigate = useNavigate()
@@ -12,29 +16,32 @@ const UserForm = () => {
     //param
     const { id } = useParams()
     const isAddMode = !id
-    const validation = {
-        name: {
-            required: true
-        },
-        username: {
-            required: true
-        },
-        email:{
-            required:true,
-            rules:'email'
-        },
-        password:{
-            required:true,
-            rules:'confirm'
-        },
-        password_confirmation:{
-            required:true
-        }
-    }
     const userForm = () => {
 
     }
-    const { isLoading, isDisable, values, setValues, errors, handleChange, handleSubmit } = useForm(userForm, validation);
+    const { isLoading, isDisable, values, setValues,setValidation,errors, handleChange, handleSubmit } = useForm(userForm);
+    const rolesList =useSelector((state) =>state.role.roles)
+    console.log(rolesList)
+    useEffect(()=>{
+        setValidation({
+            name: {
+               rules:'required'
+            },
+            username: {
+                rules:'required'
+            },
+            email:{
+                rules:'required|email'
+            },
+            password:{
+               rules:'required'
+            },
+            password_confirmation:{
+                rules:'required|confirm'
+            }
+        })
+        dispatch(RoleListAction())
+    },[])
     return (
         <div className="content-body">
             <>
@@ -54,7 +61,7 @@ const UserForm = () => {
                                     <label>Full Name</label>
                                 </div>
                                 <div className="form-control">
-                                    <input value={values.name ?? ''} name="name" className={`form-input ${errors?.name && 'invalid'}`} placeholder="Full Name" onChange={handleChange} />
+                                    <input type="text" value={values.name ?? ''} name="name" className={`form-input ${errors?.name && 'invalid'}`} placeholder="Full Name" onChange={handleChange} />
                                     {
                                         errors?.name && (<div className="validation-wrapper"><span>{errors.name}</span></div>)
                                     }
@@ -65,7 +72,7 @@ const UserForm = () => {
                                     <label>Username</label>
                                 </div>
                                 <div className="form-control">
-                                    <input value={values.username ?? ''} name="username" className={`form-input ${errors?.username && 'invalid'}`} placeholder="Username" onChange={handleChange} />
+                                    <input type="text" value={values.username ?? ''} name="username" className={`form-input ${errors?.username && 'invalid'}`} placeholder="Username" onChange={handleChange} />
                                     {
                                         errors?.username && (<div className="validation-wrapper"><span>{errors.username}</span></div>)
                                     }
@@ -76,7 +83,7 @@ const UserForm = () => {
                                    <label>Email</label>     
                                 </div>
                                 <div className="form-control">
-                                    <input value={values.email ?? ''} name="email" className={`form-input ${errors?.email && 'invalid'}`} placeholder="Email Address" onChange={handleChange} />
+                                    <input type="email" value={values.email ?? ''} name="email" className={`form-input ${errors?.email && 'invalid'}`} placeholder="Email Address" onChange={handleChange} />
                                     {
                                         errors?.email && (<div className="validation-wrapper"><span>{errors.email}</span></div>)
                                     }
@@ -87,32 +94,47 @@ const UserForm = () => {
                                     <label>Phone Number</label>
                                 </div>
                                 <div className="form-control">
-                                    <input value={values.phone_no ?? ''} name="phone_no" className={`form-input ${errors?.phone_no && 'invalid'}`} placeholder="Phone Number" onChange={handleChange} />
+                                    <input type="text" value={values.phone_no ?? ''} name="phone_no" className={`form-input ${errors?.phone_no && 'invalid'}`} placeholder="Phone Number" onChange={handleChange} />
                                     {
                                         errors?.phone_no && (<div className="validation-wrapper"><span>{errors.phone_no}</span></div>)
                                     }
                                 </div>
                             </div>
+                           {
+                             isAddMode && (
+                                <>
+                                 <div className="form-row">
+                                    <div className="form-label">
+                                        <label>Password</label>
+                                    </div>
+                                    <div className="form-control">
+                                        <input type="password" name="password" className={`form-input ${errors?.password && 'invalid'}`} placeholder="Password" onChange={handleChange} />
+                                        {
+                                            errors?.password && (<div className="validation-wrapper"><span>{errors.password}</span></div>)
+                                        }
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div className="form-label">
+                                        <label>Password Confirm</label>
+                                    </div>
+                                    <div className="form-control">
+                                        <input type="password" name="password_confirmation" className={`form-input ${errors?.password_confirmation && 'invalid'}`} placeholder="Password Confirmation" onChange={handleChange} />
+                                        {
+                                            errors?.password_confirmation && (<div className="validation-wrapper"><span>{errors.password_confirmation}</span></div>)
+                                        }
+                                    </div>
+                                </div>
+                                </>
+
+                            )
+                           }
                             <div className="form-row">
                                 <div className="form-label">
-                                    <label>Password</label>
+                                    <label>Permissions</label>
                                 </div>
                                 <div className="form-control">
-                                    <input name="password" className={`form-input ${errors?.password && 'invalid'}`} placeholder="Password" onChange={handleChange} />
-                                    {
-                                        errors?.password && (<div className="validation-wrapper"><span>{errors.password}</span></div>)
-                                    }
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <div className="form-label">
-                                    <label>Password Confirm</label>
-                                </div>
-                                <div className="form-control">
-                                    <input name="password_confirmation" className={`form-input ${errors?.password_confirmation && 'invalid'}`} placeholder="Password Confirmation" onChange={handleChange} />
-                                    {
-                                        errors?.password_confirmation && (<div className="validation-wrapper"><span>{errors.password_confirmation}</span></div>)
-                                    }
+                                    <Select multiple="true" datas={rolesList} handleChange={handleChange}/>
                                 </div>
                             </div>
                             <div className="form-row">

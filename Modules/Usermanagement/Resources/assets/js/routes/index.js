@@ -54,4 +54,10 @@ export default[
 		auth:true,
 		component:<UserForm/>
 	},
+	{
+		path:'/admin/user/edit/:id',
+		exact:true,
+		auth:true,
+		component:<UserForm/>
+	},
 ];

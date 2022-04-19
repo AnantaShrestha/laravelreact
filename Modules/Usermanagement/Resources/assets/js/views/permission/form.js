@@ -16,21 +16,22 @@ const PermissionForm =()=>{
 	const {id}=useParams()
 	const isAddMode = !id
 	//use form
-	const validation={
-		name:{
-			required:true
-		}
-	}
+	
 	//form submit callback
 	const permissionForm = () =>{
 		if(Object.keys(errors).length  === 0){
 			dispatch(isAddMode ? CreatePermissionAction(values,navigate) : UpdatePermissionAction(values,id,navigate) );
 		}
 	}
-	const {isLoading,isDisable,values,setValues,errors,handleChange,handleSubmit} = useForm(permissionForm,validation);
+	const {isLoading,isDisable,values,setValues,setValidation,errors,handleChange,handleSubmit} = useForm(permissionForm);
 
 	//use effect
-	useEffect(() => {        
+	useEffect(() => {   
+		setValidation({
+			name:{
+				rules:'required'
+			}
+		})     
 		dispatch(RouteListAction())
 		if(!isAddMode){
 			dispatch(EditPermissionAction(id))

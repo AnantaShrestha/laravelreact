@@ -4,11 +4,11 @@ export const PermissionActionType={
 	SET_ROUTELIST:"SET_ROUTELIST",
 	SET_PERMISSIONS:"SET_PERMISSIONS",
 	SET_PERMISSION:"SET_PERMISSION",
-	CREATED_SUCCESS:"CREATED_SUCCESS",
-	EDIT_SUCCESS:"UPDATED_SUCCESS",
-	UPDATE_SUCCESS:"UPDATED_SUCCESS",
-	DELETED_SUCCESS:"DELETED_SUCCESS",
-	SET_FAILED:"SET_FAILED"
+	PERMISSION_CREATED_SUCCESS:"CREATED_SUCCESS",
+	PERMISSION_EDIT_SUCCESS:"UPDATED_SUCCESS",
+	PERMISSION_UPDATE_SUCCESS:"UPDATED_SUCCESS",
+	PERMISSION_DELETED_SUCCESS:"DELETED_SUCCESS",
+	PERMISSION_SET_FAILED:"SET_FAILED"
 }
 //route list action
 export const RouteListAction = () => (dispatch) =>{
@@ -43,7 +43,7 @@ export const PermissionsListAction = () => (dispatch) =>{
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.SET_FAILED,
+					type:PermissionActionType.PERMISSION_SET_FAILED,
 					payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
@@ -61,7 +61,7 @@ export const CreatePermissionAction = (permissionFormState,navigate) => (dispatc
 	return new Promise((resolve,reject)=>{
 		Api.post('/admin/permission/store',permissionFormState).then(resp=>{
 			dispatch({
-				type:PermissionActionType.CREATED_SUCCESS,payload:resp.data})
+				type:PermissionActionType.PERMISSION_CREATED_SUCCESS,payload:resp.data})
 			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 				type:'success',message:resp.data.message
 			}})
@@ -70,7 +70,7 @@ export const CreatePermissionAction = (permissionFormState,navigate) => (dispatc
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.SET_FAILED,payload:err.response.data
+					type:PermissionActionType.PERMISSION_SET_FAILED,payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
@@ -87,13 +87,13 @@ export const EditPermissionAction = (id) => (dispatch) =>{
 	return new Promise((resolve,reject) =>{
 		Api.get('/admin/permission/edit/'+id).then(resp=>{
 			dispatch({
-				type:PermissionActionType.EDIT_SUCCESS,payload:resp.data
+				type:PermissionActionType.PERMISSION_EDIT_SUCCESS,payload:resp.data
 			})
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.SET_FAILED,payload:err.response.data
+					type:PermissionActionType.PERMISSION_SET_FAILED,payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
@@ -110,7 +110,7 @@ export const UpdatePermissionAction = (permissionFormState,id,navigate) => (disp
 	return new Promise((resolve,reject)=>{
 		Api.put('/admin/permission/edit/'+id,permissionFormState).then(resp=>{
 			dispatch({
-				type:PermissionActionType.UPDATE_SUCCESS,payload:resp.data
+				type:PermissionActionType.PERMISSION_UPDATE_SUCCESS,payload:resp.data
 			})
 			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 				type:'success',message:resp.data.message
@@ -120,7 +120,7 @@ export const UpdatePermissionAction = (permissionFormState,id,navigate) => (disp
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.SET_FAILED,payload:err.response.data
+					type:PermissionActionType.PERMISSION_SET_FAILED,payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
@@ -136,7 +136,7 @@ export const DeletePermissionAction = (id) => (dispatch) =>{
 	return new Promise((resolve,reject)=>{
 		Api.delete('/admin/permission/delete/'+id).then(resp =>{
 			dispatch({
-				type:PermissionActionType.DELETED_SUCCESS,
+				type:PermissionActionType.PERMISSION_DELETED_SUCCESS,
 				payload:{id:id}
 			})
 			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
@@ -146,7 +146,7 @@ export const DeletePermissionAction = (id) => (dispatch) =>{
 		}).catch(err=>{
 			if(err.response){
 				dispatch({
-					type:PermissionActionType.SET_FAILED,payload:err.response.data
+					type:PermissionActionType.PERMISSION_SET_FAILED,payload:err.response.data
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message

@@ -20,31 +20,31 @@ const PermissionReducer = (state=permissionState,action) =>{
 				permissions:action.payload.data
 			}
 			break;
-		case PermissionActionType.CREATED_SUCCESS:
+		case PermissionActionType.PERMISSION_CREATED_SUCCESS:
 			return{
 				...state,
 				permission:action.payload.data
 			}
 			break;
-		case PermissionActionType.EDIT_SUCCESS:
+		case PermissionActionType.PERMISSION_EDIT_SUCCESS:
 			return{
 				...state,
 				permission:action.payload.data
 			}
 			break;
-		case PermissionActionType.UPDATE_SUCCESS:
+		case PermissionActionType.PERMISSION_UPDATE_SUCCESS:
 			return{
 				...state,
 				permission:action.payloas.data
 			}
 			break;
-		case PermissionActionType.DELETED_SUCCESS:
+		case PermissionActionType.PERMISSION_DELETED_SUCCESS:
     		return{
     			...state,
     			permissions:state.permissions.filter(permission => permission.id != action.payload.id)
     		}
     		break
-    	case PermissionActionType.SET_FAILED:
+    	case PermissionActionType.PERMISSION_SET_FAILED:
 			return{
 				...state,
 				errors:action.payload.errors,

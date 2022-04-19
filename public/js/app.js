@@ -2121,6 +2121,11 @@ __webpack_require__.r(__webpack_exports__);
   exact: true,
   auth: true,
   component: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_views_user_form__WEBPACK_IMPORTED_MODULE_6__["default"], {})
+}, {
+  path: '/admin/user/edit/:id',
+  exact: true,
+  auth: true,
+  component: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_views_user_form__WEBPACK_IMPORTED_MODULE_6__["default"], {})
 }]);
 
 /***/ }),
@@ -2187,12 +2192,7 @@ var PermissionForm = function PermissionForm() {
       id = _useParams.id;
 
   var isAddMode = !id; //use form
-
-  var validation = {
-    name: {
-      required: true
-    }
-  }; //form submit callback
+  //form submit callback
 
   var permissionForm = function permissionForm() {
     if (Object.keys(errors).length === 0) {
@@ -2200,17 +2200,23 @@ var PermissionForm = function PermissionForm() {
     }
   };
 
-  var _useForm = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_3__["default"])(permissionForm, validation),
+  var _useForm = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_3__["default"])(permissionForm),
       isLoading = _useForm.isLoading,
       isDisable = _useForm.isDisable,
       values = _useForm.values,
       setValues = _useForm.setValues,
+      setValidation = _useForm.setValidation,
       errors = _useForm.errors,
       handleChange = _useForm.handleChange,
       handleSubmit = _useForm.handleSubmit; //use effect
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setValidation({
+      name: {
+        rules: 'required'
+      }
+    });
     dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_2__.RouteListAction)());
 
     if (!isAddMode) {
@@ -2522,25 +2528,20 @@ var RoleForm = function RoleForm() {
   var _useParams = (0,react_router__WEBPACK_IMPORTED_MODULE_8__.useParams)(),
       id = _useParams.id;
 
-  var isAddMode = !id; //use form
-
-  var validation = {
-    name: {
-      required: true
-    }
-  }; //form submit callback
+  var isAddMode = !id; //form submit callback
 
   var roleForm = function roleForm() {
     if (Object.keys(errors).length === 0) {
-      dispatch((0,_services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_5__.CreateRoleAction)(values, navigate));
+      isAddMode ? dispatch((0,_services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_5__.CreateRoleAction)(values, navigate)) : dispatch((0,_services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_5__.UpdateRoleAction)(values, id, navigate));
     }
   };
 
-  var _useForm = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_2__["default"])(roleForm, validation),
+  var _useForm = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_2__["default"])(roleForm),
       isLoading = _useForm.isLoading,
       isDisable = _useForm.isDisable,
       values = _useForm.values,
       setValues = _useForm.setValues,
+      setValidation = _useForm.setValidation,
       errors = _useForm.errors,
       handleChange = _useForm.handleChange,
       handleSubmit = _useForm.handleSubmit; //selector
@@ -2550,6 +2551,11 @@ var RoleForm = function RoleForm() {
     return state.permission.permissions;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setValidation({
+      name: {
+        rules: 'required'
+      }
+    });
     dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_6__.PermissionsListAction)());
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -2629,7 +2635,7 @@ var RoleForm = function RoleForm() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                 className: "form-label",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("label", {
-                  children: "Permissions"
+                  children: "Role"
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                 className: "form-control",
@@ -2712,7 +2718,7 @@ var RoleList = function RoleList() {
     return state.role.roles;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    dispatch((0,_services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_3__.RolesListAction)());
+    dispatch((0,_services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_3__.RoleListAction)());
   }, []);
 
   var handleRoleDeleteButton = function handleRoleDeleteButton(id) {
@@ -2821,12 +2827,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _hooks_useForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/hooks/useForm */ "./resources/js/hooks/useForm.js");
 /* harmony import */ var _components_admin_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/admin/Button */ "./resources/js/components/admin/Button/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_admin_Select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/admin/Select */ "./resources/js/components/admin/Select/index.js");
+/* harmony import */ var _services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/services/redux/role/RoleAction */ "./resources/js/services/redux/role/RoleAction.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
@@ -2841,207 +2851,236 @@ var UserForm = function UserForm() {
   var _values$name, _values$username, _values$email, _values$phone_no;
 
   //navigate
-  var navigate = (0,react_router__WEBPACK_IMPORTED_MODULE_5__.useNavigate)(); //dispatch
+  var navigate = (0,react_router__WEBPACK_IMPORTED_MODULE_7__.useNavigate)(); //dispatch
 
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(); //param
 
-  var _useParams = (0,react_router__WEBPACK_IMPORTED_MODULE_5__.useParams)(),
+  var _useParams = (0,react_router__WEBPACK_IMPORTED_MODULE_7__.useParams)(),
       id = _useParams.id;
 
   var isAddMode = !id;
-  var validation = {
-    name: {
-      required: true
-    },
-    username: {
-      required: true
-    },
-    email: {
-      required: true,
-      rules: 'email'
-    },
-    password: {
-      required: true,
-      rules: 'confirm'
-    },
-    password_confirmation: {
-      required: true
-    }
-  };
 
   var userForm = function userForm() {};
 
-  var _useForm = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_2__["default"])(userForm, validation),
+  var _useForm = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_2__["default"])(userForm),
       isLoading = _useForm.isLoading,
       isDisable = _useForm.isDisable,
       values = _useForm.values,
       setValues = _useForm.setValues,
+      setValidation = _useForm.setValidation,
       errors = _useForm.errors,
       handleChange = _useForm.handleChange,
       handleSubmit = _useForm.handleSubmit;
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+  var rolesList = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.role.roles;
+  });
+  console.log(rolesList);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setValidation({
+      name: {
+        rules: 'required'
+      },
+      username: {
+        rules: 'required'
+      },
+      email: {
+        rules: 'required|email'
+      },
+      password: {
+        rules: 'required'
+      },
+      password_confirmation: {
+        rules: 'required|confirm'
+      }
+    });
+    dispatch((0,_services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_5__.RoleListAction)());
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
     className: "content-body",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "page-heading-wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "page-title-wrapper",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
             children: id ? 'Edit User' : 'Create User'
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "action-wrapper",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
             to: "/admin/user",
             className: "btn-warning",
             children: "Back"
           })
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "content-box-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("form", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("form", {
           method: "post",
           onSubmit: handleSubmit,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "form-wrapper",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "form-row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-label",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
                   children: "Full Name"
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                 className: "form-control",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                  type: "text",
                   value: (_values$name = values.name) !== null && _values$name !== void 0 ? _values$name : '',
                   name: "name",
                   className: "form-input ".concat((errors === null || errors === void 0 ? void 0 : errors.name) && 'invalid'),
                   placeholder: "Full Name",
                   onChange: handleChange
-                }), (errors === null || errors === void 0 ? void 0 : errors.name) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                }), (errors === null || errors === void 0 ? void 0 : errors.name) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                   className: "validation-wrapper",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                     children: errors.name
                   })
                 })]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "form-row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-label",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
                   children: "Username"
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                 className: "form-control",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                  type: "text",
                   value: (_values$username = values.username) !== null && _values$username !== void 0 ? _values$username : '',
                   name: "username",
                   className: "form-input ".concat((errors === null || errors === void 0 ? void 0 : errors.username) && 'invalid'),
                   placeholder: "Username",
                   onChange: handleChange
-                }), (errors === null || errors === void 0 ? void 0 : errors.username) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                }), (errors === null || errors === void 0 ? void 0 : errors.username) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                   className: "validation-wrapper",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                     children: errors.username
                   })
                 })]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "form-row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-label",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
                   children: "Email"
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                 className: "form-control",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                  type: "email",
                   value: (_values$email = values.email) !== null && _values$email !== void 0 ? _values$email : '',
                   name: "email",
                   className: "form-input ".concat((errors === null || errors === void 0 ? void 0 : errors.email) && 'invalid'),
                   placeholder: "Email Address",
                   onChange: handleChange
-                }), (errors === null || errors === void 0 ? void 0 : errors.email) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                }), (errors === null || errors === void 0 ? void 0 : errors.email) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                   className: "validation-wrapper",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                     children: errors.email
                   })
                 })]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "form-row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-label",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
                   children: "Phone Number"
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                 className: "form-control",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                  type: "text",
                   value: (_values$phone_no = values.phone_no) !== null && _values$phone_no !== void 0 ? _values$phone_no : '',
                   name: "phone_no",
                   className: "form-input ".concat((errors === null || errors === void 0 ? void 0 : errors.phone_no) && 'invalid'),
                   placeholder: "Phone Number",
                   onChange: handleChange
-                }), (errors === null || errors === void 0 ? void 0 : errors.phone_no) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                }), (errors === null || errors === void 0 ? void 0 : errors.phone_no) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                   className: "validation-wrapper",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                     children: errors.phone_no
                   })
                 })]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "form-row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                className: "form-label",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-                  children: "Password"
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                className: "form-control",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-                  name: "password",
-                  className: "form-input ".concat((errors === null || errors === void 0 ? void 0 : errors.password) && 'invalid'),
-                  placeholder: "Password",
-                  onChange: handleChange
-                }), (errors === null || errors === void 0 ? void 0 : errors.password) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                  className: "validation-wrapper",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-                    children: errors.password
+            }), isAddMode && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                className: "form-row",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "form-label",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+                    children: "Password"
                   })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "form-control",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                    type: "password",
+                    name: "password",
+                    className: "form-input ".concat((errors === null || errors === void 0 ? void 0 : errors.password) && 'invalid'),
+                    placeholder: "Password",
+                    onChange: handleChange
+                  }), (errors === null || errors === void 0 ? void 0 : errors.password) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                    className: "validation-wrapper",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                      children: errors.password
+                    })
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                className: "form-row",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "form-label",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+                    children: "Password Confirm"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "form-control",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                    type: "password",
+                    name: "password_confirmation",
+                    className: "form-input ".concat((errors === null || errors === void 0 ? void 0 : errors.password_confirmation) && 'invalid'),
+                    placeholder: "Password Confirmation",
+                    onChange: handleChange
+                  }), (errors === null || errors === void 0 ? void 0 : errors.password_confirmation) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                    className: "validation-wrapper",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                      children: errors.password_confirmation
+                    })
+                  })]
                 })]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "form-row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-label",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
-                  children: "Password Confirm"
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+                  children: "Permissions"
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-control",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-                  name: "password_confirmation",
-                  className: "form-input ".concat((errors === null || errors === void 0 ? void 0 : errors.password_confirmation) && 'invalid'),
-                  placeholder: "Password Confirmation",
-                  onChange: handleChange
-                }), (errors === null || errors === void 0 ? void 0 : errors.password_confirmation) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                  className: "validation-wrapper",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-                    children: errors.password_confirmation
-                  })
-                })]
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_admin_Select__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                  multiple: "true",
+                  datas: rolesList,
+                  handleChange: handleChange
+                })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "form-row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-label"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "form-control form-action",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_admin_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_admin_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
                   isLoading: isLoading,
                   isDisable: isDisable,
                   type: "submit",
@@ -4035,7 +4074,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var useForm = function useForm(callback, validation) {
+var useForm = function useForm(callback) {
   //values
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
@@ -4046,18 +4085,24 @@ var useForm = function useForm(callback, validation) {
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState4 = _slicedToArray(_useState3, 2),
       errors = _useState4[0],
-      setErrors = _useState4[1]; //form button loading and disable
+      setErrors = _useState4[1]; //validation
 
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState6 = _slicedToArray(_useState5, 2),
-      isLoading = _useState6[0],
-      setLoading = _useState6[1];
+      validation = _useState6[0],
+      setValidation = _useState6[1]; //form button loading and disable
+
 
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      isDisable = _useState8[0],
-      setDisable = _useState8[1];
+      isLoading = _useState8[0],
+      setLoading = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isDisable = _useState10[0],
+      setDisable = _useState10[1];
 
   var findInputType = function findInputType(event) {
     var name = event.target.name;
@@ -4099,38 +4144,29 @@ var useForm = function useForm(callback, validation) {
 
 
   var joinErrorObject = function joinErrorObject(key, type) {
-    if (key && type == 'required') Object.assign(errors, _defineProperty({}, key, key.replace('_', ' ').toUpperCase() + ' field is required'));
-    if (key && type == 'email') Object.assign(errors, _defineProperty({}, key, key.replace('_', ' ').toUpperCase() + ' is not valid'));
-    if (key && type == 'confirm') Object.assign(errors, _defineProperty({}, key, key.replace('_', ' ').toUpperCase() + ' did not match'));
+    if (!values[key] && type == 'required') Object.assign(errors, _defineProperty({}, key, key.replace('_', ' ').toUpperCase() + ' field is required'));
+    if (values[key] && type == 'confirm' && values['password_confirmation'] != values['password']) Object.assign(errors, _defineProperty({}, key, key.replace('_', ' ').toUpperCase() + ' did not match with password'));
+    if (values[key] && type == 'email' && !values[key].match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) Object.assign(errors, _defineProperty({}, key, key.replace('_', ' ').toUpperCase() + ' is not valid'));
+  };
+
+  var rules = function rules(key, rulesData) {
+    var rules = rulesData.split('|');
+    rules && (rules === null || rules === void 0 ? void 0 : rules.map(function (rule, index) {
+      joinErrorObject(key, rule);
+    }));
   };
 
   var validate = function validate(name, val) {
-    validation && Object.entries(validation).map(function (_ref, i) {
-      var _ref2 = _slicedToArray(_ref, 2),
-          key = _ref2[0],
-          attr = _ref2[1];
-
-      if (attr.required && (values[key] == undefined || values[key] == '')) {
-        joinErrorObject(key, 'required');
-      }
-
-      if (attr.rules && values[key] != '') {
-        var rules = attr.rules.split('|');
-        rules && (rules === null || rules === void 0 ? void 0 : rules.map(function (rule, key) {
-          //    if(rule == 'email' && !values[key].match( /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
-          //     joinErrorObject(key,rule)
-          //    }
-          if (rule == 'confirm' && values[key] === values['password_confirmation']) {
-            joinErrorObject(key, rule);
-          }
-        }));
-      }
-    });
-
-    if (val && name) {
+    if (name && val) {
       delete errors[name];
     } else {
-      joinErrorObject(name);
+      validation && Object.entries(validation).map(function (_ref, i) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            key = _ref2[0],
+            attr = _ref2[1];
+
+        rules(key, attr.rules);
+      });
     }
   }; //handle submit
 
@@ -4150,6 +4186,7 @@ var useForm = function useForm(callback, validation) {
   return {
     values: values,
     setValues: setValues,
+    setValidation: setValidation,
     errors: errors,
     isLoading: isLoading,
     isDisable: isDisable,
@@ -4634,11 +4671,11 @@ var PermissionActionType = {
   SET_ROUTELIST: "SET_ROUTELIST",
   SET_PERMISSIONS: "SET_PERMISSIONS",
   SET_PERMISSION: "SET_PERMISSION",
-  CREATED_SUCCESS: "CREATED_SUCCESS",
-  EDIT_SUCCESS: "UPDATED_SUCCESS",
-  UPDATE_SUCCESS: "UPDATED_SUCCESS",
-  DELETED_SUCCESS: "DELETED_SUCCESS",
-  SET_FAILED: "SET_FAILED"
+  PERMISSION_CREATED_SUCCESS: "CREATED_SUCCESS",
+  PERMISSION_EDIT_SUCCESS: "UPDATED_SUCCESS",
+  PERMISSION_UPDATE_SUCCESS: "UPDATED_SUCCESS",
+  PERMISSION_DELETED_SUCCESS: "DELETED_SUCCESS",
+  PERMISSION_SET_FAILED: "SET_FAILED"
 }; //route list action
 
 var RouteListAction = function RouteListAction() {
@@ -4676,7 +4713,7 @@ var PermissionsListAction = function PermissionsListAction() {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.SET_FAILED,
+            type: PermissionActionType.PERMISSION_SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -4699,7 +4736,7 @@ var CreatePermissionAction = function CreatePermissionAction(permissionFormState
     return new Promise(function (resolve, reject) {
       Api.post('/admin/permission/store', permissionFormState).then(function (resp) {
         dispatch({
-          type: PermissionActionType.CREATED_SUCCESS,
+          type: PermissionActionType.PERMISSION_CREATED_SUCCESS,
           payload: resp.data
         });
         dispatch({
@@ -4714,7 +4751,7 @@ var CreatePermissionAction = function CreatePermissionAction(permissionFormState
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.SET_FAILED,
+            type: PermissionActionType.PERMISSION_SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -4737,14 +4774,14 @@ var EditPermissionAction = function EditPermissionAction(id) {
     return new Promise(function (resolve, reject) {
       Api.get('/admin/permission/edit/' + id).then(function (resp) {
         dispatch({
-          type: PermissionActionType.EDIT_SUCCESS,
+          type: PermissionActionType.PERMISSION_EDIT_SUCCESS,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.SET_FAILED,
+            type: PermissionActionType.PERMISSION_SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -4767,7 +4804,7 @@ var UpdatePermissionAction = function UpdatePermissionAction(permissionFormState
     return new Promise(function (resolve, reject) {
       Api.put('/admin/permission/edit/' + id, permissionFormState).then(function (resp) {
         dispatch({
-          type: PermissionActionType.UPDATE_SUCCESS,
+          type: PermissionActionType.PERMISSION_UPDATE_SUCCESS,
           payload: resp.data
         });
         dispatch({
@@ -4782,7 +4819,7 @@ var UpdatePermissionAction = function UpdatePermissionAction(permissionFormState
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.SET_FAILED,
+            type: PermissionActionType.PERMISSION_SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -4805,7 +4842,7 @@ var DeletePermissionAction = function DeletePermissionAction(id) {
     return new Promise(function (resolve, reject) {
       Api["delete"]('/admin/permission/delete/' + id).then(function (resp) {
         dispatch({
-          type: PermissionActionType.DELETED_SUCCESS,
+          type: PermissionActionType.PERMISSION_DELETED_SUCCESS,
           payload: {
             id: id
           }
@@ -4820,7 +4857,7 @@ var DeletePermissionAction = function DeletePermissionAction(id) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.SET_FAILED,
+            type: PermissionActionType.PERMISSION_SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -4883,25 +4920,25 @@ var PermissionReducer = function PermissionReducer() {
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.CREATED_SUCCESS:
+    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_CREATED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permission: action.payload.data
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.EDIT_SUCCESS:
+    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_EDIT_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permission: action.payload.data
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.UPDATE_SUCCESS:
+    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_UPDATE_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permission: action.payloas.data
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.DELETED_SUCCESS:
+    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_DELETED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permissions: state.permissions.filter(function (permission) {
           return permission.id != action.payload.id;
@@ -4909,7 +4946,7 @@ var PermissionReducer = function PermissionReducer() {
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.SET_FAILED:
+    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_SET_FAILED:
       return _objectSpread(_objectSpread({}, state), {}, {
         errors: action.payload.errors
       });
@@ -4938,7 +4975,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DeleteRoleAction": () => (/* binding */ DeleteRoleAction),
 /* harmony export */   "EditRoleAction": () => (/* binding */ EditRoleAction),
 /* harmony export */   "RoleActionType": () => (/* binding */ RoleActionType),
-/* harmony export */   "RolesListAction": () => (/* binding */ RolesListAction),
+/* harmony export */   "RoleListAction": () => (/* binding */ RoleListAction),
 /* harmony export */   "UpdateRoleAction": () => (/* binding */ UpdateRoleAction)
 /* harmony export */ });
 /* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
@@ -4946,14 +4983,14 @@ __webpack_require__.r(__webpack_exports__);
 var RoleActionType = {
   SET_ROLES: "SET_ROLES",
   SET_ROLE: "SET_ROLE",
-  SET_FAILED: "SET_FAILED",
-  CREATED_SUCCESS: "CREATED_SUCCESS",
-  EDIT_SUCCESS: "UPDATED_SUCCESS",
-  UPDATE_SUCCESS: "UPDATED_SUCCESS",
-  DELETED_SUCCESS: "DELETED_SUCCESS"
+  ROLE_SET_FAILED: "SET_FAILED",
+  ROLE_CREATED_SUCCESS: "CREATED_SUCCESS",
+  ROLE_EDIT_SUCCESS: "UPDATED_SUCCESS",
+  ROLE_UPDATE_SUCCESS: "UPDATED_SUCCESS",
+  ROLE_DELETED_SUCCESS: "DELETED_SUCCESS"
 }; //get role
 
-var RolesListAction = function RolesListAction() {
+var RoleListAction = function RoleListAction() {
   return function (dispatch) {
     return new Promise(function (resolve, reject) {
       Api.get('admin/role/').then(function (resp) {
@@ -4965,7 +5002,7 @@ var RolesListAction = function RolesListAction() {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: RoleActionType.SET_FAILED,
+            type: RoleActionType.ROLE_SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -4988,7 +5025,7 @@ var CreateRoleAction = function CreateRoleAction(roleFormState, navigate) {
     return new Promise(function (resolve, reject) {
       Api.post('admin/role/store', roleFormState).then(function (resp) {
         dispatch({
-          type: RoleActionType.CREATED_SUCCESS,
+          type: RoleActionType.ROLE_CREATED_SUCCESS,
           payload: resp.data
         });
         dispatch({
@@ -5003,7 +5040,7 @@ var CreateRoleAction = function CreateRoleAction(roleFormState, navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: RoleActionType.SET_FAILED,
+            type: RoleActionType.ROLE_SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -5026,14 +5063,14 @@ var EditRoleAction = function EditRoleAction(id) {
     return new Promise(function (resolve, reject) {
       Api.get('admin/role/edit/' + id).then(function (resp) {
         dispatch({
-          type: RoleActionType.EDIT_SUCCESS,
+          type: RoleActionType.ROLE_EDIT_SUCCESS,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: RoleActionType.SET_FAILED,
+            type: RoleActionType.ROLE_SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -5056,7 +5093,7 @@ var UpdateRoleAction = function UpdateRoleAction(roleFormState, id, navigate) {
     return new Promise(function (resolve, reject) {
       Api.put('admin/role/edit/' + id, roleFormState).then(function (resp) {
         dispatch({
-          type: RoleActionType.UPDATE_SUCCESS,
+          type: RoleActionType.ROLE_UPDATE_SUCCESS,
           payload: resp.data
         });
         dispatch({
@@ -5066,11 +5103,12 @@ var UpdateRoleAction = function UpdateRoleAction(roleFormState, id, navigate) {
             message: resp.data.message
           }
         });
+        navigate('/admin/role');
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: RoleActionType.SET_FAILED,
+            type: RoleActionType.ROLE_SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -5093,7 +5131,7 @@ var DeleteRoleAction = function DeleteRoleAction(id) {
     return new Promise(function (resolve, reject) {
       Api["delete"]('admin/role/delete/' + id).then(function (resp) {
         dispatch({
-          type: RoleActionType.DELETED_SUCCESS,
+          type: RoleActionType.ROLE_DELETED_SUCCESS,
           payload: {
             id: id
           }
@@ -5108,7 +5146,7 @@ var DeleteRoleAction = function DeleteRoleAction(id) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: RoleActionType.SET_FAILED,
+            type: RoleActionType.ROLE_SET_FAILED,
             payload: err.response.data
           });
           dispatch({
@@ -5164,25 +5202,24 @@ var RoleReducer = function RoleReducer() {
       });
       break;
 
-    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.CREATED_SUCCESS:
+    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_CREATED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         roles: action.payload.data
       });
       break;
 
-    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.EDIT_SUCCESS:
+    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_EDIT_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         role: action.payload.data
       });
 
-    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.UPDATED_SUCCESS:
+    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_UPDATED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         role: action.payload.data
       });
       break;
 
-    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.DELETED_SUCCESS:
-      console.log(action.payload.id);
+    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_DELETED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         roles: state.roles.filter(function (role) {
           return role.id != action.payload.id;
@@ -69048,7 +69085,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
+module.exports = JSON.parse('{"_args":[["axios@0.21.4","E:\\\\wampp\\\\www\\\\laravelreact"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"E:\\\\wampp\\\\www\\\\laravelreact","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 

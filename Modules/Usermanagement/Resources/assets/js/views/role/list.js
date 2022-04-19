@@ -3,13 +3,13 @@ import {Link } from "react-router-dom"
 import {useDispatch,useSelector} from "react-redux";
 import {FaTrashAlt,FaPen} from 'react-icons/fa'
 import DataTable from '@/components/admin/DataTable'
-import {RolesListAction,DeleteRoleAction} from '@/services/redux/role/RoleAction'
+import {RoleListAction,DeleteRoleAction} from '@/services/redux/role/RoleAction'
 
 const RoleList = () =>{
 	const dispatch = useDispatch()
 	const rolesList =useSelector((state) =>state.role.roles)
 	useEffect(()=>{   
-		dispatch(RolesListAction())
+		dispatch(RoleListAction())
 	},[])
 	const handleRoleDeleteButton = (id) =>{
 		dispatch(DeleteRoleAction(id))

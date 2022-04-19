@@ -14,25 +14,24 @@ const RoleReducer = (state=roleState,action) =>{
 				roles:action.payload.data
 			}
 			break;
-		case RoleActionType.CREATED_SUCCESS:
+		case RoleActionType.ROLE_CREATED_SUCCESS:
 			return {
 				...state,
 				roles:action.payload.data
 			}
 			break;
-		case RoleActionType.EDIT_SUCCESS:
+		case RoleActionType.ROLE_EDIT_SUCCESS:
 			return{
 				...state,
 				role:action.payload.data
 			}
-		case RoleActionType.UPDATED_SUCCESS:
+		case RoleActionType.ROLE_UPDATED_SUCCESS:
 			return{
 				...state,
 				role:action.payload.data
 			}
 			break;
-		case RoleActionType.DELETED_SUCCESS:
-			console.log(action.payload.id)
+		case RoleActionType.ROLE_DELETED_SUCCESS:
 			return {
 				...state,
 				roles:state.roles.filter(role => role.id != action.payload.id)

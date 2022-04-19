@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
 import { capitalFirstLetter } from 'lodash';
-const useForm = (callback,validation) =>{
+const useForm = (callback) =>{
 	//values
 	const [values, setValues] = useState({});
     //Errors
     const [errors,setErrors] = useState({})
+    //validation
+    const [validation,setValidation]=useState({})
     //form button loading and disable
     const [isLoading,setLoading]=useState(false)
 	const [isDisable,setDisable]=useState(false)
@@ -46,33 +48,31 @@ const useForm = (callback,validation) =>{
     }
     //validate form
     const joinErrorObject = (key,type)=>{
-       if(key && type == 'required')  Object.assign(errors,{[key]:key.replace('_',' ').toUpperCase()+' field is required'})
-       if(key && type=='email') Object.assign(errors,{[key]:key.replace('_',' ').toUpperCase() +' is not valid'})
-       if(key && type=='confirm') Object.assign(errors,{[key]:key.replace('_',' ').toUpperCase() +' did not match'})
+        if(!values[key] && type == 'required')
+            Object.assign(errors,{[key]:key.replace('_',' ').toUpperCase()+' field is required'})
+        if(values[key] && (type=='confirm' && values['password_confirmation'] != values['password']))
+            Object.assign(errors,{[key]:key.replace('_',' ').toUpperCase() +' did not match with password'})
+        if(values[key] && (type=='email' && !values[key].match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)))
+            Object.assign(errors,{[key]:key.replace('_',' ').toUpperCase() +' is not valid'})
+
+    }
+    const rules = (key,rulesData) =>{
+        let rules=rulesData.split('|')
+            rules && rules?.map((rule,index)=>{
+                joinErrorObject(key,rule)
+            })
     }
     const validate = (name,val) =>{
-        validation && Object.entries(validation).map(([key,attr],i)=>{
-            if(attr.required && (values[key]==undefined || values[key] == '')){
-                joinErrorObject(key,'required')
-            }
-            if(attr.rules && values[key]!=''){
-                let rules=attr.rules.split('|')
-                rules && rules?.map((rule,key)=>{
-                //    if(rule == 'email' && !values[key].match( /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
-                //     joinErrorObject(key,rule)
-                //    }
-                   if(rule=='confirm' && values[key] === values['password_confirmation']){
-                    joinErrorObject(key,rule)
-                   }
-                })
-            }
-        })
-        if(val && name){
+        if(name && val){
             delete errors[name];
-        }else{
-            joinErrorObject(name)
+        }
+        else{
+            validation && Object.entries(validation).map(([key,attr],i)=>{
+                rules(key,attr.rules)
+            })
         }
     }
+    
    
     //handle submit
     const handleSubmit =  (event) => {
@@ -90,6 +90,7 @@ const useForm = (callback,validation) =>{
     return {
         values,
         setValues,
+        setValidation,
         errors,
         isLoading,
         isDisable,
