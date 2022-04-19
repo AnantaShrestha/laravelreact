@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {omit} from 'lodash'
+import { capitalFirstLetter } from 'lodash';
 const useForm = (callback,validation) =>{
 	//values
 	const [values, setValues] = useState({});
@@ -37,11 +37,7 @@ const useForm = (callback,validation) =>{
                 break;
 
         }
-    }
-    //reset form
-    const reset = () =>{
-        return setValues({})
-    }
+    } 
     //input change handler
     const handleChange = (event) =>{
         event.persist();
@@ -49,19 +45,32 @@ const useForm = (callback,validation) =>{
         validate(event.target.name,event.target.value)
     }
     //validate form
-    const joinObject = (key)=>{
-       if(key)  Object.assign(errors,{[key]:key.toUpperCase()+' field is required'})
+    const joinErrorObject = (key,type)=>{
+       if(key && type == 'required')  Object.assign(errors,{[key]:key.replace('_',' ').toUpperCase()+' field is required'})
+       if(key && type=='email') Object.assign(errors,{[key]:key.replace('_',' ').toUpperCase() +' is not valid'})
+       if(key && type=='confirm') Object.assign(errors,{[key]:key.replace('_',' ').toUpperCase() +' did not match'})
     }
     const validate = (name,val) =>{
         validation && Object.entries(validation).map(([key,attr],i)=>{
             if(attr.required && (values[key]==undefined || values[key] == '')){
-                joinObject(key)
+                joinErrorObject(key,'required')
+            }
+            if(attr.rules && values[key]!=''){
+                let rules=attr.rules.split('|')
+                rules && rules?.map((rule,key)=>{
+                //    if(rule == 'email' && !values[key].match( /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+                //     joinErrorObject(key,rule)
+                //    }
+                   if(rule=='confirm' && values[key] === values['password_confirmation']){
+                    joinErrorObject(key,rule)
+                   }
+                })
             }
         })
         if(val && name){
             delete errors[name];
         }else{
-            joinObject(name)
+            joinErrorObject(name)
         }
     }
    

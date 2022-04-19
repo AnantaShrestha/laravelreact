@@ -44,10 +44,14 @@ class RoleRepository{
 	 */
 	public function updateRole($id,array $data){
 		$role=$this->findRole($id);
-		$role->update($data);
+		$role->update([
+			'name'=>$data['name']
+		]);
 		$permissions=$data['permissions'] ?? [];
-		$role->permissions()->detach();
-		$role->permissions()->attach($permissions);
+		if($permissions){
+			$role->permissions()->detach();
+			$role->permissions()->attach($permissions);
+		}
 		return $role;
 	}
 

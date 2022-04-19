@@ -25,7 +25,7 @@ const items=[
 			},
 			{
 				title:'User',
-				href:'',
+				href:'/admin/user',
 				icon:''
 
 			}

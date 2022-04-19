@@ -21,11 +21,11 @@ class UserRepository{
 
 	public function storeUser(array $data){
 		$user=$this->user->create([
-			'username'=>$data->username,
-			'name'=>$data->name,
-			'phone_no'=>$data->phone_no,
-			'email'=>$data->email,
-			'password'=>$data->password
+			'username'=>$data[username],
+			'name'=>$data['name'],
+			'phone_no'=>$data['phone_no'],
+			'email'=>$data['email'],
+			'password'=>$data['password']
 		]);
 		$roles=$data['roles'] ?? [];
 		if($roles){
