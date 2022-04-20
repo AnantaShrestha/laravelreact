@@ -8,6 +8,8 @@ use Modules\Usermanagement\Entities\Permission;
 use Modules\Usermanagement\Observers\PermissionObserver;
 use Modules\Usermanagement\Observers\RoleObserver;
 use Modules\Usermanagement\Entities\Role;
+use Modules\Usermanagement\Observers\UserObserver;
+use Modules\Usermanagement\Entities\User;
 
 
 class UsermanagementServiceProvider extends ServiceProvider
@@ -35,6 +37,7 @@ class UsermanagementServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
         Permission::observe(PermissionObserver::class);
         Role::observe(RoleObserver::class);
+        User::observe(UserObserver::class);
     }   
 
     /**

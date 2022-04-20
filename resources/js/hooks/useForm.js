@@ -29,7 +29,6 @@ const useForm = (callback) =>{
                         if (index > -1) {
                             values[name].splice(index, 1);
                             event.target.removeAttribute('checked')
-
                         }
                     }
                 }

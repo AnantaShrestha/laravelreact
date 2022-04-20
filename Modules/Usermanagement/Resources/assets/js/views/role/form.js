@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect} from 'react'
 import {Link,useParams } from "react-router-dom"
 import {useSelector,useDispatch} from 'react-redux'
 import { useNavigate } from "react-router";
@@ -86,7 +86,7 @@ const RoleForm = () =>{
 								<label>Role</label>
 							</div>
 							<div className="form-control">
-								<Select multiple="true" datas={permissionLists} handleChange={handleChange} selectedValue={values.permissions}/>
+								<Select name="permissions" multiple="true" datas={permissionLists} handleChange={handleChange} selectedValue={values.permissions}/>
 							</div>
 						</div>
 						<div className="form-row">

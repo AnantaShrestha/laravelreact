@@ -17,7 +17,7 @@ const RoleReducer = (state=roleState,action) =>{
 		case RoleActionType.ROLE_CREATED_SUCCESS:
 			return {
 				...state,
-				roles:action.payload.data
+				role:action.payload.data
 			}
 			break;
 		case RoleActionType.ROLE_EDIT_SUCCESS:

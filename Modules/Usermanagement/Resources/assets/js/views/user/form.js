@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router";
@@ -7,7 +7,7 @@ import Button from '@/components/admin/Button'
 import Select from '@/components/admin/Select'
 
 import {RoleListAction} from '@/services/redux/role/RoleAction'
-
+import {CreateUserAction} from '@/services/redux/user/UserAction'
 const UserForm = () => {
     //navigate
     const navigate = useNavigate()
@@ -17,11 +17,12 @@ const UserForm = () => {
     const { id } = useParams()
     const isAddMode = !id
     const userForm = () => {
-
+        if(Object.keys(errors).length  === 0){
+            isAddMode ? dispatch(CreateUserAction(values,navigate)) : null
+        }
     }
-    const { isLoading, isDisable, values, setValues,setValidation,errors, handleChange, handleSubmit } = useForm(userForm);
+    const { isLoading, isDisable, values,setValues,setValidation,errors, handleChange, handleSubmit } = useForm(userForm);
     const rolesList =useSelector((state) =>state.role.roles)
-    console.log(rolesList)
     useEffect(()=>{
         setValidation({
             name: {
@@ -131,10 +132,10 @@ const UserForm = () => {
                            }
                             <div className="form-row">
                                 <div className="form-label">
-                                    <label>Permissions</label>
+                                    <label>Role</label>
                                 </div>
                                 <div className="form-control">
-                                    <Select multiple="true" datas={rolesList} handleChange={handleChange}/>
+                                    <Select name="roles" multiple="true" datas={rolesList} handleChange={handleChange}/>
                                 </div>
                             </div>
                             <div className="form-row">

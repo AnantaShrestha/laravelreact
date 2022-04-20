@@ -3,9 +3,9 @@ export const RoleActionType={
 	SET_ROLES:"SET_ROLES",
 	SET_ROLE:"SET_ROLE",
 	ROLE_SET_FAILED:"SET_FAILED",
-	ROLE_CREATED_SUCCESS:"CREATED_SUCCESS",
-	ROLE_EDIT_SUCCESS:"UPDATED_SUCCESS",
-	ROLE_UPDATE_SUCCESS:"UPDATED_SUCCESS",
+	ROLE_CREATED_SUCCESS:"ROLE_CREATED_SUCCESS",
+	ROLE_EDIT_SUCCESS:"ROLE_EDIT_SUCCESS",
+	ROLE_UPDATE_SUCCESS:"ROLE_UPDATED_SUCCESS",
 	ROLE_DELETED_SUCCESS:"DELETED_SUCCESS",
 }
 //get role
@@ -78,7 +78,7 @@ export const EditRoleAction = (id) => (dispatch) =>{
 export const UpdateRoleAction = (roleFormState,id,navigate) => (dispatch) =>{
 	return new Promise((resolve,reject)=>{
 		Api.put('admin/role/edit/'+id,roleFormState).then(resp=>{
-			dispatch({type:RoleActionType.ROLE_UPDATE_SUCCESS,payload:resp.data})
+			dispatch({type:RoleActionType.ROLE_UPDATED_SUCCESS,payload:resp.data})
 			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 				type:'success',message:resp.data.message
 			}})

@@ -25,7 +25,8 @@ class UserRepository{
 			'name'=>$data['name'],
 			'phone_no'=>$data['phone_no'],
 			'email'=>$data['email'],
-			'password'=>$data['password']
+			'password'=>$data['password'],
+			'activate' => $data['activate'] ?? 1
 		]);
 		$roles=$data['roles'] ?? [];
 		if($roles){
@@ -34,5 +35,43 @@ class UserRepository{
 		return $user;
 	}
 
+	/**
+	 * @return find user according to id
+	 */
+	public function findUser($id){
+		return $this->user->with('roles')->findOrFail();
+	}
 
+
+	/** 
+	 * @return update user according to id
+	 */
+	public function updateUser($id,array $data)
+	{
+		$user=$this->findUser($id);
+		$user->update([
+			'username'=>$data[username],
+			'name'=>$data['name'],
+			'phone_no'=>$data['phone_no'],
+			'email'=>$data['email'],
+			'password'=>$data['password'],
+			'activate' => $data['activate'] ?? 1
+		]);
+		$roles=$data['roles'] ?? [];
+		if($roles){
+			$user->roles()->detach();
+			$user->roles()->attach($roles);
+		}
+		return $user;
+	}
+
+
+	/**
+	 * @return delete user according to id
+	 */
+	public function deleteUser($id){
+		$user=$this->findUser($id);
+		$user->roles()->detach();
+		return $user->delete();
+	}
 }

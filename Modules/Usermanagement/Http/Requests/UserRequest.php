@@ -21,6 +21,7 @@ class UserRequest extends FormRequest
             'email'=>'required|email',
             'phone_no'=>'nullable',
             'password'=>$this->id == null ? 'required|confirmed' : 'nullable|confirmed',
+            'activate'=>'nullable'
         ];
     }
 

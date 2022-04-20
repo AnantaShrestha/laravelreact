@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 const Select = (props) =>{
-	const {multiple,datas,className,handleChange,selectedValue}=props
+	const {multiple,datas,className,handleChange,selectedValue,name}=props
 	const [showDropdown,setDropDown] = useState(false)
 	const [checkedValues,setCheckedValue]=useState([])
 
@@ -46,11 +46,11 @@ const Select = (props) =>{
 									{
 										selectedValue && selectedValue.includes(data.id) ? 
 											(
-												<input name="permissions" onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} checked="checked" />
+												<input name={name} onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} checked="checked" />
 											)
 											:
 											(
-												<input name="permissions" onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} />
+												<input name={name} onChange={handleChange} id={data.id} value={data.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} />
 											)
 									}
 									
