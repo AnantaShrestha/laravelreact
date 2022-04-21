@@ -7,7 +7,7 @@ import Button from '@/components/admin/Button'
 import Select from '@/components/admin/Select'
 
 import {RoleListAction} from '@/services/redux/role/RoleAction'
-import {CreateUserAction} from '@/services/redux/user/UserAction'
+import {CreateUserAction,EditUserAction} from '@/services/redux/user/UserAction'
 const UserForm = () => {
     //navigate
     const navigate = useNavigate()
@@ -18,11 +18,34 @@ const UserForm = () => {
     const isAddMode = !id
     const userForm = () => {
         if(Object.keys(errors).length  === 0){
-            isAddMode ? dispatch(CreateUserAction(values,navigate)) : null
+           isAddMode ? dispatch(CreateUserAction(values,navigate)) : null
         }
     }
     const { isLoading, isDisable, values,setValues,setValidation,errors, handleChange, handleSubmit } = useForm(userForm);
     const rolesList =useSelector((state) =>state.role.roles)
+    const user=useSelector((state) => state.user.user)
+    useEffect(()=>{
+		if(!isAddMode){
+			dispatch(EditUserAction(id))
+		}
+	},[])
+    useEffect(()=>{
+		if(!isAddMode){
+			let roles=[]
+			setValues({
+				...values,
+				name:user.name  || '',
+                username:user.username,
+                email:user.email,
+                phone_no:user.phone_no ?? '',
+				roles:roles ?? [],
+			}) 
+			user.roles && Object.entries(user.roles).map(([key,role],i)=>{
+				roles.push(role.id)
+			})
+
+		}
+	},[user])
     useEffect(()=>{
         setValidation({
             name: {
@@ -135,7 +158,7 @@ const UserForm = () => {
                                     <label>Role</label>
                                 </div>
                                 <div className="form-control">
-                                    <Select name="roles" multiple="true" datas={rolesList} handleChange={handleChange}/>
+                                    <Select name="roles" multiple="true" datas={rolesList} handleChange={handleChange}  selectedValue={values.roles}/>
                                 </div>
                             </div>
                             <div className="form-row">

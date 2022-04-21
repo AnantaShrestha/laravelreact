@@ -33,4 +33,14 @@ class UserController extends Controller
             return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
         }
     }
+
+
+    public function edit($id){
+        try{
+            $user=$this->userRepo->findUser($id);
+            return $this->apiResponse->responseSuccess($user,'Success',SUCCESS);
+        }catch(Exception $e){
+            return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
+        }
+    }
 }

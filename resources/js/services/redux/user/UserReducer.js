@@ -19,6 +19,16 @@ const UserReducer = (state=userState,action) =>{
 				user:action.payload.data
             }
         break;
+        case UserActionType.USER_EDIT_SUCCESS:
+            return{
+                ...state,
+                user:action.payload.data
+            }
+        case UserActionType.USER_UPDATE_SUCCESS:
+            return{
+                ...state,
+                user:action.payload.data
+            }
         default:
             return state
             break;

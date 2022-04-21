@@ -4379,6 +4379,9 @@ var RoleForm = function RoleForm() {
   var permissionLists = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.permission.permissions;
   });
+  var role = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.role.role;
+  });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setValidation({
       name: {
@@ -4392,9 +4395,6 @@ var RoleForm = function RoleForm() {
       dispatch((0,_services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_5__.EditRoleAction)(id));
     }
   }, []);
-  var role = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
-    return state.role.role;
-  });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!isAddMode) {
       var permissions = [];
@@ -4666,6 +4666,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/services/redux/role/RoleAction */ "./resources/js/services/redux/role/RoleAction.js");
 /* harmony import */ var _services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/services/redux/user/UserAction */ "./resources/js/services/redux/user/UserAction.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4711,6 +4729,35 @@ var UserForm = function UserForm() {
   var rolesList = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.role.roles;
   });
+  var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.user.user;
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!isAddMode) {
+      dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_6__.EditUserAction)(id));
+    }
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!isAddMode) {
+      var _user$phone_no;
+
+      var roles = [];
+      setValues(_objectSpread(_objectSpread({}, values), {}, {
+        name: user.name || '',
+        username: user.username,
+        email: user.email,
+        phone_no: (_user$phone_no = user.phone_no) !== null && _user$phone_no !== void 0 ? _user$phone_no : '',
+        roles: roles !== null && roles !== void 0 ? roles : []
+      }));
+      user.roles && Object.entries(user.roles).map(function (_ref, i) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            key = _ref2[0],
+            role = _ref2[1];
+
+        roles.push(role.id);
+      });
+    }
+  }, [user]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setValidation({
       name: {
@@ -4907,7 +4954,8 @@ var UserForm = function UserForm() {
                   name: "roles",
                   multiple: "true",
                   datas: rolesList,
-                  handleChange: handleChange
+                  handleChange: handleChange,
+                  selectedValue: values.roles
                 })
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -4950,6 +4998,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
 /* harmony import */ var _components_admin_DataTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/admin/DataTable */ "./resources/js/components/admin/DataTable/index.js");
 /* harmony import */ var _services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/services/redux/user/UserAction */ "./resources/js/services/redux/user/UserAction.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -5039,7 +5088,20 @@ var UserList = function UserList() {
     title: 'Action',
     render: function render(row) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {})
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "table-action-wrapper",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+            className: "table-edit-btn",
+            to: "/admin/user/edit/".concat(row.id),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__.FaPen, {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            className: "table-delete-btn",
+            onClick: function onClick() {
+              return handleUserDeleteButton(row.id);
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__.FaTrashAlt, {})
+          })]
+        })
       });
     }
   }];
@@ -7173,6 +7235,9 @@ var RoleReducer = function RoleReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CreateUserAction": () => (/* binding */ CreateUserAction),
+/* harmony export */   "DeleteUserAction": () => (/* binding */ DeleteUserAction),
+/* harmony export */   "EditUserAction": () => (/* binding */ EditUserAction),
+/* harmony export */   "UpdateUserAction": () => (/* binding */ UpdateUserAction),
 /* harmony export */   "UserActionType": () => (/* binding */ UserActionType),
 /* harmony export */   "UserListAction": () => (/* binding */ UserListAction)
 /* harmony export */ });
@@ -7256,6 +7321,82 @@ var CreateUserAction = function CreateUserAction(userFormState, navigate) {
       });
     });
   };
+}; // edit role action
+
+var EditUserAction = function EditUserAction(id) {
+  return function (dispatch) {
+    return new Promise(function (resolve, reject) {
+      Api.get('/admin/user/edit/' + id).then(function (resp) {
+        dispatch({
+          type: UserActionType.USER_EDIT_SUCCESS,
+          payload: resp.data
+        });
+        resolve(resp);
+      })["catch"](function (err) {
+        if (err.response) {
+          dispatch({
+            type: UserActionType.USER_SET_FAILED,
+            payload: err.response.data
+          });
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_1__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: err.response.data.message
+            }
+          });
+        }
+
+        reject(err);
+      });
+    });
+  };
+}; //update user action
+
+var UpdateUserAction = function UpdateUserAction(userFormState, id, navigate) {
+  return function (dispatch) {
+    return new Promise(function (resolve, reject) {
+      Api.put('/admin/user/edit/' + id, userFormState)["catch"](function (resp) {
+        dispatch({
+          type: UserActionType.USER_UPDATED_SUCCESS,
+          payload: resp.data
+        });
+        dispatch({
+          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_1__.NotificationActionType.MESSAGE_OBJ,
+          payload: {
+            type: 'success',
+            message: resp.data.message
+          }
+        });
+        navigate('/admin/user');
+        resolve(resp);
+      })["catch"](function (err) {
+        if (err.response) {
+          dispatch({
+            type: UserActionType.USER_SET_FAILED,
+            payload: err.response.data
+          });
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_1__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: err.response.data.message
+            }
+          });
+        }
+
+        reject(err);
+      });
+    });
+  };
+}; //delete user action
+
+var DeleteUserAction = function DeleteUserAction(id) {
+  return function (dispatch) {
+    return new Promise(function (resolve, reject) {
+      Api["delete"]('/admin/user/delete/' + id).then(function (resp) {})["catch"](function (err) {});
+    });
+  };
 };
 
 /***/ }),
@@ -7301,6 +7442,16 @@ var UserReducer = function UserReducer() {
         user: action.payload.data
       });
       break;
+
+    case _UserAction__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_EDIT_SUCCESS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        user: action.payload.data
+      });
+
+    case _UserAction__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_UPDATE_SUCCESS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        user: action.payload.data
+      });
 
     default:
       return state;

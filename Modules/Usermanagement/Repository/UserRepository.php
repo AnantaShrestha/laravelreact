@@ -21,16 +21,16 @@ class UserRepository{
 
 	public function storeUser(array $data){
 		$user=$this->user->create([
-			'username'=>$data[username],
+			'username'=>$data['username'],
 			'name'=>$data['name'],
-			'phone_no'=>$data['phone_no'],
+			'phone_no'=>$data['phone_no'] ?? '',
 			'email'=>$data['email'],
 			'password'=>$data['password'],
 			'activate' => $data['activate'] ?? 1
 		]);
 		$roles=$data['roles'] ?? [];
 		if($roles){
-			$role->roles()->attach($roles);
+			$user->roles()->attach($roles);
 		}
 		return $user;
 	}
@@ -39,7 +39,7 @@ class UserRepository{
 	 * @return find user according to id
 	 */
 	public function findUser($id){
-		return $this->user->with('roles')->findOrFail();
+		return $this->user->with('roles')->findOrFail($id);
 	}
 
 
@@ -50,9 +50,9 @@ class UserRepository{
 	{
 		$user=$this->findUser($id);
 		$user->update([
-			'username'=>$data[username],
+			'username'=>$data['username'],
 			'name'=>$data['name'],
-			'phone_no'=>$data['phone_no'],
+			'phone_no'=>$data['phone_no'] ?? '',
 			'email'=>$data['email'],
 			'password'=>$data['password'],
 			'activate' => $data['activate'] ?? 1

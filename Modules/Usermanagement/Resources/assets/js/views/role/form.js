@@ -27,6 +27,7 @@ const RoleForm = () =>{
 
 	//selector
 	const permissionLists=useSelector((state)=>state.permission.permissions)
+	const role=useSelector((state)=>state.role.role)
 	useEffect(()=>{
 		setValidation({
 			name:{
@@ -40,7 +41,7 @@ const RoleForm = () =>{
 			dispatch(EditRoleAction(id))
 		}
 	},[])
-	const role=useSelector((state)=>state.role.role)
+
 	useEffect(()=>{
 		if(!isAddMode){
 			let permissions=[]

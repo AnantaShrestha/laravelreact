@@ -17,11 +17,13 @@ class UserRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'username'=>'username|unique:users,username,'.$this->id,
+            'username'=>'required|unique:users,username,'.$this->id,
             'email'=>'required|email',
             'phone_no'=>'nullable',
             'password'=>$this->id == null ? 'required|confirmed' : 'nullable|confirmed',
-            'activate'=>'nullable'
+            'activate'=>'nullable',
+            'roles'=>'nullable|array'
+
         ];
     }
 
