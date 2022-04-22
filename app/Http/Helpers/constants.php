@@ -1,4 +1,5 @@
 <?php 
+define('BACKEND_API_PREFIX','/api/admin');
 
 //response status
 define('VALIDATIONERROR',422);

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaTrashAlt, FaPen } from 'react-icons/fa'
 import DataTable from '@/components/admin/DataTable'
-import { UserListAction } from '@/services/redux/user/UserAction'
+import { UserListAction,DeleteUserAction } from '@/services/redux/user/UserAction'
 
 const UserList = () => {
 	const dispatch = useDispatch()
@@ -11,7 +11,9 @@ const UserList = () => {
 	useEffect(() => {
 		dispatch(UserListAction())
 	}, [])
-
+	const handleUserDeleteButton = (id)=>{
+		dispatch(DeleteUserAction(id))
+	}
 	const columns = [
 		{
 			key: 'name',
@@ -74,10 +76,8 @@ const UserList = () => {
 				return (
 					<>
 						<div className="table-action-wrapper">
-
 							<Link className="table-edit-btn" to={`/admin/user/edit/${row.id}`} ><FaPen /></Link>
 							<button className="table-delete-btn" onClick={() => handleUserDeleteButton(row.id)}><FaTrashAlt /></button>
-
 						</div>
 					</>
 				)

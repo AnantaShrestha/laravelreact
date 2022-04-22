@@ -2,8 +2,10 @@
 namespace Modules\Usermanagement\Entities;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Modules\Usermanagement\Traits\UserPermissionTrait;
 class User extends Authenticatable implements JwtSubject 
 {
+    use UserPermissionTrait;
     protected $fillable = [
         'name',
         'email',

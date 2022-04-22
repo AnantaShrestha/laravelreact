@@ -29,6 +29,11 @@ const UserReducer = (state=userState,action) =>{
                 ...state,
                 user:action.payload.data
             }
+        case UserActionType.USER_DELETED_SUCCESS:
+            return {
+				...state,
+				users:state.users.filter(user => user.id != action.payload.id)
+			}
         default:
             return state
             break;

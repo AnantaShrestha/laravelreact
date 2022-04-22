@@ -3883,6 +3883,57 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./Modules/Setting/Resources/assets/js/routes/index.js":
+/*!*************************************************************!*\
+  !*** ./Modules/Setting/Resources/assets/js/routes/index.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _views_menu_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/menu/list */ "./Modules/Setting/Resources/assets/js/views/menu/list.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
+  path: '/admin/menu',
+  exact: true,
+  auth: true,
+  component: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_views_menu_list__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+}]);
+
+/***/ }),
+
+/***/ "./Modules/Setting/Resources/assets/js/views/menu/list.js":
+/*!****************************************************************!*\
+  !*** ./Modules/Setting/Resources/assets/js/views/menu/list.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var MenuList = function MenuList() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {});
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MenuList);
+
+/***/ }),
+
 /***/ "./Modules/Usermanagement/Resources/assets/js/routes/index.js":
 /*!********************************************************************!*\
   !*** ./Modules/Usermanagement/Resources/assets/js/routes/index.js ***!
@@ -5032,6 +5083,11 @@ var UserList = function UserList() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_3__.UserListAction)());
   }, []);
+
+  var handleUserDeleteButton = function handleUserDeleteButton(id) {
+    dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_3__.DeleteUserAction)(id));
+  };
+
   var columns = [{
     key: 'name',
     title: 'Full Name',
@@ -5703,6 +5759,15 @@ var items = [{
     href: '/admin/user',
     icon: ''
   }]
+}, {
+  title: 'Setting',
+  href: '',
+  icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaCogs, {}),
+  children: [{
+    title: 'Menu Setting',
+    href: '/admin/menu',
+    icon: ''
+  }]
 }];
 
 var NavList = function NavList(props) {
@@ -6345,9 +6410,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Modules_Usermanagement_Resources_assets_js_routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Modules/Usermanagement/Resources/assets/js/routes */ "./Modules/Usermanagement/Resources/assets/js/routes/index.js");
-/* harmony import */ var _views_admin_dashboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/views/admin/dashboard */ "./resources/js/views/admin/dashboard.js");
-/* harmony import */ var _views_admin_auth_login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/views/admin/auth/login */ "./resources/js/views/admin/auth/login.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Modules_Setting_Resources_assets_js_routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Modules/Setting/Resources/assets/js/routes */ "./Modules/Setting/Resources/assets/js/routes/index.js");
+/* harmony import */ var _views_admin_dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/views/admin/dashboard */ "./resources/js/views/admin/dashboard.js");
+/* harmony import */ var _views_admin_auth_login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/views/admin/auth/login */ "./resources/js/views/admin/auth/login.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -6365,18 +6431,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+
 var routes = [{
   path: '/admin/login',
   exact: true,
   auth: false,
-  component: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_views_admin_auth_login__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+  component: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_views_admin_auth_login__WEBPACK_IMPORTED_MODULE_4__["default"], {})
 }, {
   path: '/admin/dashboard',
   exact: true,
   auth: true,
-  component: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_views_admin_dashboard__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+  component: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_views_admin_dashboard__WEBPACK_IMPORTED_MODULE_3__["default"], {})
 }];
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([].concat(routes, _toConsumableArray(_Modules_Usermanagement_Resources_assets_js_routes__WEBPACK_IMPORTED_MODULE_1__["default"])));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([].concat(routes, _toConsumableArray(_Modules_Usermanagement_Resources_assets_js_routes__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_Modules_Setting_Resources_assets_js_routes__WEBPACK_IMPORTED_MODULE_2__["default"])));
 
 /***/ }),
 
@@ -6429,7 +6496,7 @@ var LoginAuthAction = function LoginAuthAction(loginState, navigate) {
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
-              message: "Something were wrong"
+              message: err.response.data.message
             }
           });
         }
@@ -6467,7 +6534,7 @@ var LogoutAuthAction = function LogoutAuthAction(navigate) {
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
-              message: "Something were wrong"
+              message: err.response.data.message
             }
           });
         }
@@ -7394,7 +7461,37 @@ var UpdateUserAction = function UpdateUserAction(userFormState, id, navigate) {
 var DeleteUserAction = function DeleteUserAction(id) {
   return function (dispatch) {
     return new Promise(function (resolve, reject) {
-      Api["delete"]('/admin/user/delete/' + id).then(function (resp) {})["catch"](function (err) {});
+      Api["delete"]('/admin/user/delete/' + id).then(function (resp) {
+        dispatch({
+          type: UserActionType.USER_DELETED_SUCCESS,
+          payload: {
+            id: id
+          }
+        });
+        dispatch({
+          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_1__.NotificationActionType.MESSAGE_OBJ,
+          payload: {
+            type: 'danger',
+            message: resp.data.message
+          }
+        });
+      })["catch"](function (err) {
+        if (err.response) {
+          dispatch({
+            type: UserActionType.USER_SET_FAILED,
+            payload: err.response.data
+          });
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_1__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: err.response.data.message
+            }
+          });
+        }
+
+        reject(err);
+      });
     });
   };
 };
@@ -7451,6 +7548,13 @@ var UserReducer = function UserReducer() {
     case _UserAction__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_UPDATE_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         user: action.payload.data
+      });
+
+    case _UserAction__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_DELETED_SUCCESS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        users: state.users.filter(function (user) {
+          return user.id != action.payload.id;
+        })
       });
 
     default:

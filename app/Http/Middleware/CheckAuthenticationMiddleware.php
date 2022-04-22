@@ -18,19 +18,43 @@ class CheckAuthenticationMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        try {
-            $user = JWTAuth::parseToken()->authenticate();
-        } catch (Exception $e) {
-            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
-                return (new ApiResponse)->responseError(NULL,'Token Invalid',UNAUTHORIZED);
-            }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
-                return (new ApiResponse)->responseError(NULL,'Token Expired',UNAUTHORIZED);
-
-            }else{
-                return (new ApiResponse)->responseError(NULL,'Authorize token not found',UNAUTHORIZED);
+        $currentRoute = $request->getRequestUri();
+        $strPosApi=strpos($currentRoute,'api');
+        if($strPosApi){
+            try {
+                $user = JWTAuth::parseToken()->authenticate();
+                if($this->shouldPassThrough($request)  || $user->isAdministrator()){
+                    return $next($request);
+                }
+            } catch (Exception $e) {
+                if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+                    return (new ApiResponse)->responseError(NULL,'Token Invalid',UNAUTHORIZED);
+                }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+                    return (new ApiResponse)->responseError(NULL,'Token Expired',UNAUTHORIZED);
+    
+                }else{
+                    return (new ApiResponse)->responseError(NULL,'Authorize token not found',UNAUTHORIZED);
+                }
             }
         }
-        
-        return $next($request);
+        //return $next($request);
     }
+
+      /**
+     * Determine if the request has a URI that should pass through verification.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return bool
+     */
+    protected function shouldPassThrough($request)
+    {
+        $routePath = $request->path();
+        $exceptsPath = [
+            BACKEND_API_PREFIX.'/login',
+            BACKEND_API_PREFIX.'/logout',
+        ];
+        return in_array($routePath, $exceptsPath);
+    }
+
 }

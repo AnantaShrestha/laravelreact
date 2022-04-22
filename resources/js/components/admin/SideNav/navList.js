@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { Link } from "react-router-dom";
-import { FaHome,FaUsers,FaAngleDown} from 'react-icons/fa';
+import { FaHome,FaUsers,FaCogs,FaAngleDown} from 'react-icons/fa';
 const items=[
 	{
 		title:'Dashboard',
@@ -30,7 +30,21 @@ const items=[
 
 			}
 		]
-	}
+	},
+	{
+		title:'Settings',
+		href:'',
+		icon:<FaCogs/>,
+		children:[
+			{
+				title:'Menu Setting',
+				href:'/admin/menu',
+				icon:''
+			},
+			
+		]
+	},
+
 ]
 const NavList = (props) =>{
 	const [isActiveIndex, setActiveIndex] = useState(-1);

@@ -24,7 +24,7 @@ export const LoginAuthAction =(loginState, navigate) => (dispatch) =>{
 					payload:err.response
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
-					type:'danger',message:"Something were wrong"
+					type:'danger',message:err.response.data.message
 				}})
 
 
@@ -52,7 +52,7 @@ export const LogoutAuthAction = (navigate) => (dispatch)=>{
 					payload:err.response
 				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
-					type:'danger',message:"Something were wrong"
+					type:'danger',message:err.response.data.message
 				}})
 			}
 			reject(err)

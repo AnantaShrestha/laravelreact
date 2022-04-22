@@ -114,9 +114,24 @@ export const UpdateUserAction = (userFormState,id,navigate) => (dispatch) =>{
 export const DeleteUserAction = (id) =>(dispatch)=>{
 	return new Promise((resolve,reject)=>{
 		Api.delete('/admin/user/delete/'+id).then(resp=>{
-
+			dispatch({
+				type:UserActionType.USER_DELETED_SUCCESS,
+				payload:{id:id}
+			})
+			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+				type:'danger',message:resp.data.message
+			}})
 		}).catch(err=>{
-			
+			if(err.response){
+				dispatch({
+					type:UserActionType.USER_SET_FAILED,payload:err.response.data
+				})
+				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+					type:'danger',message:err.response.data.message
+				}})
+				
+			}
+			reject(err)
 		})
 	})
 }

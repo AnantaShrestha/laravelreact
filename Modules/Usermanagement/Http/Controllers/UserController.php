@@ -24,7 +24,10 @@ class UserController extends Controller
         }
     }
     
-
+    /**
+     * 
+     * @return store user in database
+     */
     public function store(UserRequest $request){
         try{
             $user=$this->userRepo->storeUser($request->validated());
@@ -34,11 +37,38 @@ class UserController extends Controller
         }
     }
 
-
+    /**
+     * 
+     * @return user according to id
+     */
     public function edit($id){
         try{
             $user=$this->userRepo->findUser($id);
             return $this->apiResponse->responseSuccess($user,'Success',SUCCESS);
+        }catch(Exception $e){
+            return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
+        }
+    }
+    /**
+     * 
+     * @return update database according to id
+     */
+    public function update(UserRequest $request,$id){
+        try {
+            $user=$this->userRepo->updateUser($id,$request->validated());
+            return $this->apiResponse->responseSuccess($user,'User updated successfully',SUCCESS);
+        } catch (Exception $e) {
+            return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
+        }
+    }
+    /**
+     * 
+     * @return remove user form database
+     */
+    public function delete($id){
+        try{
+            $this->userRepo->deleteUser($id);
+            return $this->apiResponse->responseSuccess([],'User delete successfully',SUCCESS);
         }catch(Exception $e){
             return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
         }
