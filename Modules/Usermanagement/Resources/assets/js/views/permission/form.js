@@ -70,7 +70,7 @@ const PermissionForm =()=>{
 							<div className="form-control">
 								<input value={values.name ?? ''}  name="name"  placeholder="Permission Name" type="text" className={`form-input ${errors?.name && 'invalid'}`} onChange={handleChange} />
 								{
-										errors?.name && (<div className="validation-wrapper"><span>{errors.name}</span></div>)
+									errors?.name && (<div className="validation-wrapper"><span>{errors.name}</span></div>)
 								}
 							</div>
 						</div>

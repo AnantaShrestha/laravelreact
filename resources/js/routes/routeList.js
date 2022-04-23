@@ -1,6 +1,5 @@
 import {lazy} from 'react'
 import UsermanagementRoutes from '../../../Modules/Usermanagement/Resources/assets/js/routes'
-import SettingRoutes from '../../../Modules/Setting/Resources/assets/js/routes'
 import Dashboard from '@/views/admin/dashboard'
 import Login from '@/views/admin/auth/login'
 const routes=[
@@ -17,4 +16,4 @@ const routes=[
 		component:<Dashboard />
 	}
 ];
-export default [...routes,...UsermanagementRoutes,...SettingRoutes]
+export default [...routes,...UsermanagementRoutes]

@@ -16,7 +16,12 @@ class PermissionController extends Controller
     }
     public function index(){
     	try{
-            $permissions= $this->permissionRepo->getPermission();
+            $data=[
+                'length'=>$_GET['length'] ?? null,
+                'search'=>$_GET['search'] ?? null,
+                'page'=>$_GET['page'] ?? null
+            ];
+            $permissions= $this->permissionRepo->getPermission($data);
             return $this->apiResponse->responseSuccess($permissions,'Success',SUCCESS);
         }catch(Exception $e){
             return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());

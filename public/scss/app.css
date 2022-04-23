@@ -789,17 +789,31 @@ tr, thead, tbody {
 .datatable-wrapper .datatable-action-header-wrapper {
   margin-bottom: 20px;
 }
-.datatable-wrapper .datatable-action-header-wrapper .datatable-search-wrapper input {
+.datatable-wrapper .datatable-action-header-wrapper .datatable-search-wrapper .datatable-search-form-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
+.datatable-wrapper .datatable-action-header-wrapper .datatable-search-wrapper .datatable-search-form-wrapper input {
   width: 250px;
   height: 37px;
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
   border: 1px solid #ccc;
   font-size: 16px;
   text-indent: 10px;
   outline: none;
 }
-.datatable-wrapper .datatable-action-header-wrapper .datatable-search-wrapper input:placeholder {
+.datatable-wrapper .datatable-action-header-wrapper .datatable-search-wrapper .datatable-search-form-wrapper input:placeholder {
   color: var(--white);
+}
+.datatable-wrapper .datatable-action-header-wrapper .datatable-search-wrapper .datatable-search-form-wrapper .search-btn {
+  height: 41px;
+  border-radius: 0px;
+  background: var(--dangerButton);
+  border: 0;
+  color: var(--white);
+  padding: 0px 11px;
+  align-items: center;
 }
 .datatable-wrapper .datatable-table {
   width: 100%;
@@ -824,6 +838,26 @@ tr, thead, tbody {
 }
 .datatable-wrapper .datatable-table tbody tr:nth-child(even) {
   background: #f4f4f4;
+}
+.datatable-wrapper .pagination-wrapper {
+  margin-top: 15px;
+}
+.datatable-wrapper .pagination-wrapper .pagination-ul {
+  display: flex;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+  justify-content: right;
+}
+.datatable-wrapper .pagination-wrapper .pagination-ul li button {
+  height: 38px;
+  width: 35px;
+  border: 0px;
+  background: none;
+  border: 1px solid var(--themecolor);
+}
+.datatable-wrapper .pagination-wrapper .pagination-ul li button.active {
+  background: var(--themecolor);
+  color: var(--white);
 }
 
 /** end of table css **/

@@ -1,21 +1,35 @@
-import React, {useEffect} from 'react'
+import React, {useEffect,useState} from 'react'
 import {Link } from "react-router-dom";
 import {useDispatch,useSelector} from "react-redux";
 import {FaTrashAlt,FaPen} from 'react-icons/fa'
 import {PermissionsListAction,DeletePermissionAction} from '@/services/redux/permission/PermissionAction'
 import DataTable from '@/components/admin/DataTable'
+import useForm from '@/hooks/useForm'
 const PermissionList =()=>{
 	const dispatch = useDispatch()
 	const permissionsList =useSelector((state) =>state.permission.permissions)
-	useEffect(()=>{   
-		dispatch(PermissionsListAction())
-	},[])
+	//search from
+	const searchForm = ()=> {
+		setData({...data,'search':values.search})
+	}
+	const {isLoading,isDisable,values,setValues,handleChange,handleSubmit} = useForm(searchForm);
+	const [data,setData]=useState({
+		length:10,
+		page:1,
+		search:values.search ?? ''
+	})
+	const handlePagination = (page) =>{
+		setData({...data,'page':page})
+	}
+	useEffect(()=>{ 
+		dispatch(PermissionsListAction(data))
+	},[data])
 	//table columns
 	const columns=[
 		{
 			key:'name',title:'Permisssion Name',
 			render: (row) =>{
-				return(
+				return( 
 					<span>{row.name}</span>
 				)
 			}
@@ -57,7 +71,13 @@ const PermissionList =()=>{
 			</div>
 			<div className="content-box-wrapper">
 				<div className="table-wrapper">
-					<DataTable columns={columns} rows={permissionsList} />
+					<DataTable columns={columns}
+							   rows={permissionsList} 
+							   handleSubmit={handleSubmit} 
+							   handleChange={handleChange} 
+							   isLoading={isLoading} 
+							   isDisable={isDisable}
+							   handlePagination={handlePagination} />
 				</div>
 			</div>
 		</div>

@@ -11,8 +11,17 @@ class RoleRepository{
 	/**
 	 * get role with permission
 	 */
-	public function getRole(){
-		return $this->role->with('permissions')->orderBy('created_at','desc')->get();
+	public function getRole($data=null){
+		$role=$this->role->with('permissions')
+					->select('id','name','created_at');
+		if(isset($data['search']) && !empty($data['search']))
+			$role=$role->where('name','LIKE','%'.$data['search'].'%');
+		$role=$role->orderBy('created_at','desc');
+		if(isset($data['length']) && !empty($data['length']) && !empty($data['page']))
+			$role=$role->paginate($data['length'],['*'],'page',$data['page']);
+		else
+			$role=$role->get();
+		return $role;
 	}
 
 	/**

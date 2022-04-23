@@ -19,7 +19,12 @@ class RoleController extends Controller
      */
     public function index(){
         try{
-            $role= $this->roleRepo->getRole();
+            $data=[
+                'length'=>$_GET['length'] ?? null,
+                'search'=>$_GET['search'] ?? null,
+                'page'=>$_GET['page'] ?? null
+            ];
+            $role= $this->roleRepo->getRole($data);
             return $this->apiResponse->responseSuccess($role,'Success',SUCCESS);
         }catch(Exception $e){
             return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());

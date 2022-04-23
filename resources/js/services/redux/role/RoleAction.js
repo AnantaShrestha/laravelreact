@@ -1,4 +1,5 @@
 import {NotificationActionType} from '../notification/notificationAction'
+import {isEmpty} from '@/core/globalFunction'
 export const RoleActionType={
 	SET_ROLES:"SET_ROLES",
 	SET_ROLE:"SET_ROLE",
@@ -9,9 +10,10 @@ export const RoleActionType={
 	ROLE_DELETED_SUCCESS:"DELETED_SUCCESS",
 }
 //get role
-export const RoleListAction = () => (dispatch) =>{
+export const RoleListAction = (data) => (dispatch) =>{
 	return new Promise((resolve,reject)=>{
-		Api.get('admin/role/').then(resp=>{
+		let get=data ? '?page='+data.page ?? ''+'&&length='+data.length ?? ''+'&&search='+data.search ?? '' : ''
+		Api.get('admin/role'+get ).then(resp=>{
 			dispatch({type:RoleActionType.SET_ROLES,payload:resp.data})
 			resolve(resp)
 		}).catch(err=>{

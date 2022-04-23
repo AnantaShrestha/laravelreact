@@ -3,17 +3,12 @@ namespace Modules\Usermanagement\Traits;
 
 
 trait UserPermissionTrait{
-    protected static $allPermissions = null;
-    protected static $allViewPermissions = null;
-
-    public function isAdministrator(): bool
-    {
-        return $this->isRole('administrator');
+    public function isAdminstrator():bool{
+    
     }
 
-    public function isRole(string $role): bool
-    {
-        return $this->roles->pluck('slug')->contains($role);
+    public static function accessUri(){
+        return self::allPermissions()->pluck('access_uri')->toArray();
     }
 
       /**
@@ -23,10 +18,8 @@ trait UserPermissionTrait{
      */
     public static function allPermissions()
     {
-        if (self::$allPermissions === null) {
-            self::$allPermissions = $user->roles()->with('permissions')
-                ->get()->pluck('permissions')->flatten();
-        }
-        return self::$allPermissions;
+        $user =currentUser();
+        return $user->roles()->with('permissions')
+            ->get()->pluck('permissions')->flatten();
     }
 }

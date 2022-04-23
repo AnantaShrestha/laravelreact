@@ -1,16 +1,28 @@
-import React, {useEffect} from 'react'
+import React, {useEffect,useState} from 'react'
 import {Link } from "react-router-dom"
 import {useDispatch,useSelector} from "react-redux";
 import {FaTrashAlt,FaPen} from 'react-icons/fa'
-import DataTable from '@/components/admin/DataTable'
 import {RoleListAction,DeleteRoleAction} from '@/services/redux/role/RoleAction'
-
+import DataTable from '@/components/admin/DataTable'
+import useForm from '@/hooks/useForm'
 const RoleList = () =>{
 	const dispatch = useDispatch()
 	const rolesList =useSelector((state) =>state.role.roles)
+	const searchForm = ()=> {
+		setData({...data,'search':values.search})
+	}
+	const {isLoading,isDisable,values,setValues,handleChange,handleSubmit} = useForm(searchForm);
+	const [data,setData]=useState({
+		length:10,
+		page:1,
+		search:values.search ?? ''
+	})
+	const handlePagination = (page) =>{
+		setData({...data,'page':page})
+	}
 	useEffect(()=>{   
-		dispatch(RoleListAction())
-	},[])
+		dispatch(RoleListAction(data))
+	},[data])
 	const handleRoleDeleteButton = (id) =>{
 		dispatch(DeleteRoleAction(id))
 	}
@@ -78,7 +90,13 @@ const RoleList = () =>{
 				</div>
 				<div className="content-box-wrapper">
 					<div className="table-wrapper">
-						<DataTable columns={columns} rows={rolesList} />
+						<DataTable columns={columns}
+							   rows={rolesList} 
+							   handleSubmit={handleSubmit} 
+							   handleChange={handleChange} 
+							   isLoading={isLoading} 
+							   isDisable={isDisable}
+							   handlePagination={handlePagination} />
 					</div>
 				</div>
 			</div>

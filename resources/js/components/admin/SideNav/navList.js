@@ -31,20 +31,6 @@ const items=[
 			}
 		]
 	},
-	{
-		title:'Settings',
-		href:'',
-		icon:<FaCogs/>,
-		children:[
-			{
-				title:'Menu Setting',
-				href:'/admin/menu',
-				icon:''
-			},
-			
-		]
-	},
-
 ]
 const NavList = (props) =>{
 	const [isActiveIndex, setActiveIndex] = useState(-1);

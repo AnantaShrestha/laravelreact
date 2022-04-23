@@ -22,10 +22,10 @@ class CheckAuthenticationMiddleware
         $strPosApi=strpos($currentRoute,'api');
         if($strPosApi){
             try {
-                $user = JWTAuth::parseToken()->authenticate();
-                if($this->shouldPassThrough($request)  || $user->isAdministrator()){
+                $user = currentUser();
+               
                     return $next($request);
-                }
+                
             } catch (Exception $e) {
                 if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
                     return (new ApiResponse)->responseError(NULL,'Token Invalid',UNAUTHORIZED);

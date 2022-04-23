@@ -186,18 +186,33 @@
 	.datatable-action-header-wrapper{
 		margin-bottom:20px;
 		.datatable-search-wrapper{
-			input{
-				width: 250px;
-				height: 37px;
-				border-radius: 8px;
-				border: 1px solid #ccc;
-				font-size: 16px;
-				text-indent: 10px;
-				outline: none;
-				&:placeholder{
-					color:var(--white);
+			.datatable-search-form-wrapper {
+				display: flex;
+				flex-flow: row wrap;
+				input{
+					width: 250px;
+					height: 37px;
+					border-top-left-radius: 8px;
+					border-bottom-left-radius: 8px;
+					border: 1px solid #ccc;
+					font-size: 16px;
+					text-indent: 10px;
+					outline: none;
+					&:placeholder{
+						color:var(--white);
+					}
+				}
+				.search-btn {
+					height: 41px;
+					border-radius: 0px;
+					background: var(--dangerButton);
+					border: 0;
+					color: var(--white);
+					padding: 0px 11px;
+					align-items: center;
 				}
 			}
+		
 		}
 	}
 	.datatable-table{
@@ -227,6 +242,28 @@
 				}
 			}
 
+ 		}
+
+ 	}
+ 	.pagination-wrapper{
+ 		margin-top:15px;
+ 		.pagination-ul{
+ 			display: flex;
+ 			column-gap:5px;
+ 			justify-content:right;
+ 			li{
+ 				button{
+ 					height:38px;
+ 					width: 35px;
+ 					border:0px;
+ 					background:none;
+ 					border:1px solid var(--themecolor);
+ 					&.active{
+ 						background: var(--themecolor);
+ 						color:var(--white);
+ 					}
+ 				}
+ 			}
  		}
  	}
 }
