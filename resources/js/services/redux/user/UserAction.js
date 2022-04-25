@@ -1,4 +1,3 @@
-import api from '@fortawesome/fontawesome'
 import { NotificationActionType } from '../notification/notificationAction'
 export const UserActionType = {
 	SET_USERS: "SET_USERS",
@@ -6,7 +5,7 @@ export const UserActionType = {
 	USER_SET_FAILED: "USER_SET_FAILED",
 	USER_CREATED_SUCCESS: "USER_CREATED_SUCCESS",
 	USER_EDIT_SUCCESS: "USER_EDIT_SUCCESS",
-	USER_UPDATE_SUCCESS: "USER_UPDATE_SUCCESS",
+	USER_UPDATED_SUCCESS: "USER_UPDATED_SUCCESS",
 	USER_DELETED_SUCCESS: "USER_DELETED_SUCCESS",
 }
 
@@ -88,11 +87,12 @@ export const EditUserAction = (id) => (dispatch) => {
 
 export const UpdateUserAction = (userFormState,id,navigate) => (dispatch) =>{
 	return new Promise((resolve,reject)=>{
-		Api.put('/admin/user/edit/'+id,userFormState).catch(resp=>{
+		Api.put('/admin/user/edit/'+id,userFormState).then(resp=>{
 			dispatch({type:UserActionType.USER_UPDATED_SUCCESS,payload:resp.data})
 			dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 				type:'success',message:resp.data.message
 			}})
+			
 			navigate('/admin/user')
 			resolve(resp)
 		}).catch(err=>{

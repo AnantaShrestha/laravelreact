@@ -35,7 +35,7 @@ const PermissionReducer = (state=permissionState,action) =>{
 		case PermissionActionType.PERMISSION_UPDATE_SUCCESS:
 			return{
 				...state,
-				permission:action.payloas.data
+				permission:action.payload.data
 			}
 			break;
 		case PermissionActionType.PERMISSION_DELETED_SUCCESS:

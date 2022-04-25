@@ -20,11 +20,20 @@ class CheckAuthenticationMiddleware
     {
         $currentRoute = $request->getRequestUri();
         $strPosApi=strpos($currentRoute,'api');
+        $user =currentUser();
         if($strPosApi){
             try {
-                $user = currentUser();
-               
+                $user =currentUser();
+                $url=$request->url();
+                if(in_array($url,$user->allViewPermissions()) ||  $this->shouldPassThrough($request)){
                     return $next($request);
+                }
+                if($user->checkUrlAllowAccess($url)){
+                    return $next($request);
+                }else{
+                    return (new ApiResponse)->responseError(null,'Permission Deny',UNAUTHORIZED);
+                }
+                return $next($request);
                 
             } catch (Exception $e) {
                 if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
@@ -54,6 +63,7 @@ class CheckAuthenticationMiddleware
             BACKEND_API_PREFIX.'/login',
             BACKEND_API_PREFIX.'/logout',
         ];
+    
         return in_array($routePath, $exceptsPath);
     }
 

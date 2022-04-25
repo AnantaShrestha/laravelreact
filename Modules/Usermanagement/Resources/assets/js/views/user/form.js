@@ -7,7 +7,7 @@ import Button from '@/components/admin/Button'
 import Select from '@/components/admin/Select'
 
 import {RoleListAction} from '@/services/redux/role/RoleAction'
-import {CreateUserAction,EditUserAction} from '@/services/redux/user/UserAction'
+import {CreateUserAction,EditUserAction,UpdateUserAction} from '@/services/redux/user/UserAction'
 const UserForm = () => {
     //navigate
     const navigate = useNavigate()
@@ -18,7 +18,8 @@ const UserForm = () => {
     const isAddMode = !id
     const userForm = () => {
         if(Object.keys(errors).length  === 0){
-           isAddMode ? dispatch(CreateUserAction(values,navigate)) : null
+
+           isAddMode ? dispatch(CreateUserAction(values,navigate)) : dispatch(UpdateUserAction(values,id,navigate))
         }
     }
     const { isLoading, isDisable, values,setValues,setValidation,errors, handleChange, handleSubmit } = useForm(userForm);
@@ -58,10 +59,10 @@ const UserForm = () => {
                 rules:'required|email'
             },
             password:{
-               rules:'required'
+               rules:isAddMode ? 'required' : ''
             },
             password_confirmation:{
-                rules:'required|confirm'
+                rules:isAddMode ? 'required|confirm' :''
             }
         })
         dispatch(RoleListAction())

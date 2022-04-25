@@ -26,6 +26,7 @@ class AuthController extends Controller
         }
 
         if (! $token = JWTAuth::attempt($validator->validated())) {
+           
             return $this->apiResponse->responseError(NULL,'Unauthorized', UNAUTHORIZED);
         }
         return $this->createNewToken($token);
@@ -51,18 +52,15 @@ class AuthController extends Controller
     }*/
 
     protected function createNewToken($token){
+        $user=auth('api')->user();
         $data=[
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60 * 24,
-            'user' => auth('api')->user()
+            'user' =>$user
         ];
+        \Session::put('user',$user);
         return $this->apiResponse->responseSuccess($data,'Login successfully',SUCCESS);
-    }
-
-    public function getUser(Request $request)
-    {
-        return $this->apiResponse->responseSuccess($request->user(),NULL,SUCCESS);
     }
 
     public function refresh() {
@@ -77,6 +75,7 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
+        \Session::forget('user');
         return $this->apiResponse->responseSuccess(NULL,'Logout Successfully',SUCCESS);
     } 
 }

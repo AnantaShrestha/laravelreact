@@ -54,7 +54,6 @@ class UserRepository{
 			'name'=>$data['name'],
 			'phone_no'=>$data['phone_no'] ?? '',
 			'email'=>$data['email'],
-			'password'=>$data['password'],
 			'activate' => $data['activate'] ?? 1
 		]);
 		$roles=$data['roles'] ?? [];

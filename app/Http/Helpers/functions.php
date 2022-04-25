@@ -3,6 +3,6 @@
 
 if(!function_exists('currentUser')){
 	function currentUser(){
-		return \JWTAuth::parseToken()->authenticate();
+		return auth('api')->user();
 	}
 }

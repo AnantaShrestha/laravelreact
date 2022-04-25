@@ -24,7 +24,7 @@ const UserReducer = (state=userState,action) =>{
                 ...state,
                 user:action.payload.data
             }
-        case UserActionType.USER_UPDATE_SUCCESS:
+        case UserActionType.USER_UPDATED_SUCCESS:
             return{
                 ...state,
                 user:action.payload.data
