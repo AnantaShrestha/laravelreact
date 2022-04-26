@@ -32,25 +32,6 @@ class AuthController extends Controller
         return $this->createNewToken($token);
     }
 
-   /* public function register(Request $request){
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|confirmed|',
-        ]);
-        if($validator->fails()){
-            return $this->apiResponse->ResponseError($validator->errors()->toJson(),NULL,VALIDATIONERROR);
-        }
-        $user = User::create(array_merge(
-            $validator->validated(),
-            ['password' => bcrypt($request->password)]
-        ));
-        if (! $token = JWTAuth::attempt($request->only('email','password'))) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-        return $this->createNewToken($token);  
-    }*/
-
     protected function createNewToken($token){
         $user=auth('api')->user();
         $data=[

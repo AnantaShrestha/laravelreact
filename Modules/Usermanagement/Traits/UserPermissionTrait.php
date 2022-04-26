@@ -3,6 +3,8 @@ namespace Modules\Usermanagement\Traits;
 
 
 trait UserPermissionTrait{
+    protected static $allPermissions = null;
+    protected static $allViewPermissions = null;
       /**
      * Get all permissions of user.
      *
@@ -10,9 +12,21 @@ trait UserPermissionTrait{
      */
     public static function allPermissions()
     {
-        $user =currentUser();
-        return $user->roles()->with('permissions')
-            ->get()->pluck('permissions')->flatten();
+        if(self::$allPermissions == null){
+            $user =currentUser();
+            $roles=$user->roles()->get();
+            $rolesId=[];
+            foreach($roles as $role){
+                $rolesId[]=$role->id;
+            }
+            self::$allPermissions=\DB::table('roles_permissions')
+                                    ->join('roles', 'roles_permissions.role_id', '=', 'roles.id')
+                                    ->whereIn('roles.id',$rolesId)
+                                    ->join('permissions','roles_permissions.permission_id','=','permissions.id')
+                                    ->select('permissions.*')
+                                    ->get();
+        }
+        return self::$allPermissions;
     }
     /**
      * Get all view permissions of user.
@@ -21,16 +35,19 @@ trait UserPermissionTrait{
      */
     public function allViewPermissions()
     {
-        $arrView = [];
-        $allPermissionTmp =$this->allPermissions();
-        $allPermissionTmp = $allPermissionTmp->pluck('access_uri')->toArray();
-        foreach($allPermissionTmp as $actionList){
-            foreach ($actionList as  $action) {
-                $arrScheme = ['https://', 'http://'];
-                $arrView[] =str_replace($arrScheme, '', url($action));
+        if(self::$allPermissions===null){
+            $arrView = [];
+            $allPermissionTmp =$this->allPermissions();
+            $allPermissionTmp = $allPermissionTmp->pluck('access_uri')->toArray();
+            if($allPermissionTmp){
+                foreach($allPermissionTmp as $action){
+                    $arrScheme = ['https://', 'http://'];
+                    $arrView[] =str_replace($arrScheme, '', url($action));
+                }
             }
+            self::$allViewPermissions=$arrView;
         }
-        return $arrView;
+        return self::$allViewPermissions;
     }
 
 

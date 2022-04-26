@@ -11,8 +11,18 @@ class UserRepository{
 	/**
 	 * @return  get user
 	 */
-	public function getUser(){
-		return $this->user->with('roles')->orderBy('created_at','desc')->get();
+	public function getUser($data){
+		$user=$this->user->with('roles')
+					->select('id','name','username','email','phone_no','created_at');
+		if(isset($data['search']) && !empty($data['search']))
+			$user=$user->where('name','LIKE','%'.$data['search'].'%');
+		$user=$user->orderBy('created_at','desc');
+		if(isset($data['length']) && !empty($data['length']) && !empty($data['page']))
+			$user=$user->paginate($data['length'],['*'],'page',$data['page']);
+		else
+			$user=$user->get();
+		return $user;
+		// return $this->user->with('roles')->orderBy('created_at','desc')->get();
 	}
 
 	/**

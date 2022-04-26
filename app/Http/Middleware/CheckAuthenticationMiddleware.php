@@ -20,7 +20,6 @@ class CheckAuthenticationMiddleware
     {
         $currentRoute = $request->getRequestUri();
         $strPosApi=strpos($currentRoute,'api');
-        $user =currentUser();
         if($strPosApi){
             try {
                 $user =currentUser();

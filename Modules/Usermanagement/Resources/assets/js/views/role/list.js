@@ -11,7 +11,7 @@ const RoleList = () =>{
 	const searchForm = ()=> {
 		setData({...data,'search':values.search})
 	}
-	const {isLoading,isDisable,values,setValues,handleChange,handleSubmit} = useForm(searchForm);
+	const {isLoading,isDisable,values,handleChange,handleSubmit} = useForm(searchForm);
 	const [data,setData]=useState({
 		length:10,
 		page:1,

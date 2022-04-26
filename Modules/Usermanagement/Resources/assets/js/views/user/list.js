@@ -1,16 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaTrashAlt, FaPen } from 'react-icons/fa'
 import DataTable from '@/components/admin/DataTable'
 import { UserListAction,DeleteUserAction } from '@/services/redux/user/UserAction'
-
+import useForm from '@/hooks/useForm'
 const UserList = () => {
 	const dispatch = useDispatch()
-	const userList = useSelector((state) => state.user.users)
+	const usersList = useSelector((state) => state.user.users)
+	const searchForm = ()=> {
+		setData({...data,'search':values.search})
+	}
+	const {isLoading,isDisable,values,handleChange,handleSubmit} = useForm(searchForm);
+	const [data,setData]=useState({
+		length:10,
+		page:1,
+		search:values.search ?? ''
+	})
+	const handlePagination = (page) =>{
+		setData({...data,'page':page})
+	}
 	useEffect(() => {
-		dispatch(UserListAction())
-	}, [])
+		dispatch(UserListAction(data))
+	}, [data])
 	const handleUserDeleteButton = (id)=>{
 		dispatch(DeleteUserAction(id))
 	}
@@ -96,7 +108,13 @@ const UserList = () => {
 			</div>
 			<div className="content-box-wrapper">
 				<div className="table-wrapper">
-					<DataTable columns={columns} rows={userList} />
+					<DataTable columns={columns}
+							   rows={usersList} 
+							   handleSubmit={handleSubmit} 
+							   handleChange={handleChange} 
+							   isLoading={isLoading} 
+							   isDisable={isDisable}
+							   handlePagination={handlePagination} />
 				</div>
 			</div>
 		</div>

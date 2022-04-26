@@ -33,7 +33,7 @@ export const RouteListAction = () => (dispatch) =>{
 //permissions list action
 export const PermissionsListAction = (data) => (dispatch) =>{
 	return new Promise((resolve,reject)=>{
-		let get=data ? '?page='+data.page ?? ''+'&&length='+data.length ?? ''+'&&search='+data.search ?? '' : ''
+		let get=data ? '?page='+data.page+'&&length='+data.length+'&&search='+data.search : ''
 		Api.get('/admin/permission'+get).then(resp=>{
 			dispatch({
 				type:PermissionActionType.SET_PERMISSIONS,

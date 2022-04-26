@@ -2421,7 +2421,6 @@ var PermissionList = function PermissionList() {
       isLoading = _useForm.isLoading,
       isDisable = _useForm.isDisable,
       values = _useForm.values,
-      setValues = _useForm.setValues,
       handleChange = _useForm.handleChange,
       handleSubmit = _useForm.handleSubmit;
 
@@ -2796,7 +2795,6 @@ var RoleList = function RoleList() {
       isLoading = _useForm.isLoading,
       isDisable = _useForm.isDisable,
       values = _useForm.values,
-      setValues = _useForm.setValues,
       handleChange = _useForm.handleChange,
       handleSubmit = _useForm.handleSubmit;
 
@@ -3270,11 +3268,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
 /* harmony import */ var _components_admin_DataTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/admin/DataTable */ "./resources/js/components/admin/DataTable/index.js");
 /* harmony import */ var _services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/services/redux/user/UserAction */ "./resources/js/services/redux/user/UserAction.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _hooks_useForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/hooks/useForm */ "./resources/js/hooks/useForm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3287,6 +3286,13 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -3298,13 +3304,44 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var UserList = function UserList() {
+  var _values$search;
+
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
-  var userList = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+  var usersList = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.user.users;
   });
+
+  var searchForm = function searchForm() {
+    setData(_objectSpread(_objectSpread({}, data), {}, {
+      'search': values.search
+    }));
+  };
+
+  var _useForm = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_4__["default"])(searchForm),
+      isLoading = _useForm.isLoading,
+      isDisable = _useForm.isDisable,
+      values = _useForm.values,
+      handleChange = _useForm.handleChange,
+      handleSubmit = _useForm.handleSubmit;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    length: 10,
+    page: 1,
+    search: (_values$search = values.search) !== null && _values$search !== void 0 ? _values$search : ''
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      data = _useState2[0],
+      setData = _useState2[1];
+
+  var handlePagination = function handlePagination(page) {
+    setData(_objectSpread(_objectSpread({}, data), {}, {
+      'page': page
+    }));
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_3__.UserListAction)());
-  }, []);
+    dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_3__.UserListAction)(data));
+  }, [data]);
 
   var handleUserDeleteButton = function handleUserDeleteButton(id) {
     dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_3__.DeleteUserAction)(id));
@@ -3314,8 +3351,8 @@ var UserList = function UserList() {
     key: 'name',
     title: 'Full Name',
     render: function render(row) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
           children: row.name
         })
       });
@@ -3324,8 +3361,8 @@ var UserList = function UserList() {
     key: 'username',
     title: 'Username',
     render: function render(row) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
           children: row.username
         })
       });
@@ -3334,8 +3371,8 @@ var UserList = function UserList() {
     key: 'email',
     title: 'Email',
     render: function render(row) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
           children: row.email
         })
       });
@@ -3344,16 +3381,16 @@ var UserList = function UserList() {
     key: 'roles',
     title: 'Role',
     render: function render(row) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "table-permission-list",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
             children: row.roles && Object.entries(row.roles).map(function (_ref, index) {
               var _ref2 = _slicedToArray(_ref, 2),
                   key = _ref2[0],
                   role = _ref2[1];
 
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 children: role.name
               }, index);
             })
@@ -3365,48 +3402,53 @@ var UserList = function UserList() {
     key: 'action',
     title: 'Action',
     render: function render(row) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "table-action-wrapper",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
             className: "table-edit-btn",
             to: "/admin/user/edit/".concat(row.id),
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__.FaPen, {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fa__WEBPACK_IMPORTED_MODULE_7__.FaPen, {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
             className: "table-delete-btn",
             onClick: function onClick() {
               return handleUserDeleteButton(row.id);
             },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__.FaTrashAlt, {})
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_icons_fa__WEBPACK_IMPORTED_MODULE_7__.FaTrashAlt, {})
           })]
         })
       });
     }
   }];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "content-body",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "page-heading-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "page-title-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
           children: "User"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "action-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
           to: "/admin/user/create",
           className: "btn-success",
           children: "Create"
         })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "content-box-wrapper",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "table-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_admin_DataTable__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_admin_DataTable__WEBPACK_IMPORTED_MODULE_2__["default"], {
           columns: columns,
-          rows: userList
+          rows: usersList,
+          handleSubmit: handleSubmit,
+          handleChange: handleChange,
+          isLoading: isLoading,
+          isDisable: isDisable,
+          handlePagination: handlePagination
         })
       })
     })]
@@ -5071,9 +5113,7 @@ var RouteListAction = function RouteListAction() {
 var PermissionsListAction = function PermissionsListAction(data) {
   return function (dispatch) {
     return new Promise(function (resolve, reject) {
-      var _ref, _ref2, _ref3;
-
-      var get = data ? (_ref = (_ref2 = (_ref3 = '?page=' + data.page) !== null && _ref3 !== void 0 ? _ref3 : '' + '&&length=' + data.length) !== null && _ref2 !== void 0 ? _ref2 : '' + '&&search=' + data.search) !== null && _ref !== void 0 ? _ref : '' : '';
+      var get = data ? '?page=' + data.page + '&&length=' + data.length + '&&search=' + data.search : '';
       Api.get('/admin/permission' + get).then(function (resp) {
         dispatch({
           type: PermissionActionType.SET_PERMISSIONS,
@@ -5365,9 +5405,7 @@ var RoleActionType = {
 var RoleListAction = function RoleListAction(data) {
   return function (dispatch) {
     return new Promise(function (resolve, reject) {
-      var _ref, _ref2, _ref3;
-
-      var get = data ? (_ref = (_ref2 = (_ref3 = '?page=' + data.page) !== null && _ref3 !== void 0 ? _ref3 : '' + '&&length=' + data.length) !== null && _ref2 !== void 0 ? _ref2 : '' + '&&search=' + data.search) !== null && _ref !== void 0 ? _ref : '' : '';
+      var get = data ? '?page=' + data.page + '&&length=' + data.length + '&&search=' + data.search : '';
       Api.get('admin/role' + get).then(function (resp) {
         dispatch({
           type: RoleActionType.SET_ROLES,
@@ -5640,10 +5678,11 @@ var UserActionType = {
   USER_DELETED_SUCCESS: "USER_DELETED_SUCCESS"
 }; //get user
 
-var UserListAction = function UserListAction() {
+var UserListAction = function UserListAction(data) {
   return function (dispatch) {
     return new Promise(function (resolve, reject) {
-      Api.get('/admin/user').then(function (resp) {
+      var get = data ? '?page=' + data.page + '&&length=' + data.length + '&&search=' + data.search : '';
+      Api.get('/admin/user' + get).then(function (resp) {
         dispatch({
           type: UserActionType.SET_USERS,
           payload: resp.data
