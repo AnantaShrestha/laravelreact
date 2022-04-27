@@ -83,4 +83,14 @@ class UserRepository{
 		$user->roles()->detach();
 		return $user->delete();
 	}
+
+
+
+	/**
+	 * 
+	 * @return permission according to user
+	 */
+	public function userPermission(){
+		return $this->user->allViewPermissions();
+	}
 }

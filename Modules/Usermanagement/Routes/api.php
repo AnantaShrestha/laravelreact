@@ -43,5 +43,6 @@ $router->prefix('admin')->name('admin.')->group(function() use($router){
         $router->get('edit/{id}',['as'=>'edit','uses'=>'UserController@edit']);
         $router->put('edit/{id}',['as'=>'update','uses'=>'UserController@update']);
         $router->delete('delete',['as'=>'delete','uses'=>'UserController@delete']);
+        $router->get('permission',['as'=>'userPermiision','uses'=>'UserController@userPermission']);
     });
 });

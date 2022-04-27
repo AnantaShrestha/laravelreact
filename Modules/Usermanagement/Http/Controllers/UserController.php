@@ -78,4 +78,17 @@ class UserController extends Controller
             return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
         }
     }
+
+    /**
+     * 
+     * @return user permission
+     */
+    public function userPermission(){
+        try{
+            $userPermission=$this->userRepo->userPermission();
+            return $this->apiResponse->responseSuccess($userPermission,'Success',SUCCESS);
+        }catch(Exception $e){
+            return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
+        }
+    }
 }
