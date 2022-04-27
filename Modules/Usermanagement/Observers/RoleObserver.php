@@ -10,6 +10,11 @@ class RoleObserver{
     public function updating(Role $role){
         $role->slug = \Str::slug($role->name);
         $role->updated_by=auth()->guard('api')->user()->id;
+        \Cache::forget('user-permissions');
+    }
+
+    public function deleting(Role $role){
+        \Cache::forget('user-permissions');
     }
 
 

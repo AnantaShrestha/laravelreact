@@ -56,7 +56,6 @@ const RoleForm = () =>{
 
 		}
 	},[role])
-	
 	return(
 		<div className="content-body">
 			<>

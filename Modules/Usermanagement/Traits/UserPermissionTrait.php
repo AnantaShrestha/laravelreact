@@ -14,17 +14,19 @@ trait UserPermissionTrait{
     {
         if(self::$allPermissions == null){
             $user =currentUser();
-            $roles=$user->roles()->get();
-            $rolesId=[];
-            foreach($roles as $role){
-                $rolesId[]=$role->id;
-            }
-            self::$allPermissions=\DB::table('roles_permissions')
-                                    ->join('roles', 'roles_permissions.role_id', '=', 'roles.id')
-                                    ->whereIn('roles.id',$rolesId)
-                                    ->join('permissions','roles_permissions.permission_id','=','permissions.id')
-                                    ->select('permissions.*')
-                                    ->get();
+            self::$allPermissions=\Cache::rememberForever('user-permissions' . $user->id,function() use ($user) {
+                $roles=$user->roles()->get();
+                $rolesId=[];
+                foreach($roles as $role){
+                    $rolesId[]=$role->id;
+                }
+                return \DB::table('roles_permissions')
+                        ->join('roles', 'roles_permissions.role_id', '=', 'roles.id')
+                        ->whereIn('roles.id',$rolesId)
+                        ->join('permissions','roles_permissions.permission_id','=','permissions.id')
+                        ->select('permissions.*')
+                        ->get();
+            });
         }
         return self::$allPermissions;
     }
