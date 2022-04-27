@@ -65,7 +65,8 @@ class PermissionRouteRepository{
         	$prefix.'login',
         	$prefix.'logout',
             $prefix.'dashboard',
-            $prefix.'permission/route/list'
+            $prefix.'permission/route/list',
+			$prefix.'user/permission'
         ];
     }
 }
