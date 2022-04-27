@@ -3,7 +3,6 @@ import {isEmpty} from '@/core/globalFunction'
 export const RoleActionType={
 	SET_ROLES:"SET_ROLES",
 	SET_ROLE:"SET_ROLE",
-	ROLE_SET_FAILED:"SET_FAILED",
 	ROLE_CREATED_SUCCESS:"ROLE_CREATED_SUCCESS",
 	ROLE_EDIT_SUCCESS:"ROLE_EDIT_SUCCESS",
 	ROLE_UPDATED_SUCCESS:"ROLE_UPDATED_SUCCESS",
@@ -18,10 +17,6 @@ export const RoleListAction = (data) => (dispatch) =>{
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:RoleActionType.ROLE_SET_FAILED,
-					payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})
@@ -42,9 +37,6 @@ export const CreateRoleAction = (roleFormState,navigate) => (dispatch)=>{
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:RoleActionType.ROLE_SET_FAILED,payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})
@@ -64,9 +56,6 @@ export const EditRoleAction = (id) => (dispatch) =>{
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:RoleActionType.ROLE_SET_FAILED,payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})
@@ -88,9 +77,6 @@ export const UpdateRoleAction = (roleFormState,id,navigate) => (dispatch) =>{
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:RoleActionType.ROLE_SET_FAILED,payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})	
@@ -113,9 +99,6 @@ export const DeleteRoleAction = (id) => (dispatch) =>{
 			}})
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:RoleActionType.ROLE_SET_FAILED,payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})

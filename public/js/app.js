@@ -4621,33 +4621,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var _components_admin_SideNav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/admin/SideNav */ "./resources/js/components/admin/SideNav/index.js");
 /* harmony import */ var _components_admin_TopHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/admin/TopHeader */ "./resources/js/components/admin/TopHeader/index.js");
 /* harmony import */ var _components_admin_FlashMessage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/admin/FlashMessage */ "./resources/js/components/admin/FlashMessage/index.js");
-/* harmony import */ var _services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/services/redux/user/UserAction */ "./resources/js/services/redux/user/UserAction.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -4660,49 +4638,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PrivateLayout = function PrivateLayout(_ref) {
   var children = _ref.children;
-  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useLocation)();
-  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useNavigate)();
-  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
-  var hostName = window.location.hostname;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      viewPermissions = _useState2[0],
-      setViewPermissions = _useState2[1];
-
   var isAuthenticate = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.auth.isLoggedIn;
   });
-
-  if (isAuthenticate) {
-    var userPermission = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
-      return state.user.userPermission;
-    });
-    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-      dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_5__.UserPermissionAction)());
-    }, []);
-    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-      setViewPermissions([]);
-      userPermission && (userPermission === null || userPermission === void 0 ? void 0 : userPermission.map(function (permission, key) {
-        var path = permission.replace(hostName + '/api', '');
-        setViewPermissions(function (viewPermissions) {
-          return [].concat(_toConsumableArray(viewPermissions), [path]);
-        });
-      }));
-    }, [userPermission]);
-  }
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_admin_FlashMessage__WEBPACK_IMPORTED_MODULE_4__["default"], {}), isAuthenticate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_admin_FlashMessage__WEBPACK_IMPORTED_MODULE_4__["default"], {}), isAuthenticate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "body-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_admin_SideNav__WEBPACK_IMPORTED_MODULE_2__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_admin_SideNav__WEBPACK_IMPORTED_MODULE_2__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "main-content-wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_admin_TopHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_admin_TopHeader__WEBPACK_IMPORTED_MODULE_3__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "content-box",
           children: children
         })]
       })]
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Navigate, {
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Navigate, {
       to: "/admin/login"
     })]
   });
@@ -4863,7 +4812,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AuthActionType": () => (/* binding */ AuthActionType),
 /* harmony export */   "LoginAuthAction": () => (/* binding */ LoginAuthAction),
-/* harmony export */   "LogoutAuthAction": () => (/* binding */ LogoutAuthAction)
+/* harmony export */   "LogoutAuthAction": () => (/* binding */ LogoutAuthAction),
+/* harmony export */   "UserPermissionAction": () => (/* binding */ UserPermissionAction)
 /* harmony export */ });
 /* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
 
@@ -4871,7 +4821,8 @@ var AuthActionType = {
   LOGIN_SUCCESS: "LOGIN_SUCCESS",
   LOGIN_FAILED: "LOGIN_FAILED",
   LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
-  LOGOUT_FAILED: 'LOGOUT_FAILED'
+  LOGOUT_FAILED: 'LOGOUT_FAILED',
+  SET_USER_PERMISSION: 'SET_USER_PERMISSION'
 }; //login action
 
 var LoginAuthAction = function LoginAuthAction(loginState, navigate) {
@@ -4890,6 +4841,7 @@ var LoginAuthAction = function LoginAuthAction(loginState, navigate) {
           }
         });
         navigate('/admin/dashboard');
+        dispatch(UserPermissionAction());
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
@@ -4948,6 +4900,31 @@ var LogoutAuthAction = function LogoutAuthAction(navigate) {
       });
     });
   };
+}; //set user permission
+
+var UserPermissionAction = function UserPermissionAction() {
+  return function (dispatch) {
+    return new Promise(function (resolve, reject) {
+      Api.get('/admin/user/permission').then(function (resp) {
+        dispatch({
+          type: AuthActionType.SET_USER_PERMISSION,
+          payload: resp.data
+        });
+      })["catch"](function (err) {
+        if (err.response) {
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: err.response.data.message
+            }
+          });
+        }
+
+        reject(err);
+      });
+    });
+  };
 };
 
 /***/ }),
@@ -4973,7 +4950,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var authState = {
   isLoggedIn: false,
-  user: {}
+  user: {},
+  userPermission: []
 };
 
 var getAuthState = function getAuthState() {
@@ -5035,6 +5013,11 @@ var AuthReducer = function AuthReducer() {
         user: null
       });
       break;
+
+    case _AuthAction__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.SET_USER_PERMISSION:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        userPermission: payload.data
+      });
 
     default:
       return state;
@@ -5134,8 +5117,7 @@ var PermissionActionType = {
   PERMISSION_CREATED_SUCCESS: "PERMISSION_CREATED_SUCCESS",
   PERMISSION_EDIT_SUCCESS: "PERMISSION_EDIT_SUCCESS",
   PERMISSION_UPDATE_SUCCESS: "PERMISSION_UPDATE_SUCCESS",
-  PERMISSION_DELETED_SUCCESS: "PERMISSION_DELETED_SUCCESS",
-  PERMISSION_SET_FAILED: "PERMISSION_SET_FAILED"
+  PERMISSION_DELETED_SUCCESS: "PERMISSION_DELETED_SUCCESS"
 }; //route list action
 
 var RouteListAction = function RouteListAction() {
@@ -5174,10 +5156,6 @@ var PermissionsListAction = function PermissionsListAction(data) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.PERMISSION_SET_FAILED,
-            payload: err.response.data
-          });
-          dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
@@ -5212,10 +5190,6 @@ var CreatePermissionAction = function CreatePermissionAction(permissionFormState
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.PERMISSION_SET_FAILED,
-            payload: err.response.data
-          });
-          dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
@@ -5241,10 +5215,6 @@ var EditPermissionAction = function EditPermissionAction(id) {
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
-          dispatch({
-            type: PermissionActionType.PERMISSION_SET_FAILED,
-            payload: err.response.data
-          });
           dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
@@ -5280,10 +5250,6 @@ var UpdatePermissionAction = function UpdatePermissionAction(permissionFormState
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: PermissionActionType.PERMISSION_SET_FAILED,
-            payload: err.response.data
-          });
-          dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
@@ -5317,10 +5283,6 @@ var DeletePermissionAction = function DeletePermissionAction(id) {
         });
       })["catch"](function (err) {
         if (err.response) {
-          dispatch({
-            type: PermissionActionType.PERMISSION_SET_FAILED,
-            payload: err.response.data
-          });
           dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
@@ -5407,12 +5369,6 @@ var PermissionReducer = function PermissionReducer() {
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_SET_FAILED:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        errors: action.payload.errors
-      });
-      break;
-
     default:
       return state;
       break;
@@ -5446,7 +5402,6 @@ __webpack_require__.r(__webpack_exports__);
 var RoleActionType = {
   SET_ROLES: "SET_ROLES",
   SET_ROLE: "SET_ROLE",
-  ROLE_SET_FAILED: "SET_FAILED",
   ROLE_CREATED_SUCCESS: "ROLE_CREATED_SUCCESS",
   ROLE_EDIT_SUCCESS: "ROLE_EDIT_SUCCESS",
   ROLE_UPDATED_SUCCESS: "ROLE_UPDATED_SUCCESS",
@@ -5465,10 +5420,6 @@ var RoleListAction = function RoleListAction(data) {
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
-          dispatch({
-            type: RoleActionType.ROLE_SET_FAILED,
-            payload: err.response.data
-          });
           dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
@@ -5504,10 +5455,6 @@ var CreateRoleAction = function CreateRoleAction(roleFormState, navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: RoleActionType.ROLE_SET_FAILED,
-            payload: err.response.data
-          });
-          dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
@@ -5533,10 +5480,6 @@ var EditRoleAction = function EditRoleAction(id) {
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
-          dispatch({
-            type: RoleActionType.ROLE_SET_FAILED,
-            payload: err.response.data
-          });
           dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
@@ -5572,10 +5515,6 @@ var UpdateRoleAction = function UpdateRoleAction(roleFormState, id, navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: RoleActionType.ROLE_SET_FAILED,
-            payload: err.response.data
-          });
-          dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
@@ -5609,10 +5548,6 @@ var DeleteRoleAction = function DeleteRoleAction(id) {
         });
       })["catch"](function (err) {
         if (err.response) {
-          dispatch({
-            type: RoleActionType.ROLE_SET_FAILED,
-            payload: err.response.data
-          });
           dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
@@ -5715,16 +5650,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "EditUserAction": () => (/* binding */ EditUserAction),
 /* harmony export */   "UpdateUserAction": () => (/* binding */ UpdateUserAction),
 /* harmony export */   "UserActionType": () => (/* binding */ UserActionType),
-/* harmony export */   "UserListAction": () => (/* binding */ UserListAction),
-/* harmony export */   "UserPermissionAction": () => (/* binding */ UserPermissionAction)
+/* harmony export */   "UserListAction": () => (/* binding */ UserListAction)
 /* harmony export */ });
 /* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
 
 var UserActionType = {
   SET_USERS: "SET_USERS",
   SET_USER: "SET_USER",
-  SET_USER_PERMISSION: 'SET_USER_PERMISSION',
-  USER_SET_FAILED: "USER_SET_FAILED",
   USER_CREATED_SUCCESS: "USER_CREATED_SUCCESS",
   USER_EDIT_SUCCESS: "USER_EDIT_SUCCESS",
   USER_UPDATED_SUCCESS: "USER_UPDATED_SUCCESS",
@@ -5743,10 +5675,6 @@ var UserListAction = function UserListAction(data) {
         resolve(resp);
       })["catch"](function (err) {
         if (err.resp) {
-          dispatch({
-            type: UserActionType.USER_SET_FAILED,
-            payload: err.response.data
-          });
           dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
@@ -5782,10 +5710,6 @@ var CreateUserAction = function CreateUserAction(userFormState, navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: UserActionType.USER_SET_FAILED,
-            payload: err.response.data
-          });
-          dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
@@ -5811,10 +5735,6 @@ var EditUserAction = function EditUserAction(id) {
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
-          dispatch({
-            type: UserActionType.USER_SET_FAILED,
-            payload: err.response.data
-          });
           dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
@@ -5850,10 +5770,6 @@ var UpdateUserAction = function UpdateUserAction(userFormState, id, navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: UserActionType.USER_SET_FAILED,
-            payload: err.response.data
-          });
-          dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
@@ -5888,39 +5804,6 @@ var DeleteUserAction = function DeleteUserAction(id) {
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
-          dispatch({
-            type: UserActionType.USER_SET_FAILED,
-            payload: err.response.data
-          });
-          dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
-            payload: {
-              type: 'danger',
-              message: err.response.data.message
-            }
-          });
-        }
-
-        reject(err);
-      });
-    });
-  };
-}; //set user permission
-
-var UserPermissionAction = function UserPermissionAction() {
-  return function (dispatch) {
-    return new Promise(function (resolve, reject) {
-      Api.get('/admin/user/permission').then(function (resp) {
-        dispatch({
-          type: UserActionType.SET_USER_PERMISSION,
-          payload: resp.data
-        });
-      })["catch"](function (err) {
-        if (err.response) {
-          dispatch({
-            type: UserActionType.USER_SET_FAILED,
-            payload: err.response.data
-          });
           dispatch({
             type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
@@ -5960,8 +5843,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var userState = {
   users: {},
   user: {},
-  errors: {},
-  userPermission: []
+  errors: {}
 };
 
 var UserReducer = function UserReducer() {
@@ -5998,11 +5880,6 @@ var UserReducer = function UserReducer() {
         })
       });
 
-    case _UserAction__WEBPACK_IMPORTED_MODULE_0__.UserActionType.SET_USER_PERMISSION:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        userPermission: action.payload.data
-      });
-
     default:
       return state;
       break;
@@ -6024,15 +5901,64 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducers */ "./resources/js/services/store/reducers.js");
+/* harmony import */ var _middlewares_permissionMiddleware__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./middlewares/permissionMiddleware */ "./resources/js/services/store/middlewares/permissionMiddleware.js");
 
 
 
-var composeEnhancers = window.__REDUX__DEVTOOLS_EXTENSION_COMPOSE__ || redux__WEBPACK_IMPORTED_MODULE_1__.compose;
-var Store = (0,redux__WEBPACK_IMPORTED_MODULE_1__.createStore)(_reducers__WEBPACK_IMPORTED_MODULE_0__["default"], composeEnhancers((0,redux__WEBPACK_IMPORTED_MODULE_1__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"])));
+
+var composeEnhancers = window.__REDUX__DEVTOOLS_EXTENSION_COMPOSE__ || redux__WEBPACK_IMPORTED_MODULE_2__.compose;
+var Store = (0,redux__WEBPACK_IMPORTED_MODULE_2__.createStore)(_reducers__WEBPACK_IMPORTED_MODULE_0__["default"], composeEnhancers((0,redux__WEBPACK_IMPORTED_MODULE_2__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_3__["default"], _middlewares_permissionMiddleware__WEBPACK_IMPORTED_MODULE_1__["default"])));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Store);
+
+/***/ }),
+
+/***/ "./resources/js/services/store/middlewares/permissionMiddleware.js":
+/*!*************************************************************************!*\
+  !*** ./resources/js/services/store/middlewares/permissionMiddleware.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var permissionMiddleware = function permissionMiddleware(store) {
+  return function (next) {
+    return function (action) {
+      var state = store.getState();
+      console.log(state);
+      next(action);
+    };
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (permissionMiddleware); // const location=useLocation()
+// 	const navigate=useNavigate()
+// 	const dispatch=useDispatch()
+// 	const hostName=window.location.hostname
+// 	const [viewPermissions,setViewPermissions]=useState([])
+// 	const isAuthenticate =useSelector(
+// 		(state) => state.auth.isLoggedIn
+// 	);
+// 	if(isAuthenticate){
+// 		const userPermission =useSelector(
+// 			(state) => state.user.userPermission
+// 		)
+// 		useEffect(()=>{
+// 			dispatch(UserPermissionAction())
+// 		},[])
+// 		useEffect(()=>{
+// 			setViewPermissions([])
+// 			userPermission && userPermission?.map((permission,key)=>{
+// 				let path =permission.replace(hostName+'/api','')
+// 				setViewPermissions(viewPermissions=>[...viewPermissions,path])
+// 			})
+// 		},[userPermission])
+// 	}
 
 /***/ }),
 

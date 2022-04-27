@@ -2,8 +2,6 @@ import { NotificationActionType } from '../notification/notificationAction'
 export const UserActionType = {
 	SET_USERS: "SET_USERS",
 	SET_USER: "SET_USER",
-	SET_USER_PERMISSION:'SET_USER_PERMISSION',
-	USER_SET_FAILED: "USER_SET_FAILED",
 	USER_CREATED_SUCCESS: "USER_CREATED_SUCCESS",
 	USER_EDIT_SUCCESS: "USER_EDIT_SUCCESS",
 	USER_UPDATED_SUCCESS: "USER_UPDATED_SUCCESS",
@@ -19,9 +17,6 @@ export const UserListAction = (data) => (dispatch) => {
 			resolve(resp)
 		}).catch(err => {
 			if (err.resp) {
-				dispatch({
-					type: UserActionType.USER_SET_FAILED, payload: err.response.data
-				})
 				dispatch({
 					type: NotificationActionType.MESSAGE_OBJ, payload: {
 						type: 'danger', message: err.response.data.message
@@ -47,9 +42,6 @@ export const CreateUserAction = (userFormState, navigate) => (dispatch) => {
 		}).catch(err => {
 			if (err.response) {
 				dispatch({
-					type: UserActionType.USER_SET_FAILED, payload: err.response.data
-				})
-				dispatch({
 					type: NotificationActionType.MESSAGE_OBJ, payload: {
 						type: 'danger', message: err.response.data.message
 					}
@@ -71,9 +63,6 @@ export const EditUserAction = (id) => (dispatch) => {
 			resolve(resp)
 		}).catch(err => {
 			if (err.response) {
-				dispatch({
-					type: UserActionType.USER_SET_FAILED, payload: err.response.data
-				})
 				dispatch({
 					type: NotificationActionType.MESSAGE_OBJ, payload: {
 						type: 'danger', message: err.response.data.message
@@ -99,9 +88,6 @@ export const UpdateUserAction = (userFormState,id,navigate) => (dispatch) =>{
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:UserActionType.USER_SET_FAILED,payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})	
@@ -126,9 +112,6 @@ export const DeleteUserAction = (id) =>(dispatch)=>{
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:UserActionType.USER_SET_FAILED,payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})
@@ -138,25 +121,4 @@ export const DeleteUserAction = (id) =>(dispatch)=>{
 		})
 	})
 }
-//set user permission
-export const UserPermissionAction =() =>(dispatch) =>{
-	return new Promise((resolve,reject)=>{
-		Api.get('/admin/user/permission').then(resp=>{
-			dispatch({
-				type:UserActionType.SET_USER_PERMISSION,
-				payload:resp.data
-			})
-		}).catch(err=>{
-			if(err.response){
-				dispatch({
-					type:UserActionType.USER_SET_FAILED,payload:err.response.data
-				})
-				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
-					type:'danger',message:err.response.data.message
-				}})
-				
-			}
-			reject(err)
-		})
-	})
-}
+

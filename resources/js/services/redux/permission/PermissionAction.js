@@ -7,7 +7,6 @@ export const PermissionActionType={
 	PERMISSION_EDIT_SUCCESS:"PERMISSION_EDIT_SUCCESS",
 	PERMISSION_UPDATE_SUCCESS:"PERMISSION_UPDATE_SUCCESS",
 	PERMISSION_DELETED_SUCCESS:"PERMISSION_DELETED_SUCCESS",
-	PERMISSION_SET_FAILED:"PERMISSION_SET_FAILED"
 }
 //route list action
 export const RouteListAction = () => (dispatch) =>{
@@ -42,10 +41,6 @@ export const PermissionsListAction = (data) => (dispatch) =>{
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:PermissionActionType.PERMISSION_SET_FAILED,
-					payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})
@@ -69,9 +64,6 @@ export const CreatePermissionAction = (permissionFormState,navigate) => (dispatc
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:PermissionActionType.PERMISSION_SET_FAILED,payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})
@@ -92,9 +84,6 @@ export const EditPermissionAction = (id) => (dispatch) =>{
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:PermissionActionType.PERMISSION_SET_FAILED,payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})
@@ -119,9 +108,6 @@ export const UpdatePermissionAction = (permissionFormState,id,navigate) => (disp
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:PermissionActionType.PERMISSION_SET_FAILED,payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})
@@ -145,9 +131,6 @@ export const DeletePermissionAction = (id) => (dispatch) =>{
 
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:PermissionActionType.PERMISSION_SET_FAILED,payload:err.response.data
-				})
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})

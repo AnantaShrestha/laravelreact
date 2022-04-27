@@ -44,12 +44,6 @@ const PermissionReducer = (state=permissionState,action) =>{
     			permissions:state.permissions.filter(permission => permission.id != action.payload.id)
     		}
     		break
-    	case PermissionActionType.PERMISSION_SET_FAILED:
-			return{
-				...state,
-				errors:action.payload.errors,
-			}
-			break;
 		default:
 			return state
 			break;

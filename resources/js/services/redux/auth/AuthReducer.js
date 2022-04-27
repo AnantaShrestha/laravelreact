@@ -3,6 +3,7 @@ import {AuthActionType} from './AuthAction'
 const authState= {
 	isLoggedIn:false,
 	user:{},
+	userPermission:[]
 }
 
 const getAuthState = () =>{
@@ -61,6 +62,11 @@ const AuthReducer = (state=newAuth,action)=>{
 				user:null
 			}
 			break;
+		case AuthActionType.SET_USER_PERMISSION:
+			return{
+				...state,
+				userPermission:payload.data
+			}
 
 		default:
 			return state

@@ -3,7 +3,6 @@ const userState= {
 	users:{},
 	user:{},
 	errors:{},
-    userPermission:[]
 }
 
 const UserReducer = (state=userState,action) =>{
@@ -35,11 +34,6 @@ const UserReducer = (state=userState,action) =>{
 				...state,
 				users:state.users.filter(user => user.id != action.payload.id)
 			}
-        case UserActionType.SET_USER_PERMISSION:
-            return{
-                ...state,
-                userPermission:action.payload.data
-            }
         default:
             return state
             break;

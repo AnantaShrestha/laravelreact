@@ -5,6 +5,7 @@ export const AuthActionType = {
 	LOGIN_FAILED:"LOGIN_FAILED",
 	LOGOUT_SUCCESS:'LOGOUT_SUCCESS',
 	LOGOUT_FAILED:'LOGOUT_FAILED',
+	SET_USER_PERMISSION:'SET_USER_PERMISSION',
 };
 
 //login action
@@ -16,6 +17,7 @@ export const LoginAuthAction =(loginState, navigate) => (dispatch) =>{
 				type:'success',message:resp.data.message
 			}})
 			navigate('/admin/dashboard')
+			dispatch(UserPermissionAction())
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
@@ -51,6 +53,26 @@ export const LogoutAuthAction = (navigate) => (dispatch)=>{
 					type:AuthActionType.LOGOUT_FAILED,
 					payload:err.response
 				})
+				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+					type:'danger',message:err.response.data.message
+				}})
+			}
+			reject(err)
+		})
+	})
+}
+
+
+//set user permission
+export const UserPermissionAction =() =>(dispatch) =>{
+	return new Promise((resolve,reject)=>{
+		Api.get('/admin/user/permission').then(resp=>{
+			dispatch({
+				type:AuthActionType.SET_USER_PERMISSION,
+				payload:resp.data
+			})
+		}).catch(err=>{
+			if(err.response){
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
 					type:'danger',message:err.response.data.message
 				}})
