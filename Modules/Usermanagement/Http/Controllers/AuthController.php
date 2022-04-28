@@ -20,11 +20,9 @@ class AuthController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-
         if ($validator->fails()) {
             return $this->apiResponse->responseError($validator->errors(),'Invalid Data',VALIDATIONERROR);
         }
-
         if (! $token = JWTAuth::attempt($validator->validated())) {
            
             return $this->apiResponse->responseError(NULL,'Unauthorized', UNAUTHORIZED);
@@ -55,6 +53,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        \Cache::flush('user-permissions'.auth('api')->user()->id);
         auth()->logout();
         \Session::forget('user');
         return $this->apiResponse->responseSuccess(NULL,'Logout Successfully',SUCCESS);

@@ -65,8 +65,9 @@ const AuthReducer = (state=newAuth,action)=>{
 		case AuthActionType.SET_USER_PERMISSION:
 			return{
 				...state,
-				userPermission:payload.data
+				userPermission:action.payload.data
 			}
+			break;
 
 		default:
 			return state
