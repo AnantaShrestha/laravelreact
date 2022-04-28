@@ -41,18 +41,17 @@ const RoleForm = () =>{
 			dispatch(EditRoleAction(id))
 		}
 	},[])
-
 	useEffect(()=>{
 		if(!isAddMode){
 			let permissions=[]
+			role.permissions && Object.entries(role.permissions).map(([key,permission],i)=>{
+				permissions.push(permission.id)
+			})
 			setValues({
 				...values,
 				name:role.name  || '',
 				permissions:permissions || []
 			}) 
-			role.permissions && Object.entries(role.permissions).map(([key,permission],i)=>{
-				permissions.push(permission.id)
-			})
 
 		}
 	},[role])
@@ -68,7 +67,7 @@ const RoleForm = () =>{
 				</div>
 			</div>
 			<div className="content-box-wrapper">
-				<form method='post' onSubmit={handleSubmit}>
+				<form className="global-form" method='post' onSubmit={handleSubmit}>
 					<div className="form-wrapper">
 						<div className="form-row">
 							<div className="form-label">

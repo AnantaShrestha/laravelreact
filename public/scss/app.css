@@ -595,6 +595,16 @@ tr, thead, tbody {
   justify-content: center;
 }
 
+.permission-denied {
+  padding: 40px;
+  justify-content: center;
+  display: flex;
+}
+.permission-denied h1 {
+  font-size: 32px;
+  color: red;
+}
+
 /** side bar **/
 .sidebar-wrapper {
   position: fixed;
@@ -910,6 +920,8 @@ tr, thead, tbody {
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
   position: absolute;
   width: 100%;
+  max-height: 135px;
+  overflow-y: auto;
 }
 .select-wrapper .select-options .select-option {
   line-height: 20px;

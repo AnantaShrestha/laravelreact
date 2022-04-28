@@ -2,10 +2,10 @@ import React,{useState,useEffect} from 'react'
 const Select = (props) =>{
 	const {multiple,datas,className,handleChange,selectedValue,name}=props
 	const [showDropdown,setDropDown] = useState(false)
-	const [checkedValues,setCheckedValue]=useState([])
-
+	const [checkedValues,setCheckedValue]=useState([]) 
 	const handleClick = (e) =>{
 		let value=e.target.lastChild.data
+		console.log(e.target)
 		let index =  checkedValues.indexOf(value);
 		if (index > -1) {
 			checkedValues.splice(index, 1);

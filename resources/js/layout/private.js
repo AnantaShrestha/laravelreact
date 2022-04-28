@@ -1,31 +1,15 @@
-import React, {useState,useEffect} from 'react'
-import {useSelector,useDispatch} from "react-redux";
+import React, {useState} from 'react'
+import {useSelector} from "react-redux";
 import {Navigate} from 'react-router-dom'
 import SideBar from '@/components/admin/SideNav'
 import TopHeader from '@/components/admin/TopHeader'
 import FlashMessage from '@/components/admin/FlashMessage'
-import { UserPermissionAction } from '../services/redux/auth/AuthAction';
+import checkPermission from '@/hooks/checkPermission'
 const PrivateLayout = ({children}) =>{
-	const dispatch=useDispatch()
-	const location=window.location
 	const isAuthenticate =useSelector(
 		(state) => state.auth.isLoggedIn
 	);
-	if(isAuthenticate){
-		const [viewPermissions,setViewPermissions]=useState([])
-		const userPermission=useSelector((state)=>state.auth.userPermission)
-		useEffect(()=>{
-			dispatch(UserPermissionAction())
-		},[])
-		useEffect(()=>{
-			setViewPermissions([])
-			userPermission && userPermission?.map((permission,key)=>{
-			let path =  permission.replace(location.hostname+'/api','')
-							setViewPermissions(viewPermissions=>[...viewPermissions,path])
-						})
-		},[userPermission])
-		console.log(viewPermissions)
-	}
+	const {access,viewPermissions} = checkPermission(isAuthenticate)
 	return (
 		<>
 		<FlashMessage />
@@ -37,7 +21,13 @@ const PrivateLayout = ({children}) =>{
 						<div className="main-content-wrapper">
 							<TopHeader />
 							<div className="content-box">
-								{children}
+								{
+									access ? children : (
+										<div className="permission-denied">
+											<h1>Permission Denied</h1>
+										</div>
+									)
+								}
 							</div>
 						</div>
 					</div>

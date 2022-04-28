@@ -61,6 +61,7 @@ class CheckAuthenticationMiddleware
         $exceptsPath = [
             BACKEND_API_PREFIX.'/login',
             BACKEND_API_PREFIX.'/logout',
+            BACKEND_API_PREFIX.'/user/permission'
         ];
     
         return in_array($routePath, $exceptsPath);
