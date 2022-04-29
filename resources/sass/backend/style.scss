@@ -137,6 +137,7 @@
 	margin-top: 30px;
 	border-radius: 20px;
 	box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.1);
+	min-height:87vh;
 }
 .content-box-wrapper{
 	padding: 30px 20px;
@@ -360,3 +361,14 @@
 }
 
  /** end of custom select option **/
+/** not found **/
+.not-data-found {
+	display: flex;
+	justify-content: center;
+	padding:15px 0px;
+	h1{
+		font-size:21px;
+		color:#ddd;
+	}
+}
+/** end of not found **/

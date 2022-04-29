@@ -1,27 +1,23 @@
-const Rows = (props) =>{
-	const {columns,rows,isLoading,perPage,currentPage} =props
-	return(
+const Rows = (props) => {
+	const { columns, rows,perPage, currentPage } = props
+	return (
 		<>
 			<tbody>
 				{
-					isLoading  ? null :(
-						rows && Object.entries(rows)?.map(([rowIndex,row],i)=>{
-							
-							return (
-								<tr key={i}>
-									<td>{perPage ? (currentPage * perPage) - (perPage - ((i + 2) - 1)) : i+1}</td>
-									{
-										Object.entries(columns)?.map(([columnIndex,column],j)=>{
-											return(
-												<td key={j}>{column.render(row)}</td>
-											)
-										})
-
-									}
-								</tr>
-							)
-						})
-					)
+					rows && Object.entries(rows)?.map(([rowIndex, row], i) => {
+						return (
+							<tr key={i}>
+								<td>{perPage ? (currentPage * perPage) - (perPage - ((i + 2) - 1)) : i + 1}</td>
+								{
+									Object.entries(columns)?.map(([columnIndex, column], j) => {
+										return (
+											<td key={j}>{column.render(row)}</td>
+										)
+									})
+								}
+							</tr>
+						)
+					})
 				}
 			</tbody>
 		</>
