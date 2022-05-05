@@ -24,7 +24,7 @@ class CheckAuthenticationMiddleware
             try {
                 $user =currentUser();
                 $url=$request->url();
-                if(in_array($url,$user->allViewPermissions()) ||  $this->shouldPassThrough($request)){
+                if(in_array(url('/').'/api/admin/*',$user->allViewPermissions()) ||  $this->shouldPassThrough($request)){
                     return $next($request);
                 }
                 if($user->checkUrlAllowAccess($url)){

@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { Link } from "react-router-dom";
-import { FaHome,FaUsers,FaCogs,FaAngleDown} from 'react-icons/fa';
+import { FaHome,FaUsers,FaCogs,FaAngleDown,FaRegCommentDots} from 'react-icons/fa';
 const items=[
 	{
 		title:'Dashboard',
@@ -31,6 +31,23 @@ const items=[
 			}
 		]
 	},
+	{
+		title:'Setting',
+		href:'',
+		icon:<FaCogs/>,
+		children:[
+			{
+				title:'Log',
+				href:'/admin/log',
+				icon:''
+			}
+		]
+	},
+	{
+		title:'Chat Room',
+		href:'/admin/chat',
+		icon:<FaRegCommentDots />
+	}
 ]
 const NavList = (props) =>{
 	const [isActiveIndex, setActiveIndex] = useState(-1);
@@ -40,10 +57,8 @@ const NavList = (props) =>{
 	    setActiveIndex(index);
 	    let prevIndex=oldIndex
 	    prevIndex != index ? setActive(true) : setActive(!active)
-	  	setOldIndex(index)
-	    
+	  	setOldIndex(index)  
 	};
-
 	return(
 		<ul>
 			{
@@ -84,7 +99,7 @@ const NavList = (props) =>{
 																	<div className="nav-item-wrapper" >
 																		
 																		<div className="nav-icon" >
-																			{item.icon && (item.icon)}
+																			{child.icon && (child.icon)}
 																		</div>
 																		<div className="nav-title">
 																			{

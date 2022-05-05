@@ -42,9 +42,11 @@ trait UserPermissionTrait{
             $allPermissionTmp =$this->allPermissions();
             $allPermissionTmp = $allPermissionTmp->pluck('access_uri')->toArray();
             if($allPermissionTmp){
-                foreach($allPermissionTmp as $action){
-                    $arrScheme = ['https://', 'http://'];
-                    $arrView[] =str_replace($arrScheme, '', url($action));
+                foreach($allPermissionTmp as $actionList){
+                    foreach(explode(',',$actionList) as $action){
+                        $arrScheme = ['https://', 'http://'];
+                        $arrView[] =str_replace($arrScheme, '', url($action));
+                    }
                 }
             }
             self::$allViewPermissions=$arrView;

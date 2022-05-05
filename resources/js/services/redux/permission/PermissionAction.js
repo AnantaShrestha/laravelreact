@@ -20,10 +20,9 @@ export const RouteListAction = () => (dispatch) =>{
 
 		}).catch(err=>{
 			if(err.response){
-				dispatch({
-					type:PermissionActionType.SET_FAILED,
-					payload:err.response.message
-				})
+				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+					type:'danger',message:err.response.data.message
+				}})
 			}
 			reject(err)
 		})

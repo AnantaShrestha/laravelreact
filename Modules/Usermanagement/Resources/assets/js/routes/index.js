@@ -5,6 +5,7 @@ import RoleList from '../views/role/list'
 import RoleForm from '../views/role/form'
 import UserList from '../views/user/list'
 import UserForm from '../views/user/form'
+import ChatRoom from '../views/chatroom'
 export default[
 	{
 		path:'/admin/permission',
@@ -60,4 +61,10 @@ export default[
 		auth:true,
 		component:<UserForm/>
 	},
+	{
+		path:'/admin/chat',
+		exact:true,
+		auth:true,
+		component:<ChatRoom/>
+	}
 ];

@@ -5,7 +5,6 @@ const Select = (props) =>{
 	const [checkedValues,setCheckedValue]=useState([]) 
 	const handleClick = (e) =>{
 		let value=e.target.lastChild.data
-		console.log(e.target)
 		let index =  checkedValues.indexOf(value);
 		if (index > -1) {
 			checkedValues.splice(index, 1);

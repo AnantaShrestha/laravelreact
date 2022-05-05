@@ -1,9 +1,7 @@
 import React from 'react'
-
 import NavList from './NavList'
-
-
 const SideBar = () =>{
+	const name=JSON.parse(localStorage.getItem('token')).user.name
 	return (
 		<>
 			<div className="sidebar-wrapper">
@@ -12,7 +10,7 @@ const SideBar = () =>{
 						<img src="/images/user.png" />
 					</div>
 					<div className="sidebar-title">
-						<h2>Laravel React</h2>
+						<h2>{name}</h2>
 					</div>
 				</div>
 				<NavList />

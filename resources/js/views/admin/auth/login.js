@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import {useDispatch,useSelector} from "react-redux";
 import { useNavigate } from "react-router";
 import {Navigate} from 'react-router-dom'
@@ -22,10 +22,20 @@ const Login = (props) =>{
 		if(Object.keys(errors).length == 0)
 			dispatch(LoginAuthAction(values,navigate))
   	}
-	const {isLoading,isDisable,values,errors,handleChange,handleSubmit} = useForm(formLogin,validation);
+	const {isLoading,isDisable,values,setValidation,errors,handleChange,handleSubmit} = useForm(formLogin,validation);
 	const isAuthenticate = useSelector(
 		(state) => state.auth.isLoggedIn
 	)
+	useEffect(()=>{
+		setValidation({
+			username:{
+				rules:'required'
+			},
+			password:{
+				rules:'required'
+			}
+		})
+	},[])
 	return (
 		<>
 		  {
