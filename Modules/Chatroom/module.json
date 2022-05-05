@@ -1,0 +1,13 @@
+{
+    "name": "Chatroom",
+    "alias": "chatroom",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Chatroom\\Providers\\ChatroomServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

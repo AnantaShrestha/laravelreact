@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateUserMessagesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('user_messages', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('message_group_id')->nullable();
+            $table->unsignedBigInteger('message_id');
+            $table->unsignedBigInteger('sender_id');
+            $table->unsignedBigInteger('receiver_id');
+            $table->tinyInteger('type')->default(0)
+                ->comment('1:group message, 0:personal message');
+            $table->tinyInteger('seen_status')->default(0)
+                ->comment('1:seen');
+            $table->tinyInteger('deliver_status')->default(0)
+                ->comment('1:delivered');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('user_messages');
+    }
+}

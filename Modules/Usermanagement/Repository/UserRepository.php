@@ -22,7 +22,6 @@ class UserRepository{
 		else
 			$user=$user->get();
 		return $user;
-		// return $this->user->with('roles')->orderBy('created_at','desc')->get();
 	}
 
 	/**

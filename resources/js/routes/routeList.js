@@ -1,5 +1,6 @@
 import {lazy} from 'react'
 import UsermanagementRoutes from '../../../Modules/Usermanagement/Resources/assets/js/routes'
+import ChatroomRoutes from '../../../Modules/Chatroom/Resources/assets/js/routes'
 import SettingRoutes from '../../../Modules/Setting/Resources/assets/js/routes'
 
 import Dashboard from '@/views/admin/dashboard'
@@ -18,4 +19,4 @@ const routes=[
 		component:<Dashboard />
 	}
 ];
-export default [...routes,...UsermanagementRoutes,...SettingRoutes]
+export default [...routes,...UsermanagementRoutes,...SettingRoutes,...ChatroomRoutes]
