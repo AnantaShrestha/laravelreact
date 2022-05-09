@@ -1,7 +1,6 @@
 <?php
-namespace \Modules\Chatroom\Repository;
-
-use \Modules\Entities\Message;
+namespace Modules\Chatroom\Repository;
+use Modules\Chatroom\Entities\Message;
 class MessageRepository{
 	private $message;
 

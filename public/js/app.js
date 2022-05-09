@@ -2094,7 +2094,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hooks_useForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/hooks/useForm */ "./resources/js/hooks/useForm.js");
 /* harmony import */ var _core_globalFunction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/core/globalFunction */ "./resources/js/core/globalFunction.js");
 /* harmony import */ var _services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/services/redux/user/UserAction */ "./resources/js/services/redux/user/UserAction.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _services_redux_message_MessageAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/services/redux/message/MessageAction */ "./resources/js/services/redux/message/MessageAction.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2111,7 +2112,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
  //import {FaRegPaperPlane} from 'react-icons/fa';
+
 
 
 
@@ -2135,59 +2138,67 @@ var ChatRoom = function ChatRoom() {
     return state.user.users.data;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_4__.UserListAction)(data));
+    dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_4__.ChatListUserAction)(data));
   }, [data]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+
+  var selectUser = function selectUser(userId) {
+    dispatch((0,_services_redux_message_MessageAction__WEBPACK_IMPORTED_MODULE_5__.UserMessageAction)(userId));
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "chat-room-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "chat-row-message-wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "chat-person",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
             children: "Ananta Shrestha"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "chat-person-list"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "chat-person-form",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "chat-person-form-wrapper",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
               name: "message",
               className: "message-box",
               placeholder: "Send Message..."
             })
           })
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "chat-row-list-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "chat-list-items",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "chat-heading",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
               children: "Users"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "chat-user-list",
             children: users && ((_Object$entries = Object.entries(users)) === null || _Object$entries === void 0 ? void 0 : _Object$entries.map(function (_ref, i) {
               var _ref2 = _slicedToArray(_ref, 2),
                   rowIndex = _ref2[0],
                   user = _ref2[1];
 
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                 className: "chat-user-item",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                onClick: function onClick() {
+                  return selectUser(user.id);
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                   className: "chat-user-image",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                     children: (0,_core_globalFunction__WEBPACK_IMPORTED_MODULE_3__.shortName)(user.name)
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                     className: "chat-online-status"
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                   className: "chat-user-name",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                     children: user.name
                   })
                 })]
@@ -4692,7 +4703,6 @@ var Tooltip = function Tooltip(props) {
       isHover = _useState2[0],
       setHover = _useState2[1];
 
-  console.log(isHover);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "tooltip-wrapper",
@@ -4865,6 +4875,7 @@ var Api = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "currentUser": () => (/* binding */ currentUser),
 /* harmony export */   "dateFormat": () => (/* binding */ dateFormat),
 /* harmony export */   "isArray": () => (/* binding */ isArray),
 /* harmony export */   "isEmpty": () => (/* binding */ isEmpty),
@@ -4895,6 +4906,11 @@ function shortName(data) {
   var nameArr = data.split(' ');
   var shortName = nameArr.shift().charAt(0) + nameArr.pop().charAt(0);
   return shortName.toUpperCase();
+} //get current user
+
+function currentUser() {
+  var user = localStorage.getItem('token');
+  return user ? JSON.parse(user).user : '';
 }
 
 /***/ }),
@@ -5674,6 +5690,96 @@ var LogReducer = function LogReducer() {
 
 /***/ }),
 
+/***/ "./resources/js/services/redux/message/MessageAction.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/services/redux/message/MessageAction.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MessageActionType": () => (/* binding */ MessageActionType),
+/* harmony export */   "UserMessageAction": () => (/* binding */ UserMessageAction)
+/* harmony export */ });
+/* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
+
+var MessageActionType = {
+  SET_USER_MESSAGE: "SET_USER_MESSAGE"
+}; //get user message according to user id
+
+var UserMessageAction = function UserMessageAction(userId) {
+  return function (dispatch) {
+    return new Promise(function (resolve, reject) {
+      Api.get('/admin/message/' + userId).then(function (resp) {
+        dispatch({
+          type: MessageActionType.SET_USER_MESSAGE,
+          payload: resp.data
+        });
+        resolve(resp);
+      })["catch"](function (err) {
+        if (err.response) {
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: err.response.data.message
+            }
+          });
+        }
+
+        reject(err);
+      });
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./resources/js/services/redux/message/MessageReducer.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/services/redux/message/MessageReducer.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _MessageAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MessageAction */ "./resources/js/services/redux/message/MessageAction.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var messageState = {
+  messages: {}
+};
+
+var MessageReducer = function MessageReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : messageState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _MessageAction__WEBPACK_IMPORTED_MODULE_0__.MessageActionType.SET_USER_MESSAGE:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        messages: action.payload.data
+      });
+      break;
+
+    default:
+      return state;
+      break;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MessageReducer);
+
+/***/ }),
+
 /***/ "./resources/js/services/redux/notification/notificationAction.js":
 /*!************************************************************************!*\
   !*** ./resources/js/services/redux/notification/notificationAction.js ***!
@@ -6293,6 +6399,7 @@ var RoleReducer = function RoleReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChatListUserAction": () => (/* binding */ ChatListUserAction),
 /* harmony export */   "CreateUserAction": () => (/* binding */ CreateUserAction),
 /* harmony export */   "DeleteUserAction": () => (/* binding */ DeleteUserAction),
 /* harmony export */   "EditUserAction": () => (/* binding */ EditUserAction),
@@ -6465,6 +6572,33 @@ var DeleteUserAction = function DeleteUserAction(id) {
       });
     });
   };
+}; //chat list user action
+
+var ChatListUserAction = function ChatListUserAction(data) {
+  return function (dispatch) {
+    return new Promise(function (resolve, reject) {
+      var get = data ? '?page=' + data.page + '&&length=' + data.length + '&&search=' + data.search : '';
+      Api.get('/admin/user/chatListUser' + get).then(function (resp) {
+        dispatch({
+          type: UserActionType.SET_USERS,
+          payload: resp.data
+        });
+        resolve(resp);
+      })["catch"](function (err) {
+        if (err.resp) {
+          dispatch({
+            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            payload: {
+              type: 'danger',
+              message: err.response.data.message
+            }
+          });
+        }
+
+        reject(err);
+      });
+    });
+  };
 };
 
 /***/ }),
@@ -6572,13 +6706,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _services_redux_notification_notificationReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/services/redux/notification/notificationReducer */ "./resources/js/services/redux/notification/notificationReducer.js");
 /* harmony import */ var _services_redux_auth_AuthReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/services/redux/auth/AuthReducer */ "./resources/js/services/redux/auth/AuthReducer.js");
 /* harmony import */ var _services_redux_permission_PermissionReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/services/redux/permission/PermissionReducer */ "./resources/js/services/redux/permission/PermissionReducer.js");
 /* harmony import */ var _services_redux_role_RoleReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/services/redux/role/RoleReducer */ "./resources/js/services/redux/role/RoleReducer.js");
 /* harmony import */ var _services_redux_user_UserReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/services/redux/user/UserReducer */ "./resources/js/services/redux/user/UserReducer.js");
 /* harmony import */ var _services_redux_log_LogReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/services/redux/log/LogReducer */ "./resources/js/services/redux/log/LogReducer.js");
+/* harmony import */ var _services_redux_message_MessageReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/services/redux/message/MessageReducer */ "./resources/js/services/redux/message/MessageReducer.js");
 
 
 
@@ -6586,13 +6721,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var RootReducers = (0,redux__WEBPACK_IMPORTED_MODULE_6__.combineReducers)({
+
+var RootReducers = (0,redux__WEBPACK_IMPORTED_MODULE_7__.combineReducers)({
   notification: _services_redux_notification_notificationReducer__WEBPACK_IMPORTED_MODULE_0__["default"],
   auth: _services_redux_auth_AuthReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   permission: _services_redux_permission_PermissionReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   role: _services_redux_role_RoleReducer__WEBPACK_IMPORTED_MODULE_3__["default"],
   user: _services_redux_user_UserReducer__WEBPACK_IMPORTED_MODULE_4__["default"],
-  log: _services_redux_log_LogReducer__WEBPACK_IMPORTED_MODULE_5__["default"]
+  log: _services_redux_log_LogReducer__WEBPACK_IMPORTED_MODULE_5__["default"],
+  message: _services_redux_message_MessageReducer__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RootReducers);
 

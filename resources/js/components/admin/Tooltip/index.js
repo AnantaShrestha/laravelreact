@@ -3,7 +3,6 @@ import React,{useState} from 'react'
 const Tooltip = (props)=>{
 	const {children,title} =props
 	const [isHover,setHover]=useState(false)
-	console.log(isHover)
 	return (
 		<>
 		  <div className="tooltip-wrapper" 

@@ -12,4 +12,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+$router->prefix('admin')->name('admin.')->group(function() use($router){ 
+    $router->prefix('message')->name('message.')->group(function() use($router){
+        $router->get('/{id}',['as'=>'getConversation','uses'=>'MessageController@getConversation']);
+    });
+});
 

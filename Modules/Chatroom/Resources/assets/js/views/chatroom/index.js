@@ -2,9 +2,10 @@ import React,{useState,useEffect} from 'react'
 import {useDispatch,useSelector} from "react-redux";
 import useForm from '@/hooks/useForm'
 import {shortName} from '@/core/globalFunction'
-import { UserListAction } from '@/services/redux/user/UserAction'
+import { ChatListUserAction } from '@/services/redux/user/UserAction'
+import {UserMessageAction} from '@/services/redux/message/MessageAction'
 //import {FaRegPaperPlane} from 'react-icons/fa';
-
+import {currentUser} from '@/core/globalFunction'
 const ChatRoom = () =>{
 	const dispatch=useDispatch()
 	const [data,setData]=useState({
@@ -12,11 +13,13 @@ const ChatRoom = () =>{
 		page:1,
 		search:''
 	})
-
 	const users=useSelector((state) => state.user.users.data)
 	useEffect(() => {
-		dispatch(UserListAction(data))
+		dispatch(ChatListUserAction(data))
 	}, [data])
+	const selectUser = (userId) =>{
+		dispatch(UserMessageAction(userId))
+	}
 	return(
 		<>
 			
@@ -42,7 +45,7 @@ const ChatRoom = () =>{
 					{
 						users && Object.entries(users)?.map(([rowIndex, user], i)=>{
 							return(
-								<div className="chat-user-item" key={rowIndex}>
+								<div className="chat-user-item" key={rowIndex} onClick={()=>selectUser(user.id)}>
 									<div className="chat-user-image">
 										<span>{shortName(user.name)}</span>
 										<div className="chat-online-status"></div>

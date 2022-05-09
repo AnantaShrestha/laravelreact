@@ -28,6 +28,22 @@ class UserController extends Controller
             return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
         }
     }
+    /**
+     * @return chat list user
+     */
+    public function chatListUser(){
+         try{
+            $data=[
+                'length'=>$_GET['length'] ?? null,
+                'search'=>$_GET['search'] ?? null,
+                'page'=>$_GET['page'] ?? null
+            ];
+            $user= $this->userRepo->getChatUserList($data);
+            return $this->apiResponse->responseSuccess($user,'Success',SUCCESS);
+        }catch(Exception $e){
+            return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
+        }
+    }
     
     /**
      * 

@@ -25,6 +25,22 @@ class UserRepository{
 	}
 
 	/**
+	 * @return get list user for chat
+	 */
+	public function getChatUserList($data){
+		$user=$this->user->where('id','!=',auth('api')->user()->id)
+				->select('id','name','username');
+		if(isset($data['search']) && !empty($data['search']))
+			$user=$user->where('name','LIKE','%'.$data['search'].'%');
+		$user=$user->orderBy('name','asc');
+		if(isset($data['length']) && !empty($data['length']) && !empty($data['page']))
+			$user=$user->paginate($data['length'],['*'],'page',$data['page']);
+		else
+			$user=$user->get();
+		return $user;
+	}
+
+	/**
 	 * @return store user
 	 */
 

@@ -39,6 +39,7 @@ $router->prefix('admin')->name('admin.')->group(function() use($router){
     //user routes
     $router->prefix('user')->name('user.')->group(function() use($router){
         $router->get('/',['as'=>'index','uses'=>'UserController@index']);
+        $router->get('chatListUser/',['as'=>'chatListUser','uses'=>'UserController@chatListUser']);
         $router->post('store',['as'=>'store','uses'=>'UserController@store']);
         $router->get('edit/{id}',['as'=>'edit','uses'=>'UserController@edit']);
         $router->put('edit/{id}',['as'=>'update','uses'=>'UserController@update']);
