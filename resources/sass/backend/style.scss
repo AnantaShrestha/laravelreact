@@ -405,6 +405,16 @@
 	.chat-row-message-wrapper{
 		width: calc(100% - 299px);
 		position:relative;
+		.not-chat-selected {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			h2{
+				font-size:24px;
+				color:#ddd;
+			}
+		}
 		.chat-person {
 			background: var(--themecolor);
 			padding: 5px 10px;
@@ -502,4 +512,5 @@
 		
 	}
 }
+
 /** end of chat box **/

@@ -8,33 +8,46 @@ import {UserMessageAction} from '@/services/redux/message/MessageAction'
 import {currentUser} from '@/core/globalFunction'
 const ChatRoom = () =>{
 	const dispatch=useDispatch()
+	const users=useSelector((state) => state.user.users.data)
+	const messages=useSelector((state) => state.message.messages)
 	const [data,setData]=useState({
 		length:10,
 		page:1,
 		search:''
 	})
-	const users=useSelector((state) => state.user.users.data)
+
 	useEffect(() => {
 		dispatch(ChatListUserAction(data))
 	}, [data])
 	const selectUser = (userId) =>{
 		dispatch(UserMessageAction(userId))
 	}
+
 	return(
-		<>
-			
+		<>	
 		<div className="chat-room-wrapper">
 			<div className="chat-row-message-wrapper">
-				<div className="chat-person">
-					<h2>Ananta Shrestha</h2>
-				</div>
-				<div className="chat-person-list">
-				</div>
-				<div className="chat-person-form">
-					<div className="chat-person-form-wrapper">
-						<input name="message" className="message-box" placeholder="Send Message..."  />
-					</div>
-				</div>
+				{
+					messages?.user ? (
+						<>
+							<div className="chat-person">
+								<h2>{messages.user.name}</h2>
+							</div>
+							<div className="chat-person-list">
+							</div>
+							<div className="chat-person-form">
+								<div className="chat-person-form-wrapper">
+									<input name="message" className="message-box" placeholder="Send Message..."  />
+								</div>
+							</div>
+						</>
+					) : (
+						<div className="not-chat-selected">
+							<h2>No Message Selected</h2>
+						</div>
+					)
+				}
+				
 			</div>
 			<div className="chat-row-list-wrapper">
 				<div className="chat-list-items">
@@ -62,7 +75,6 @@ const ChatRoom = () =>{
 				</div>
 			</div>
 		</div>
-			
 		</>
 	)
 

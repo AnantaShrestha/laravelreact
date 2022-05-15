@@ -25,7 +25,7 @@ class UserRepository{
 	}
 
 	/**
-	 * @return get list user for chat
+	 * @return get list user for chat without role
 	 */
 	public function getChatUserList($data){
 		$user=$this->user->where('id','!=',auth('api')->user()->id)
@@ -67,6 +67,12 @@ class UserRepository{
 		return $this->user->with('roles')->findOrFail($id);
 	}
 
+	/**
+	 * @return find user according id without role
+	 */
+	public function findChatUser($id){
+		return $this->user->findOrFail($id,['id','name','username']);
+	}
 
 	/** 
 	 * @return update user according to id
