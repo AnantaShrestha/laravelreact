@@ -1,12 +1,4 @@
-import {NotificationActionType} from '../notification/notificationAction'
-
-export const AuthActionType = {
-	LOGIN_SUCCESS:"LOGIN_SUCCESS",
-	LOGIN_FAILED:"LOGIN_FAILED",
-	LOGOUT_SUCCESS:'LOGOUT_SUCCESS',
-	LOGOUT_FAILED:'LOGOUT_FAILED',
-	SET_USER_PERMISSION:'SET_USER_PERMISSION',
-};
+import {AuthActionType,NotificationActionType} from '../../types'
 
 //login action
 export const LoginAuthAction =(loginState, navigate) => (dispatch) =>{

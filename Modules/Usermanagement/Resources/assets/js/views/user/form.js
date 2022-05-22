@@ -159,7 +159,15 @@ const UserForm = () => {
                                     <label>Role</label>
                                 </div>
                                 <div className="form-control">
-                                    <Select name="roles" multiple="true" datas={rolesList} handleChange={handleChange}  selectedValue={values.roles}/>
+                                    <Select 
+                                        name="roles" 
+                                        multiple="true" 
+                                        datas={rolesList} 
+                                        handleChange={handleChange}  
+                                        selectedValue={values.roles}
+                                        optionValue="name"
+                                        optionKey="id"
+                                    />
                                 </div>
                             </div>
                             <div className="form-row">

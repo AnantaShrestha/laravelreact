@@ -1,8 +1,4 @@
-import {NotificationActionType} from '../notification/notificationAction'
-
-export const MessageActionType={
-	SET_USER_MESSAGE : "SET_USER_MESSAGE"
-}
+import {MessageActionType,NotificationActionType} from '../../types'
 
 //get user message according to user id
 export const UserMessageAction = (userId) => (dispatch) =>{
@@ -20,4 +16,10 @@ export const UserMessageAction = (userId) => (dispatch) =>{
 			reject(err)
 		})
 	})
+}
+
+//store user message accordingh to user id
+export const UserMessageSendAction = (userId) => (dispatch) =>{
+
+	
 }

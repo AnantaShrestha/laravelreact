@@ -1,9 +1,11 @@
-import {AuthActionType} from './AuthAction'
-
+import {AuthActionType} from '../../types'
+import useSocket from '@/core/socket'
+const {networkAddress} =useSocket()
 const authState= {
 	isLoggedIn:false,
 	user:{},
-	userPermission:[]
+	userPermission:[],
+	activeUser:[]
 }
 
 const getAuthState = () =>{
@@ -40,6 +42,13 @@ const AuthReducer = (state=newAuth,action)=>{
 			axios.defaults.headers.common[
 				"Authorization"
 			]  =`Bearer ${action.payload.data.access_token}`;
+			const socket=io(networkAddress)
+			socket.on('connect',function(){
+				socket.emit('connected',action.payload.data.user.id)
+			})
+			socket.on('updateUserStatus',(data)=>{
+				activeUser:data
+			})
 			return {
 				...state,
 				isLoggedIn:true,

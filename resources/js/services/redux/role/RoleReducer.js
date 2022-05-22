@@ -1,4 +1,4 @@
-import {RoleActionType} from './RoleAction'
+import {RoleActionType} from '../../types'
 const roleState= {
 	roles:{},
 	role:{},

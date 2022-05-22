@@ -1,4 +1,4 @@
-import {MessageActionType} from './MessageAction'
+import {MessageActionType} from '../../types'
 const messageState= {
 	messages:{},
 }

@@ -1,8 +1,26 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
 const Select = (props) =>{
-	const {multiple,datas,className,handleChange,selectedValue,name}=props
+	const {multiple,datas,className,handleChange,selectedValue,name,optionValue,optionKey}=props
+	const node=useRef();
 	const [showDropdown,setDropDown] = useState(false)
-	const [checkedValues,setCheckedValue]=useState([]) 
+	const [checkedValues,setCheckedValue]=useState([])
+	const [data,setData]=useState([])
+	const [items,setItems] = useState([])
+	useEffect(()=>{
+		setData(datas)
+	},[datas])
+	useEffect(()=>{
+		setItems([])
+		data.length > 0 && Object.entries(data).map(([key,item],i)=>{
+			setItems(
+				items=>[
+					...items,
+					[item[optionKey] , item[optionValue]]
+				]
+			)
+
+		})
+	},[data])
 	const handleClick = (e) =>{
 		let value=e.target.lastChild.data
 		let index =  checkedValues.indexOf(value);
@@ -13,10 +31,18 @@ const Select = (props) =>{
 		}
 		setDropDown(false)
 	}
+	const selectFilter = (e) =>{
+		setData(
+			datas.filter(item=>{
+				return item[optionValue].toLowerCase().search(
+     				event.target.value.toLowerCase()) !== -1;
+     		})
+		)
+	}
 	return(
 		<>
 			<div className="select-wrapper">
-				<div className="selected-items" onClick={() =>setDropDown(!showDropdown)}>
+				<div className="selected-items" onClick={()=>setDropDown(!showDropdown)}>
 				{
 					checkedValues.length > 0 ? 
 					(
@@ -37,28 +63,32 @@ const Select = (props) =>{
 				}
 				</div>
 				<div className="select-options" style={{display: showDropdown ? 'block' : 'none' }}>
-					{
+					<div className="select-search-wrapper">
+						<input name='search' className="select-search" onChange={selectFilter} autoComplete="off" />
+					</div>
+					<div className="select-items" >
+						{
+							items.length > 0 && items?.map(item=>{
+								return(
 
-						Object.entries(datas).map(([key,item],i)=>{
-							return(
-
-								<div key={i} className="select-option">
-									{
-										selectedValue && selectedValue.includes(item?.id) ? 
-											(
-												<input name={name} onChange={handleChange} id={item?.id} value={item?.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} defaultChecked  />
-											)
-											:
-											(
-												<input name={name} onChange={handleChange} id={item?.id} value={item?.id} className='select-input' type={multiple ? 'checkbox' : 'radio'} />
-											)
-									}
-									
-									<label onClick={handleClick} htmlFor={item?.id}>{item?.name}</label>
-								</div>
-							)
-						})
-					}
+									<div key={item[0]} className="select-option">
+										{
+											selectedValue && selectedValue.includes(item[0]) ? 
+												(
+													<input name={name} onChange={handleChange} value={item[0]} className='select-input' type={multiple ? 'checkbox' : 'radio'} defaultChecked   />
+												)
+												:
+												(
+													<input name={name} onChange={handleChange}  value={item[0]} className='select-input' type={multiple ? 'checkbox' : 'radio'} />
+												)
+										}
+										
+										<label onClick={handleClick} htmlFor={item[0]}>{item[1]}</label>
+									</div>
+								)
+							})
+						}
+					</div>
 				</div>
 			</div>
 		</>

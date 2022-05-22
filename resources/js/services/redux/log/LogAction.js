@@ -1,9 +1,4 @@
-import {NotificationActionType} from '../notification/notificationAction'
-export const LogActionType ={
-	SET_LOG:'SET_LOG'
-}
-
-
+import  {LogActionType,NotificationActionType} from '../../types'
 //log list
 
 export const LogListAction = (data) => (dispatch) =>{

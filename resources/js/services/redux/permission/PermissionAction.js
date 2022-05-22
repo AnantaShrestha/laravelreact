@@ -1,13 +1,4 @@
-import {NotificationActionType} from '../notification/notificationAction'
-export const PermissionActionType={
-	SET_ROUTELIST:"SET_ROUTELIST",
-	SET_PERMISSIONS:"SET_PERMISSIONS",
-	SET_PERMISSION:"SET_PERMISSION",
-	PERMISSION_CREATED_SUCCESS:"PERMISSION_CREATED_SUCCESS",
-	PERMISSION_EDIT_SUCCESS:"PERMISSION_EDIT_SUCCESS",
-	PERMISSION_UPDATE_SUCCESS:"PERMISSION_UPDATE_SUCCESS",
-	PERMISSION_DELETED_SUCCESS:"PERMISSION_DELETED_SUCCESS",
-}
+import {NotificationActionType,PermissionActionType} from '../../types'
 //route list action
 export const RouteListAction = () => (dispatch) =>{
 	return new Promise((resolve,reject)=>{

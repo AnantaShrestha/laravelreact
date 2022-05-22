@@ -2091,10 +2091,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _hooks_useForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/hooks/useForm */ "./resources/js/hooks/useForm.js");
-/* harmony import */ var _core_globalFunction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/core/globalFunction */ "./resources/js/core/globalFunction.js");
-/* harmony import */ var _services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/services/redux/user/UserAction */ "./resources/js/services/redux/user/UserAction.js");
-/* harmony import */ var _services_redux_message_MessageAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/services/redux/message/MessageAction */ "./resources/js/services/redux/message/MessageAction.js");
+/* harmony import */ var _core_globalFunction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/core/globalFunction */ "./resources/js/core/globalFunction.js");
+/* harmony import */ var _services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/services/redux/user/UserAction */ "./resources/js/services/redux/user/UserAction.js");
+/* harmony import */ var _services_redux_message_MessageAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/services/redux/message/MessageAction */ "./resources/js/services/redux/message/MessageAction.js");
+/* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./message */ "./Modules/Chatroom/Resources/assets/js/views/chatroom/message.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -2112,8 +2112,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
  //import {FaRegPaperPlane} from 'react-icons/fa';
+
 
 
 
@@ -2140,12 +2140,18 @@ var ChatRoom = function ChatRoom() {
       data = _useState2[0],
       setData = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      userId = _useState4[0],
+      setUserId = _useState4[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_4__.ChatListUserAction)(data));
+    dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_3__.ChatListUserAction)(data));
   }, [data]);
 
   var selectUser = function selectUser(userId) {
-    dispatch((0,_services_redux_message_MessageAction__WEBPACK_IMPORTED_MODULE_5__.UserMessageAction)(userId));
+    dispatch((0,_services_redux_message_MessageAction__WEBPACK_IMPORTED_MODULE_4__.UserMessageAction)(userId));
+    setUserId(userId);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
@@ -2153,30 +2159,9 @@ var ChatRoom = function ChatRoom() {
       className: "chat-room-wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "chat-row-message-wrapper",
-        children: messages !== null && messages !== void 0 && messages.user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-            className: "chat-person",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
-              children: messages.user.name
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-            className: "chat-person-list"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-            className: "chat-person-form",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              className: "chat-person-form-wrapper",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                name: "message",
-                className: "message-box",
-                placeholder: "Send Message..."
-              })
-            })
-          })]
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          className: "not-chat-selected",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
-            children: "No Message Selected"
-          })
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_message__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          messages: messages,
+          userId: userId
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "chat-row-list-wrapper",
@@ -2202,7 +2187,7 @@ var ChatRoom = function ChatRoom() {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                   className: "chat-user-image",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                    children: (0,_core_globalFunction__WEBPACK_IMPORTED_MODULE_3__.shortName)(user.name)
+                    children: (0,_core_globalFunction__WEBPACK_IMPORTED_MODULE_2__.shortName)(user.name)
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                     className: "chat-online-status"
                   })]
@@ -2222,6 +2207,102 @@ var ChatRoom = function ChatRoom() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChatRoom);
+
+/***/ }),
+
+/***/ "./Modules/Chatroom/Resources/assets/js/views/chatroom/message.js":
+/*!************************************************************************!*\
+  !*** ./Modules/Chatroom/Resources/assets/js/views/chatroom/message.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _hooks_useForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/hooks/useForm */ "./resources/js/hooks/useForm.js");
+/* harmony import */ var _components_admin_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/admin/Button */ "./resources/js/components/admin/Button/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+var Message = function Message(props) {
+  var messages = props.messages,
+      userId = props.userId;
+
+  var messageForm = function messageForm() {
+    if (Object.keys(errors).length === 0) {
+      console.log(values);
+    }
+  };
+
+  var _useForm = (0,_hooks_useForm__WEBPACK_IMPORTED_MODULE_2__["default"])(messageForm),
+      isLoading = _useForm.isLoading,
+      isDisable = _useForm.isDisable,
+      values = _useForm.values,
+      setValues = _useForm.setValues,
+      setValidation = _useForm.setValidation,
+      errors = _useForm.errors,
+      handleChange = _useForm.handleChange,
+      handleSubmit = _useForm.handleSubmit; //use effect
+
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setValidation({
+      message: {
+        rules: 'required'
+      }
+    });
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: messages !== null && messages !== void 0 && messages.user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "chat-person",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+          children: messages.user.name
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "chat-person-list"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "chat-person-form",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("form", {
+          method: "post",
+          onSubmit: handleSubmit,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "chat-person-form-wrapper ".concat((errors === null || errors === void 0 ? void 0 : errors.message) && 'invalid'),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", {
+              name: "message",
+              className: "message-box",
+              placeholder: "Send Message...",
+              onChange: handleChange
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_admin_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              isLoading: isLoading,
+              isDisable: isDisable,
+              type: "submit",
+              className: "btn-success",
+              name: "Send"
+            })]
+          })
+        })
+      })]
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "not-chat-selected",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+        children: "No Person Selected"
+      })
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Message);
 
 /***/ }),
 
@@ -3069,7 +3150,9 @@ var RoleForm = function RoleForm() {
                   multiple: "true",
                   datas: permissionLists,
                   handleChange: handleChange,
-                  selectedValue: values.permissions
+                  selectedValue: values.permissions,
+                  optionValue: "name",
+                  optionKey: "id"
                 })
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -3595,7 +3678,9 @@ var UserForm = function UserForm() {
                   multiple: "true",
                   datas: rolesList,
                   handleChange: handleChange,
-                  selectedValue: values.roles
+                  selectedValue: values.roles,
+                  optionValue: "name",
+                  optionKey: "id"
                 })
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -4377,7 +4462,10 @@ var Select = function Select(props) {
       className = props.className,
       handleChange = props.handleChange,
       selectedValue = props.selectedValue,
-      name = props.name;
+      name = props.name,
+      optionValue = props.optionValue,
+      optionKey = props.optionKey;
+  var node = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -4388,6 +4476,32 @@ var Select = function Select(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       checkedValues = _useState4[0],
       setCheckedValue = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      data = _useState6[0],
+      setData = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      items = _useState8[0],
+      setItems = _useState8[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setData(datas);
+  }, [datas]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setItems([]);
+    data.length > 0 && Object.entries(data).map(function (_ref, i) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          key = _ref2[0],
+          item = _ref2[1];
+
+      setItems(function (items) {
+        return [].concat(_toConsumableArray(items), [[item[optionKey], item[optionValue]]]);
+      });
+    });
+  }, [data]);
 
   var handleClick = function handleClick(e) {
     var value = e.target.lastChild.data;
@@ -4402,6 +4516,12 @@ var Select = function Select(props) {
     }
 
     setDropDown(false);
+  };
+
+  var selectFilter = function selectFilter(e) {
+    setData(datas.filter(function (item) {
+      return item[optionValue].toLowerCase().search(event.target.value.toLowerCase()) !== -1;
+    }));
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
@@ -4426,40 +4546,45 @@ var Select = function Select(props) {
           className: "select-placeholder",
           children: "Select"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "select-options",
         style: {
           display: showDropdown ? 'block' : 'none'
         },
-        children: Object.entries(datas).map(function (_ref, i) {
-          var _ref2 = _slicedToArray(_ref, 2),
-              key = _ref2[0],
-              item = _ref2[1];
-
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            className: "select-option",
-            children: [selectedValue && selectedValue.includes(item === null || item === void 0 ? void 0 : item.id) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-              name: name,
-              onChange: handleChange,
-              id: item === null || item === void 0 ? void 0 : item.id,
-              value: item === null || item === void 0 ? void 0 : item.id,
-              className: "select-input",
-              type: multiple ? 'checkbox' : 'radio',
-              defaultChecked: true
-            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-              name: name,
-              onChange: handleChange,
-              id: item === null || item === void 0 ? void 0 : item.id,
-              value: item === null || item === void 0 ? void 0 : item.id,
-              className: "select-input",
-              type: multiple ? 'checkbox' : 'radio'
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-              onClick: handleClick,
-              htmlFor: item === null || item === void 0 ? void 0 : item.id,
-              children: item === null || item === void 0 ? void 0 : item.name
-            })]
-          }, i);
-        })
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "select-search-wrapper",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+            name: "search",
+            className: "select-search",
+            onChange: selectFilter,
+            autoComplete: "off"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "select-items",
+          children: items.length > 0 && (items === null || items === void 0 ? void 0 : items.map(function (item) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "select-option",
+              children: [selectedValue && selectedValue.includes(item[0]) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+                name: name,
+                onChange: handleChange,
+                value: item[0],
+                className: "select-input",
+                type: multiple ? 'checkbox' : 'radio',
+                defaultChecked: true
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+                name: name,
+                onChange: handleChange,
+                value: item[0],
+                className: "select-input",
+                type: multiple ? 'checkbox' : 'radio'
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+                onClick: handleClick,
+                htmlFor: item[0],
+                children: item[1]
+              })]
+            }, item[0]);
+          }))
+        })]
       })]
     })
   });
@@ -4885,7 +5010,6 @@ var Api = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "currentUser": () => (/* binding */ currentUser),
 /* harmony export */   "dateFormat": () => (/* binding */ dateFormat),
 /* harmony export */   "isArray": () => (/* binding */ isArray),
 /* harmony export */   "isEmpty": () => (/* binding */ isEmpty),
@@ -4916,12 +5040,31 @@ function shortName(data) {
   var nameArr = data.split(' ');
   var shortName = nameArr.shift().charAt(0) + nameArr.pop().charAt(0);
   return shortName.toUpperCase();
-} //get current user
-
-function currentUser() {
-  var user = localStorage.getItem('token');
-  return user ? JSON.parse(user).user : '';
 }
+
+/***/ }),
+
+/***/ "./resources/js/core/socket.js":
+/*!*************************************!*\
+  !*** ./resources/js/core/socket.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var useSocket = function useSocket() {
+  var ipAddress = '127.0.0.1';
+  var socketPort = '8005';
+  var networkAddress = ipAddress + ':' + socketPort;
+  return {
+    networkAddress: networkAddress
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useSocket);
 
 /***/ }),
 
@@ -5389,31 +5532,23 @@ var routes = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AuthActionType": () => (/* binding */ AuthActionType),
 /* harmony export */   "LoginAuthAction": () => (/* binding */ LoginAuthAction),
 /* harmony export */   "LogoutAuthAction": () => (/* binding */ LogoutAuthAction),
 /* harmony export */   "UserPermissionAction": () => (/* binding */ UserPermissionAction)
 /* harmony export */ });
-/* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
-
-var AuthActionType = {
-  LOGIN_SUCCESS: "LOGIN_SUCCESS",
-  LOGIN_FAILED: "LOGIN_FAILED",
-  LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
-  LOGOUT_FAILED: 'LOGOUT_FAILED',
-  SET_USER_PERMISSION: 'SET_USER_PERMISSION'
-}; //login action
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
+ //login action
 
 var LoginAuthAction = function LoginAuthAction(loginState, navigate) {
   return function (dispatch) {
     return new Promise(function (resolve, reject) {
       Api.post('/admin/login', loginState).then(function (resp) {
         dispatch({
-          type: AuthActionType.LOGIN_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.LOGIN_SUCCESS,
           payload: resp.data
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'success',
             message: resp.data.message
@@ -5425,11 +5560,11 @@ var LoginAuthAction = function LoginAuthAction(loginState, navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: AuthActionType.LOGIN_FAILED,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.LOGIN_FAILED,
             payload: err.response
           });
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -5448,11 +5583,11 @@ var LogoutAuthAction = function LogoutAuthAction(navigate) {
     return new Promise(function (resolve, reject) {
       Api.get('/admin/logout').then(function (resp) {
         dispatch({
-          type: AuthActionType.LOGOUT_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.LOGOUT_SUCCESS,
           payload: resp.data
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'success',
             message: resp.data.message
@@ -5463,11 +5598,11 @@ var LogoutAuthAction = function LogoutAuthAction(navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: AuthActionType.LOGOUT_FAILED,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.LOGOUT_FAILED,
             payload: err.response
           });
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -5486,13 +5621,13 @@ var UserPermissionAction = function UserPermissionAction() {
     return new Promise(function (resolve, reject) {
       Api.get('/admin/user/permission').then(function (resp) {
         dispatch({
-          type: AuthActionType.SET_USER_PERMISSION,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.SET_USER_PERMISSION,
           payload: resp.data
         });
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -5519,7 +5654,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AuthAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AuthAction */ "./resources/js/services/redux/auth/AuthAction.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
+/* harmony import */ var _core_socket__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/core/socket */ "./resources/js/core/socket.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -5527,10 +5663,16 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
+
+var _useSocket = (0,_core_socket__WEBPACK_IMPORTED_MODULE_1__["default"])(),
+    networkAddress = _useSocket.networkAddress;
+
 var authState = {
   isLoggedIn: false,
   user: {},
-  userPermission: []
+  userPermission: [],
+  activeUser: []
 };
 
 var getAuthState = function getAuthState() {
@@ -5562,7 +5704,7 @@ var AuthReducer = function AuthReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _AuthAction__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.LOGIN_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.LOGIN_SUCCESS:
       var now = new Date();
       var setToken = {
         token: action.payload.data.access_token,
@@ -5571,20 +5713,27 @@ var AuthReducer = function AuthReducer() {
       };
       localStorage.setItem('token', JSON.stringify(setToken));
       axios.defaults.headers.common["Authorization"] = "Bearer ".concat(action.payload.data.access_token);
+      var socket = io(networkAddress);
+      socket.on('connect', function () {
+        socket.emit('connected', action.payload.data.user.id);
+      });
+      socket.on('updateUserStatus', function (data) {
+        activeUser: data;
+      });
       return _objectSpread(_objectSpread({}, state), {}, {
         isLoggedIn: true,
         user: action.payload.data.user
       });
       break;
 
-    case _AuthAction__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.LOGIN_FAILED:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.LOGIN_FAILED:
       return _objectSpread(_objectSpread({}, state), {}, {
         isLoggedIn: false,
         user: {}
       });
       break;
 
-    case _AuthAction__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.LOGOUT_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.LOGOUT_SUCCESS:
       localStorage.removeItem('token');
       delete axios.defaults.headers.common['Authorization'];
       return _objectSpread(_objectSpread({}, state), {}, {
@@ -5593,7 +5742,7 @@ var AuthReducer = function AuthReducer() {
       });
       break;
 
-    case _AuthAction__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.SET_USER_PERMISSION:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.AuthActionType.SET_USER_PERMISSION:
       return _objectSpread(_objectSpread({}, state), {}, {
         userPermission: action.payload.data
       });
@@ -5618,14 +5767,10 @@ var AuthReducer = function AuthReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LogActionType": () => (/* binding */ LogActionType),
 /* harmony export */   "LogListAction": () => (/* binding */ LogListAction)
 /* harmony export */ });
-/* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
-
-var LogActionType = {
-  SET_LOG: 'SET_LOG'
-}; //log list
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
+ //log list
 
 var LogListAction = function LogListAction(data) {
   return function (dispatch) {
@@ -5633,14 +5778,14 @@ var LogListAction = function LogListAction(data) {
       var get = data ? '?page=' + data.page + '&&length=' + data.length + '&&search=' + data.search : '';
       Api.get('/admin/log' + get).then(function (resp) {
         dispatch({
-          type: LogActionType.SET_LOG,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.LogActionType.SET_LOG,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -5667,7 +5812,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _LogAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LogAction */ "./resources/js/services/redux/log/LogAction.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -5684,7 +5829,7 @@ var LogReducer = function LogReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _LogAction__WEBPACK_IMPORTED_MODULE_0__.LogActionType.SET_LOG:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.LogActionType.SET_LOG:
       return _objectSpread(_objectSpread({}, state), {}, {
         logs: action.payload.data
       });
@@ -5709,28 +5854,25 @@ var LogReducer = function LogReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "MessageActionType": () => (/* binding */ MessageActionType),
-/* harmony export */   "UserMessageAction": () => (/* binding */ UserMessageAction)
+/* harmony export */   "UserMessageAction": () => (/* binding */ UserMessageAction),
+/* harmony export */   "UserMessageSendAction": () => (/* binding */ UserMessageSendAction)
 /* harmony export */ });
-/* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
-
-var MessageActionType = {
-  SET_USER_MESSAGE: "SET_USER_MESSAGE"
-}; //get user message according to user id
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
+ //get user message according to user id
 
 var UserMessageAction = function UserMessageAction(userId) {
   return function (dispatch) {
     return new Promise(function (resolve, reject) {
       Api.get('/admin/message/' + userId).then(function (resp) {
         dispatch({
-          type: MessageActionType.SET_USER_MESSAGE,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.MessageActionType.SET_USER_MESSAGE,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -5742,6 +5884,10 @@ var UserMessageAction = function UserMessageAction(userId) {
       });
     });
   };
+}; //store user message accordingh to user id
+
+var UserMessageSendAction = function UserMessageSendAction(userId) {
+  return function (dispatch) {};
 };
 
 /***/ }),
@@ -5757,7 +5903,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _MessageAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MessageAction */ "./resources/js/services/redux/message/MessageAction.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -5774,7 +5920,7 @@ var MessageReducer = function MessageReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _MessageAction__WEBPACK_IMPORTED_MODULE_0__.MessageActionType.SET_USER_MESSAGE:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.MessageActionType.SET_USER_MESSAGE:
       return _objectSpread(_objectSpread({}, state), {}, {
         messages: action.payload.data
       });
@@ -5790,23 +5936,6 @@ var MessageReducer = function MessageReducer() {
 
 /***/ }),
 
-/***/ "./resources/js/services/redux/notification/notificationAction.js":
-/*!************************************************************************!*\
-  !*** ./resources/js/services/redux/notification/notificationAction.js ***!
-  \************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NotificationActionType": () => (/* binding */ NotificationActionType)
-/* harmony export */ });
-var NotificationActionType = {
-  MESSAGE_OBJ: "MESSAGE_OBJ"
-};
-
-/***/ }),
-
 /***/ "./resources/js/services/redux/notification/notificationReducer.js":
 /*!*************************************************************************!*\
   !*** ./resources/js/services/redux/notification/notificationReducer.js ***!
@@ -5818,7 +5947,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -5835,7 +5964,7 @@ var NotificationReducer = function NotificationReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ:
       return _objectSpread(_objectSpread({}, state), {}, {
         message_obj: {
           type: action.payload.type,
@@ -5864,36 +5993,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CreatePermissionAction": () => (/* binding */ CreatePermissionAction),
 /* harmony export */   "DeletePermissionAction": () => (/* binding */ DeletePermissionAction),
 /* harmony export */   "EditPermissionAction": () => (/* binding */ EditPermissionAction),
-/* harmony export */   "PermissionActionType": () => (/* binding */ PermissionActionType),
 /* harmony export */   "PermissionsListAction": () => (/* binding */ PermissionsListAction),
 /* harmony export */   "RouteListAction": () => (/* binding */ RouteListAction),
 /* harmony export */   "UpdatePermissionAction": () => (/* binding */ UpdatePermissionAction)
 /* harmony export */ });
-/* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
-
-var PermissionActionType = {
-  SET_ROUTELIST: "SET_ROUTELIST",
-  SET_PERMISSIONS: "SET_PERMISSIONS",
-  SET_PERMISSION: "SET_PERMISSION",
-  PERMISSION_CREATED_SUCCESS: "PERMISSION_CREATED_SUCCESS",
-  PERMISSION_EDIT_SUCCESS: "PERMISSION_EDIT_SUCCESS",
-  PERMISSION_UPDATE_SUCCESS: "PERMISSION_UPDATE_SUCCESS",
-  PERMISSION_DELETED_SUCCESS: "PERMISSION_DELETED_SUCCESS"
-}; //route list action
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
+ //route list action
 
 var RouteListAction = function RouteListAction() {
   return function (dispatch) {
     return new Promise(function (resolve, reject) {
       Api.get('/admin/permission/route/list').then(function (resp) {
         dispatch({
-          type: PermissionActionType.SET_ROUTELIST,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.SET_ROUTELIST,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -5913,14 +6032,14 @@ var PermissionsListAction = function PermissionsListAction(data) {
       var get = data ? '?page=' + data.page + '&&length=' + data.length + '&&search=' + data.search : '';
       Api.get('/admin/permission' + get).then(function (resp) {
         dispatch({
-          type: PermissionActionType.SET_PERMISSIONS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.SET_PERMISSIONS,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -5939,11 +6058,11 @@ var CreatePermissionAction = function CreatePermissionAction(permissionFormState
     return new Promise(function (resolve, reject) {
       Api.post('/admin/permission/store', permissionFormState).then(function (resp) {
         dispatch({
-          type: PermissionActionType.PERMISSION_CREATED_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_CREATED_SUCCESS,
           payload: resp.data
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'success',
             message: resp.data.message
@@ -5954,7 +6073,7 @@ var CreatePermissionAction = function CreatePermissionAction(permissionFormState
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -5973,14 +6092,14 @@ var EditPermissionAction = function EditPermissionAction(id) {
     return new Promise(function (resolve, reject) {
       Api.get('/admin/permission/edit/' + id).then(function (resp) {
         dispatch({
-          type: PermissionActionType.PERMISSION_EDIT_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_EDIT_SUCCESS,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -5999,11 +6118,11 @@ var UpdatePermissionAction = function UpdatePermissionAction(permissionFormState
     return new Promise(function (resolve, reject) {
       Api.put('/admin/permission/edit/' + id, permissionFormState).then(function (resp) {
         dispatch({
-          type: PermissionActionType.PERMISSION_UPDATE_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_UPDATE_SUCCESS,
           payload: resp.data
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'success',
             message: resp.data.message
@@ -6014,7 +6133,7 @@ var UpdatePermissionAction = function UpdatePermissionAction(permissionFormState
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6033,13 +6152,13 @@ var DeletePermissionAction = function DeletePermissionAction(id) {
     return new Promise(function (resolve, reject) {
       Api["delete"]('/admin/permission/delete/' + id).then(function (resp) {
         dispatch({
-          type: PermissionActionType.PERMISSION_DELETED_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_DELETED_SUCCESS,
           payload: {
             id: id
           }
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'danger',
             message: resp.data.message
@@ -6048,7 +6167,7 @@ var DeletePermissionAction = function DeletePermissionAction(id) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6075,7 +6194,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _PermissionAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PermissionAction */ "./resources/js/services/redux/permission/PermissionAction.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -6095,37 +6214,37 @@ var PermissionReducer = function PermissionReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.SET_ROUTELIST:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.SET_ROUTELIST:
       return _objectSpread(_objectSpread({}, state), {}, {
         routeLists: action.payload.data
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.SET_PERMISSIONS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.SET_PERMISSIONS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permissions: action.payload.data
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_CREATED_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_CREATED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permission: action.payload.data
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_EDIT_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_EDIT_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permission: action.payload.data
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_UPDATE_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_UPDATE_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permission: action.payload.data
       });
       break;
 
-    case _PermissionAction__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_DELETED_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.PermissionActionType.PERMISSION_DELETED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         permissions: state.permissions.filter(function (permission) {
           return permission.id != action.payload.id;
@@ -6155,22 +6274,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CreateRoleAction": () => (/* binding */ CreateRoleAction),
 /* harmony export */   "DeleteRoleAction": () => (/* binding */ DeleteRoleAction),
 /* harmony export */   "EditRoleAction": () => (/* binding */ EditRoleAction),
-/* harmony export */   "RoleActionType": () => (/* binding */ RoleActionType),
 /* harmony export */   "RoleListAction": () => (/* binding */ RoleListAction),
 /* harmony export */   "UpdateRoleAction": () => (/* binding */ UpdateRoleAction)
 /* harmony export */ });
-/* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
 /* harmony import */ var _core_globalFunction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/core/globalFunction */ "./resources/js/core/globalFunction.js");
 
-
-var RoleActionType = {
-  SET_ROLES: "SET_ROLES",
-  SET_ROLE: "SET_ROLE",
-  ROLE_CREATED_SUCCESS: "ROLE_CREATED_SUCCESS",
-  ROLE_EDIT_SUCCESS: "ROLE_EDIT_SUCCESS",
-  ROLE_UPDATED_SUCCESS: "ROLE_UPDATED_SUCCESS",
-  ROLE_DELETED_SUCCESS: "DELETED_SUCCESS"
-}; //get role
+ //get role
 
 var RoleListAction = function RoleListAction(data) {
   return function (dispatch) {
@@ -6178,14 +6288,14 @@ var RoleListAction = function RoleListAction(data) {
       var get = data ? '?page=' + data.page + '&&length=' + data.length + '&&search=' + data.search : '';
       Api.get('admin/role' + get).then(function (resp) {
         dispatch({
-          type: RoleActionType.SET_ROLES,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.SET_ROLES,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6204,11 +6314,11 @@ var CreateRoleAction = function CreateRoleAction(roleFormState, navigate) {
     return new Promise(function (resolve, reject) {
       Api.post('admin/role/store', roleFormState).then(function (resp) {
         dispatch({
-          type: RoleActionType.ROLE_CREATED_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_CREATED_SUCCESS,
           payload: resp.data
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'success',
             message: resp.data.message
@@ -6219,7 +6329,7 @@ var CreateRoleAction = function CreateRoleAction(roleFormState, navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6238,14 +6348,14 @@ var EditRoleAction = function EditRoleAction(id) {
     return new Promise(function (resolve, reject) {
       Api.get('admin/role/edit/' + id).then(function (resp) {
         dispatch({
-          type: RoleActionType.ROLE_EDIT_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_EDIT_SUCCESS,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6264,11 +6374,11 @@ var UpdateRoleAction = function UpdateRoleAction(roleFormState, id, navigate) {
     return new Promise(function (resolve, reject) {
       Api.put('admin/role/edit/' + id, roleFormState).then(function (resp) {
         dispatch({
-          type: RoleActionType.ROLE_UPDATED_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_UPDATED_SUCCESS,
           payload: resp.data
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'success',
             message: resp.data.message
@@ -6279,7 +6389,7 @@ var UpdateRoleAction = function UpdateRoleAction(roleFormState, id, navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6298,13 +6408,13 @@ var DeleteRoleAction = function DeleteRoleAction(id) {
     return new Promise(function (resolve, reject) {
       Api["delete"]('admin/role/delete/' + id).then(function (resp) {
         dispatch({
-          type: RoleActionType.ROLE_DELETED_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_DELETED_SUCCESS,
           payload: {
             id: id
           }
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'danger',
             message: resp.data.message
@@ -6313,7 +6423,7 @@ var DeleteRoleAction = function DeleteRoleAction(id) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6340,7 +6450,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _RoleAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoleAction */ "./resources/js/services/redux/role/RoleAction.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -6359,30 +6469,30 @@ var RoleReducer = function RoleReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.SET_ROLES:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.SET_ROLES:
       return _objectSpread(_objectSpread({}, state), {}, {
         roles: action.payload.data
       });
       break;
 
-    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_CREATED_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_CREATED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         role: action.payload.data
       });
       break;
 
-    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_EDIT_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_EDIT_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         role: action.payload.data
       });
 
-    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_UPDATED_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_UPDATED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         role: action.payload.data
       });
       break;
 
-    case _RoleAction__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_DELETED_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.RoleActionType.ROLE_DELETED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         roles: state.roles.filter(function (role) {
           return role.id != action.payload.id;
@@ -6414,19 +6524,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DeleteUserAction": () => (/* binding */ DeleteUserAction),
 /* harmony export */   "EditUserAction": () => (/* binding */ EditUserAction),
 /* harmony export */   "UpdateUserAction": () => (/* binding */ UpdateUserAction),
-/* harmony export */   "UserActionType": () => (/* binding */ UserActionType),
 /* harmony export */   "UserListAction": () => (/* binding */ UserListAction)
 /* harmony export */ });
-/* harmony import */ var _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../notification/notificationAction */ "./resources/js/services/redux/notification/notificationAction.js");
-
-var UserActionType = {
-  SET_USERS: "SET_USERS",
-  SET_USER: "SET_USER",
-  USER_CREATED_SUCCESS: "USER_CREATED_SUCCESS",
-  USER_EDIT_SUCCESS: "USER_EDIT_SUCCESS",
-  USER_UPDATED_SUCCESS: "USER_UPDATED_SUCCESS",
-  USER_DELETED_SUCCESS: "USER_DELETED_SUCCESS"
-}; //get user
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
+ //get user
 
 var UserListAction = function UserListAction(data) {
   return function (dispatch) {
@@ -6434,14 +6535,14 @@ var UserListAction = function UserListAction(data) {
       var get = data ? '?page=' + data.page + '&&length=' + data.length + '&&search=' + data.search : '';
       Api.get('/admin/user' + get).then(function (resp) {
         dispatch({
-          type: UserActionType.SET_USERS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.SET_USERS,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.resp) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6460,11 +6561,11 @@ var CreateUserAction = function CreateUserAction(userFormState, navigate) {
     return new Promise(function (resolve, reject) {
       Api.post('/admin/user/store', userFormState).then(function (resp) {
         dispatch({
-          type: UserActionType.USER_CREATED_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_CREATED_SUCCESS,
           payload: resp.data
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'success',
             message: resp.data.message
@@ -6475,7 +6576,7 @@ var CreateUserAction = function CreateUserAction(userFormState, navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6494,14 +6595,14 @@ var EditUserAction = function EditUserAction(id) {
     return new Promise(function (resolve, reject) {
       Api.get('/admin/user/edit/' + id).then(function (resp) {
         dispatch({
-          type: UserActionType.USER_EDIT_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_EDIT_SUCCESS,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6520,11 +6621,11 @@ var UpdateUserAction = function UpdateUserAction(userFormState, id, navigate) {
     return new Promise(function (resolve, reject) {
       Api.put('/admin/user/edit/' + id, userFormState).then(function (resp) {
         dispatch({
-          type: UserActionType.USER_UPDATED_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_UPDATED_SUCCESS,
           payload: resp.data
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'success',
             message: resp.data.message
@@ -6535,7 +6636,7 @@ var UpdateUserAction = function UpdateUserAction(userFormState, id, navigate) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6554,13 +6655,13 @@ var DeleteUserAction = function DeleteUserAction(id) {
     return new Promise(function (resolve, reject) {
       Api["delete"]('/admin/user/delete/' + id).then(function (resp) {
         dispatch({
-          type: UserActionType.USER_DELETED_SUCCESS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_DELETED_SUCCESS,
           payload: {
             id: id
           }
         });
         dispatch({
-          type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
           payload: {
             type: 'danger',
             message: resp.data.message
@@ -6570,7 +6671,7 @@ var DeleteUserAction = function DeleteUserAction(id) {
       })["catch"](function (err) {
         if (err.response) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6590,14 +6691,14 @@ var ChatListUserAction = function ChatListUserAction(data) {
       var get = data ? '?page=' + data.page + '&&length=' + data.length + '&&search=' + data.search : '';
       Api.get('/admin/user/chatListUser' + get).then(function (resp) {
         dispatch({
-          type: UserActionType.SET_USERS,
+          type: _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.SET_USERS,
           payload: resp.data
         });
         resolve(resp);
       })["catch"](function (err) {
         if (err.resp) {
           dispatch({
-            type: _notification_notificationAction__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
+            type: _types__WEBPACK_IMPORTED_MODULE_0__.NotificationActionType.MESSAGE_OBJ,
             payload: {
               type: 'danger',
               message: err.response.data.message
@@ -6624,7 +6725,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _UserAction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserAction */ "./resources/js/services/redux/user/UserAction.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./resources/js/services/types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -6643,29 +6744,29 @@ var UserReducer = function UserReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _UserAction__WEBPACK_IMPORTED_MODULE_0__.UserActionType.SET_USERS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.SET_USERS:
       return _objectSpread(_objectSpread({}, state), {}, {
         users: action.payload.data
       });
       break;
 
-    case _UserAction__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_CREATED_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_CREATED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         user: action.payload.data
       });
       break;
 
-    case _UserAction__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_EDIT_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_EDIT_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         user: action.payload.data
       });
 
-    case _UserAction__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_UPDATED_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_UPDATED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         user: action.payload.data
       });
 
-    case _UserAction__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_DELETED_SUCCESS:
+    case _types__WEBPACK_IMPORTED_MODULE_0__.UserActionType.USER_DELETED_SUCCESS:
       return _objectSpread(_objectSpread({}, state), {}, {
         users: state.users.filter(function (user) {
           return user.id != action.payload.id;
@@ -6742,6 +6843,74 @@ var RootReducers = (0,redux__WEBPACK_IMPORTED_MODULE_7__.combineReducers)({
   message: _services_redux_message_MessageReducer__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RootReducers);
+
+/***/ }),
+
+/***/ "./resources/js/services/types.js":
+/*!****************************************!*\
+  !*** ./resources/js/services/types.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AuthActionType": () => (/* binding */ AuthActionType),
+/* harmony export */   "LogActionType": () => (/* binding */ LogActionType),
+/* harmony export */   "MessageActionType": () => (/* binding */ MessageActionType),
+/* harmony export */   "NotificationActionType": () => (/* binding */ NotificationActionType),
+/* harmony export */   "PermissionActionType": () => (/* binding */ PermissionActionType),
+/* harmony export */   "RoleActionType": () => (/* binding */ RoleActionType),
+/* harmony export */   "UserActionType": () => (/* binding */ UserActionType)
+/* harmony export */ });
+//notification types
+var NotificationActionType = {
+  MESSAGE_OBJ: "MESSAGE_OBJ"
+}; // auth types
+
+var AuthActionType = {
+  LOGIN_SUCCESS: "LOGIN_SUCCESS",
+  LOGIN_FAILED: "LOGIN_FAILED",
+  LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
+  LOGOUT_FAILED: 'LOGOUT_FAILED',
+  SET_USER_PERMISSION: 'SET_USER_PERMISSION'
+}; //log types
+
+var LogActionType = {
+  SET_LOG: 'SET_LOG'
+}; //message types
+
+var MessageActionType = {
+  SET_USER_MESSAGE: "SET_USER_MESSAGE"
+}; //permission types
+
+var PermissionActionType = {
+  SET_ROUTELIST: "SET_ROUTELIST",
+  SET_PERMISSIONS: "SET_PERMISSIONS",
+  SET_PERMISSION: "SET_PERMISSION",
+  PERMISSION_CREATED_SUCCESS: "PERMISSION_CREATED_SUCCESS",
+  PERMISSION_EDIT_SUCCESS: "PERMISSION_EDIT_SUCCESS",
+  PERMISSION_UPDATE_SUCCESS: "PERMISSION_UPDATE_SUCCESS",
+  PERMISSION_DELETED_SUCCESS: "PERMISSION_DELETED_SUCCESS"
+}; // role action
+
+var RoleActionType = {
+  SET_ROLES: "SET_ROLES",
+  SET_ROLE: "SET_ROLE",
+  ROLE_CREATED_SUCCESS: "ROLE_CREATED_SUCCESS",
+  ROLE_EDIT_SUCCESS: "ROLE_EDIT_SUCCESS",
+  ROLE_UPDATED_SUCCESS: "ROLE_UPDATED_SUCCESS",
+  ROLE_DELETED_SUCCESS: "DELETED_SUCCESS"
+}; //user action type
+
+var UserActionType = {
+  SET_USERS: "SET_USERS",
+  SET_USER: "SET_USER",
+  USER_CREATED_SUCCESS: "USER_CREATED_SUCCESS",
+  USER_EDIT_SUCCESS: "USER_EDIT_SUCCESS",
+  USER_UPDATED_SUCCESS: "USER_UPDATED_SUCCESS",
+  USER_DELETED_SUCCESS: "USER_DELETED_SUCCESS"
+};
 
 /***/ }),
 

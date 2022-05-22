@@ -1,13 +1,4 @@
-import { NotificationActionType } from '../notification/notificationAction'
-export const UserActionType = {
-	SET_USERS: "SET_USERS",
-	SET_USER: "SET_USER",
-	USER_CREATED_SUCCESS: "USER_CREATED_SUCCESS",
-	USER_EDIT_SUCCESS: "USER_EDIT_SUCCESS",
-	USER_UPDATED_SUCCESS: "USER_UPDATED_SUCCESS",
-	USER_DELETED_SUCCESS: "USER_DELETED_SUCCESS",
-}
-
+import {NotificationActionType,UserActionType} from '../../types'
 //get user
 export const UserListAction = (data) => (dispatch) => {
 	return new Promise((resolve, reject) => { 

@@ -1,4 +1,4 @@
-import {NotificationActionType} from './notificationAction'
+import {NotificationActionType} from '../../types'
 const notificationState = {
 	message_obj:{}
 }

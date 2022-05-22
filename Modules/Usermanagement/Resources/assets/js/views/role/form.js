@@ -85,7 +85,15 @@ const RoleForm = () =>{
 								<label>Permissions</label>
 							</div>
 							<div className="form-control">
-								<Select name="permissions" multiple="true" datas={permissionLists} handleChange={handleChange} selectedValue={values.permissions}/>
+								<Select  
+									name="permissions" 
+									multiple="true" 
+									datas={permissionLists} 
+									handleChange={handleChange} 
+									selectedValue={values.permissions} 
+									optionValue="name" 
+									optionKey="id"
+								/>
 							</div>
 						</div>
 						<div className="form-row">

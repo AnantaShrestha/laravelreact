@@ -1,4 +1,5 @@
-import {UserActionType} from './UserAction'
+import {UserActionType} from '../../types'
+
 const userState= {
 	users:{},
 	user:{},

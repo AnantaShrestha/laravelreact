@@ -994,24 +994,36 @@ tr, thead, tbody {
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
   position: absolute;
   width: 100%;
+}
+.select-wrapper .select-options .select-search-wrapper {
+  padding: 5px 15px;
+}
+.select-wrapper .select-options .select-search-wrapper input {
+  display: block;
+  width: 99%;
+  height: 30px;
+  border: 1px solid #ddd;
+  text-indent: 7px;
+}
+.select-wrapper .select-options .select-items {
   max-height: 135px;
   overflow-y: auto;
 }
-.select-wrapper .select-options .select-option {
+.select-wrapper .select-options .select-items .select-option {
   line-height: 20px;
 }
-.select-wrapper .select-options .select-option input {
+.select-wrapper .select-options .select-items .select-option input {
   display: none;
 }
-.select-wrapper .select-options .select-option input:checked + label {
+.select-wrapper .select-options .select-items .select-option input:checked + label {
   background: #ddd;
 }
-.select-wrapper .select-options .select-option label {
+.select-wrapper .select-options .select-items .select-option label {
   font-size: 14px;
   display: block;
   padding: 10px 15px;
 }
-.select-wrapper .select-options .select-option label:hover {
+.select-wrapper .select-options .select-items .select-option label:hover {
   background: #ddd;
 }
 
@@ -1094,23 +1106,43 @@ tr, thead, tbody {
 }
 .chat-room-wrapper .chat-row-message-wrapper .chat-person-form {
   position: absolute;
-  bottom: 0;
+  bottom: 15px;
   width: 100%;
 }
 .chat-room-wrapper .chat-row-message-wrapper .chat-person-form .chat-person-form-wrapper {
   position: relative;
+  padding: 8px 10px;
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  margin: 0px 20px;
+  align-items: center;
+}
+.chat-room-wrapper .chat-row-message-wrapper .chat-person-form .chat-person-form-wrapper.invalid {
+  border-color: red;
 }
 .chat-room-wrapper .chat-row-message-wrapper .chat-person-form .chat-person-form-wrapper .message-box {
   width: 100%;
-  height: 40px;
-  background: #f5f5f5;
+  border-radius: 30px;
   border: 0;
+  padding: 0px;
   outline: none;
+  resize: none;
   font-size: 14px;
   text-indent: 10px;
+  background: none;
+  font-size: 14px;
 }
 .chat-room-wrapper .chat-row-message-wrapper .chat-person-form .chat-person-form-wrapper .message-box:placeholder {
   font-size: 14px;
+}
+.chat-room-wrapper .chat-row-message-wrapper .chat-person-form .chat-person-form-wrapper .message-action-btn {
+  height: 100%;
+  background: none;
+  border: 0;
+  font-size: 18px;
+  color: var(--primaryButton);
+  z-index: 11;
 }
 .chat-room-wrapper .chat-row-list-wrapper {
   position: absolute;
@@ -1166,6 +1198,9 @@ tr, thead, tbody {
   height: 9px;
   border-radius: 50%;
   background: #948d8d;
+}
+.chat-room-wrapper .chat-row-list-wrapper .chat-list-items .chat-user-list .chat-user-item .chat-user-image .chat-online-status.green {
+  color: green;
 }
 .chat-room-wrapper .chat-row-list-wrapper .chat-list-items .chat-user-list .chat-user-item .chat-user-name span {
   font-size: 16px;

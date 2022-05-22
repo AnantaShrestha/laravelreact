@@ -1,8 +1,7 @@
-import {LogActionType} from './LogAction'
+import  {LogActionType} from '../../types'
 const logState= {
 	logs:{},
 }
-
 
 const LogReducer = (state=logState,action) =>{
 	switch(action.type){

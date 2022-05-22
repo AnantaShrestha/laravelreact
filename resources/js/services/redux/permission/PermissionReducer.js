@@ -1,4 +1,5 @@
-import {PermissionActionType} from './PermissionAction'
+import {PermissionActionType} from '../../types'
+
 const permissionState= {
 	routeLists:{},
 	permissions:{},

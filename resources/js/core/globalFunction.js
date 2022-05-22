@@ -23,8 +23,3 @@ export function shortName(data){
 	return shortName.toUpperCase()
 }
 
-//get current user
-export function currentUser(){
-	let user=localStorage.getItem('token')
-	return user ? JSON.parse(user).user : ''
-}

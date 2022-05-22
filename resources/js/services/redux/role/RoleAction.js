@@ -1,13 +1,5 @@
-import {NotificationActionType} from '../notification/notificationAction'
+import {NotificationActionType,RoleActionType} from '../../types'
 import {isEmpty} from '@/core/globalFunction'
-export const RoleActionType={
-	SET_ROLES:"SET_ROLES",
-	SET_ROLE:"SET_ROLE",
-	ROLE_CREATED_SUCCESS:"ROLE_CREATED_SUCCESS",
-	ROLE_EDIT_SUCCESS:"ROLE_EDIT_SUCCESS",
-	ROLE_UPDATED_SUCCESS:"ROLE_UPDATED_SUCCESS",
-	ROLE_DELETED_SUCCESS:"DELETED_SUCCESS",
-}
 //get role
 export const RoleListAction = (data) => (dispatch) =>{
 	return new Promise((resolve,reject)=>{
