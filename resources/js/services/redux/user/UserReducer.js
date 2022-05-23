@@ -3,7 +3,9 @@ import {UserActionType} from '../../types'
 const userState= {
 	users:{},
 	user:{},
+    chatUsers:{},
 	errors:{},
+
 }
 
 const UserReducer = (state=userState,action) =>{
@@ -13,13 +15,17 @@ const UserReducer = (state=userState,action) =>{
                 ...state,
                 users:action.payload.data
             }
-            break;
+
+        case UserActionType.SET_CHAT_USERS:
+            return{
+                ...state,
+                chatUsers:action.payload.data
+            }
         case UserActionType.USER_CREATED_SUCCESS:
             return{
                 ...state,
 				user:action.payload.data
             }
-        break;
         case UserActionType.USER_EDIT_SUCCESS:
             return{
                 ...state,
@@ -37,7 +43,6 @@ const UserReducer = (state=userState,action) =>{
 			}
         default:
             return state
-            break;
     }
 }
 export default UserReducer;

@@ -19,7 +19,6 @@ io.on('connection',(socket)=>{
 		io.emit('updateUserStatus',users)
 		console.log('User Connected ' + userId)
 	});
-
 	socket.on('disconnect',function(){
 		let i =users.indexOf(socket.id)
 		users.splice(i,1,0)

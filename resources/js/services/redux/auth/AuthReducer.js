@@ -5,7 +5,6 @@ const authState= {
 	isLoggedIn:false,
 	user:{},
 	userPermission:[],
-	activeUser:[]
 }
 
 const getAuthState = () =>{
@@ -46,9 +45,7 @@ const AuthReducer = (state=newAuth,action)=>{
 			socket.on('connect',function(){
 				socket.emit('connected',action.payload.data.user.id)
 			})
-			socket.on('updateUserStatus',(data)=>{
-				activeUser:data
-			})
+		
 			return {
 				...state,
 				isLoggedIn:true,
