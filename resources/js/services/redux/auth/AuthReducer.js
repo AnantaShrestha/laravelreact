@@ -41,10 +41,6 @@ const AuthReducer = (state=newAuth,action)=>{
 			axios.defaults.headers.common[
 				"Authorization"
 			]  =`Bearer ${action.payload.data.access_token}`;
-			const socket=io(networkAddress)
-			socket.on('connect',function(){
-				socket.emit('connected',action.payload.data.user.id)
-			})
 		
 			return {
 				...state,
