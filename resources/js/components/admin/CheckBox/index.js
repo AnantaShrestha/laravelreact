@@ -1,19 +1,22 @@
 import React,{useState,useEffect} from 'react'
 const CheckBox = (props) =>{
-	const {handleChange,name,value,checked}=props
-	const [checkedStatus,setCheckedStatus]=useState(false)
+	const {handleChange,name,value,selectedValues,multiple,className}=props
+	const [checkedValues,setCheckedValues]=useState([])
+	const [checkedStatus,setCheckedStatus]=useState('')
 	useEffect(()=>{
-		setCheckedStatus(checked)
-	},[checked])
+		setCheckedValues(selectedValues)
+	},[selectedValues])
+	useEffect(()=>{
+		setCheckedStatus(false)
+		 checkedValues.includes(value) ? setCheckedStatus('checked') : setCheckedStatus('')
+	},[checkedValues])
 	return(
 		<>
-			{
-				checkedStatus ?
-					(<input  name={name} value={value} type="checkbox" onChange={handleChange}  defaultChecked  />) :
-					(<input  name={name} value={value} type="checkbox" onChange={handleChange}   />)
-			}
-
+			<input className={className}  name={name} value={value} type={multiple ? 'checkbox' : 'radio'} onChange={handleChange} checked={checkedStatus} />
 		</>
 	)
 }
 export default CheckBox
+
+
+

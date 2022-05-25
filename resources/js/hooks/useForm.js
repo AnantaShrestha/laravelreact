@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import { capitalFirstLetter } from 'lodash';
 const useForm = (callback) =>{
 	//values

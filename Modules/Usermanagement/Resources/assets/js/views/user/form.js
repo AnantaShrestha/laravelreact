@@ -164,7 +164,7 @@ const UserForm = () => {
                                         multiple="true" 
                                         datas={rolesList} 
                                         handleChange={handleChange}  
-                                        selectedValue={values.roles}
+                                        selectedValues={values.roles}
                                         optionValue="name"
                                         optionKey="id"
                                     />

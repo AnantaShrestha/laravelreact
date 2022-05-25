@@ -90,7 +90,7 @@ const RoleForm = () =>{
 									multiple="true" 
 									datas={permissionLists} 
 									handleChange={handleChange} 
-									selectedValue={values.permissions} 
+									selectedValues={values.permissions} 
 									optionValue="name" 
 									optionKey="id"
 								/>

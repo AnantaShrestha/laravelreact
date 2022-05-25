@@ -26,7 +26,7 @@ const PermissionForm =()=>{
 	const {isLoading,isDisable,values,setValues,setValidation,errors,handleChange,handleSubmit} = useForm(permissionForm);
 
 	//use effect
-	useEffect(() => {   
+	useEffect(() => { 
 		setValidation({
 			name:{
 				rules:'required'
@@ -92,7 +92,7 @@ const PermissionForm =()=>{
 																<li key={index}>
 																	<>
 																	<div className="checklist-wrapper">
-																		<CheckBox name="access_uri" value={route} handleChange={handleChange} checked={values.access_uri && values.access_uri.includes(route) ? true : false} />
+																		<CheckBox multiple={true} name="access_uri" value={route} handleChange={handleChange} selectedValues={values.access_uri ?? []} />
 																		<span>{type} {title}</span>
 																	</div>
 																	</>

@@ -1,6 +1,8 @@
 import React,{useState,useEffect,useRef} from 'react'
+import CheckBox from '@/components/admin/checkBox'
+
 const Select = (props) =>{
-	const {multiple,datas,className,handleChange,selectedValue,name,optionValue,optionKey}=props
+	const {multiple,datas,className,handleChange,selectedValues,name,optionValue,optionKey}=props
 	const node=useRef();
 	const [showDropdown,setDropDown] = useState(false)
 	const [checkedValues,setCheckedValue]=useState([])
@@ -70,19 +72,8 @@ const Select = (props) =>{
 						{
 							items.length > 0 && items?.map(item=>{
 								return(
-
 									<div key={item[0]} className="select-option">
-										{
-											selectedValue && selectedValue.includes(item[0]) ? 
-												(
-													<input name={name} onChange={handleChange} value={item[0]} className='select-input' type={multiple ? 'checkbox' : 'radio'} defaultChecked   />
-												)
-												:
-												(
-													<input name={name} onChange={handleChange}  value={item[0]} className='select-input' type={multiple ? 'checkbox' : 'radio'} />
-												)
-										}
-										
+										<CheckBox name={name} handleChange={handleChange} value={item[0]} className='select-input' multiple={multiple} selectedValues={selectedValues} />
 										<label onClick={handleClick} htmlFor={item[0]}>{item[1]}</label>
 									</div>
 								)
