@@ -2,13 +2,15 @@ import React,{useState,useEffect} from 'react'
 import {useDispatch,useSelector} from "react-redux";
 import useForm from '@/hooks/useForm'
 import Button from '@/components/admin/Button'
-
+import io from 'socket.io-client'
 const Message = (props) =>{
 	const {messages,userId}=props
+	const socket = io.connect("127.0.0.1:8005")
 
 	const messageForm = () =>{
+		socket.emit('send_message',{message:"Hello"})
 		if(Object.keys(errors).length  === 0){
-			console.log(values)
+			socket.emit('send_message',{message:"Hello"})
 		}
 	}
 	const {isLoading,isDisable,values,setValues,setValidation,errors,handleChange,handleSubmit} = useForm(messageForm);
