@@ -9,7 +9,7 @@ const PrivateLayout = ({children}) =>{
 	const isAuthenticate =useSelector(
 		(state) => state.auth.isLoggedIn
 	);
-	const {access,viewPermissions} = checkPermission(isAuthenticate)
+	const {access} = checkPermission(isAuthenticate)
 	return (
 		<>
 		<FlashMessage />
