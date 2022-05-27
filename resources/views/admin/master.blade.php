@@ -12,5 +12,4 @@
 	</div>
 </body>
 	<script src="{{asset('js/app.js')}}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
 </html>

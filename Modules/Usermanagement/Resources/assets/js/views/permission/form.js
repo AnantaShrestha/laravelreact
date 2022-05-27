@@ -24,7 +24,6 @@ const PermissionForm =()=>{
 		}
 	}
 	const {isLoading,isDisable,values,setValues,setValidation,errors,handleChange,handleSubmit} = useForm(permissionForm);
-
 	//use effect
 	useEffect(() => { 
 		setValidation({

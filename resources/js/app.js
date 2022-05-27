@@ -29,5 +29,4 @@ if(getToken){
     }
 }
 
-
 require('./Main')
