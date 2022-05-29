@@ -4,8 +4,7 @@ import {MessageActionType,NotificationActionType} from '../../types'
 export const UserMessageAction = (userId) => (dispatch) =>{
 	return new Promise((resolve,reject)=>{
 		Api.get('/admin/message/'+userId).then(resp=>{
-			dispatch({
-				type:MessageActionType.SET_USER_MESSAGE,payload:resp.data})
+			dispatch({type:MessageActionType.SET_USER_MESSAGE,payload:resp.data})
 			resolve(resp)
 		}).catch(err=>{
 			if(err.response){
@@ -19,7 +18,18 @@ export const UserMessageAction = (userId) => (dispatch) =>{
 }
 
 //store user message accordingh to user id
-export const UserMessageSendAction = (userId) => (dispatch) =>{
-
-	
+export const UserMessageSendAction = (data) => (dispatch) =>{
+	return new Promise((resolve,reject)=>{
+		Api.post('/admin/message/store',data).then(resp=>{
+			dispatch({type:MessageActionType.MESSAGE_CREATED_SUCCESS,payload:resp.data})
+			resolve(resp)
+		}).catch(err=>{
+			if(err.response){
+				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
+					type:'danger',message:err.response.data.message
+				}})
+			}
+			reject(err)
+		})
+	})
 }

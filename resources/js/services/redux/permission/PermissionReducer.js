@@ -14,31 +14,26 @@ const PermissionReducer = (state=permissionState,action) =>{
 				...state,
 				routeLists:action.payload.data
 			}
-			break;
 		case PermissionActionType.SET_PERMISSIONS:
 			return{
 				...state,
 				permissions:action.payload.data
 			}
-			break;
 		case PermissionActionType.PERMISSION_CREATED_SUCCESS:
 			return{
 				...state,
 				permission:action.payload.data
 			}
-			break;
 		case PermissionActionType.PERMISSION_EDIT_SUCCESS:
 			return{
 				...state,
 				permission:action.payload.data
 			}
-			break;
 		case PermissionActionType.PERMISSION_UPDATE_SUCCESS:
 			return{
 				...state,
 				permission:action.payload.data
 			}
-			break;
 		case PermissionActionType.PERMISSION_DELETED_SUCCESS:
     		return{
     			...state,
@@ -47,7 +42,6 @@ const PermissionReducer = (state=permissionState,action) =>{
     		break
 		default:
 			return state
-			break;
 	}
 }	
 

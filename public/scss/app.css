@@ -1198,10 +1198,10 @@ tr, thead, tbody {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #948d8d;
+  background: #ccc;
 }
 .chat-room-wrapper .chat-row-list-wrapper .chat-list-items .chat-user-list .chat-user-item .chat-user-image .chat-online-status.green {
-  color: green;
+  background: #00A400;
 }
 .chat-room-wrapper .chat-row-list-wrapper .chat-list-items .chat-user-list .chat-user-item .chat-user-name span {
   font-size: 16px;

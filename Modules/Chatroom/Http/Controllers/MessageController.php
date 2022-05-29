@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use \Modules\Chatroom\Repository\MessageRepository;
 use Modules\Usermanagement\Repository\UserRepository;
+use Modules\Chatroom\Http\Requests\MessageRequest;
 use App\Http\Api\ApiResponse;
 class MessageController extends Controller
 {
@@ -31,6 +32,15 @@ class MessageController extends Controller
             ];
             return $this->apiResponse->responseSuccess($data,'Success',SUCCESS);
         }catch(Exception $e){
+            return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
+        }
+    }
+
+    public function sendMessage(MessageRequest $request){
+        try {
+            $message=$this->messageRepo->storeMessage($request->validated());
+            return $this->apiResponse->responseSuccess($message,'Message send successfully',SUCCESS);
+        } catch (Exception $e) {
             return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
         }
     }

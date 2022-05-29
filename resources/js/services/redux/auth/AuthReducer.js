@@ -1,6 +1,4 @@
 import {AuthActionType} from '../../types'
-import useSocket from '@/core/socket'
-const {networkAddress} =useSocket()
 const authState= {
 	isLoggedIn:false,
 	user:{},
@@ -47,14 +45,12 @@ const AuthReducer = (state=newAuth,action)=>{
 				isLoggedIn:true,
 				user:action.payload.data.user,
 			}
-			break;
 		case AuthActionType.LOGIN_FAILED:
 			return {
 				...state,
 				isLoggedIn:false,
 				user:{}
 			}
-			break;
 		case AuthActionType.LOGOUT_SUCCESS:
 			localStorage.removeItem('token')
 			delete axios.defaults.headers.common['Authorization']
@@ -63,17 +59,14 @@ const AuthReducer = (state=newAuth,action)=>{
 				isLoggedIn:false,
 				user:null
 			}
-			break;
 		case AuthActionType.SET_USER_PERMISSION:
 			return{
 				...state,
 				userPermission:action.payload.data
 			}
-			break;
 
 		default:
 			return state
-			break;
 	}
 }
 

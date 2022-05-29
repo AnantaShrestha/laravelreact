@@ -13,13 +13,11 @@ const RoleReducer = (state=roleState,action) =>{
 				...state,
 				roles:action.payload.data
 			}
-			break;
 		case RoleActionType.ROLE_CREATED_SUCCESS:
 			return {
 				...state,
 				role:action.payload.data
 			}
-			break;
 		case RoleActionType.ROLE_EDIT_SUCCESS:
 			return{
 				...state,
@@ -30,7 +28,6 @@ const RoleReducer = (state=roleState,action) =>{
 				...state,
 				role:action.payload.data
 			}
-			break;
 		case RoleActionType.ROLE_DELETED_SUCCESS:
 			return {
 				...state,
@@ -39,7 +36,6 @@ const RoleReducer = (state=roleState,action) =>{
 			break
 		default:
 			return state;
-			break;
 	}
 }
 

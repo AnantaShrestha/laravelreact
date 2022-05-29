@@ -1,6 +1,7 @@
 import {MessageActionType} from '../../types'
 const messageState= {
 	messages:{},
+	message:[]
 }
 
 const MessageReducer = (state=messageState,action) =>{
@@ -10,11 +11,13 @@ const MessageReducer = (state=messageState,action) =>{
 				...state,
 				messages:action.payload.data
 			}
-			break;
-		
+		case MessageActionType.MESSAGE_CREATED_SUCCESS:
+			return{
+				...state,
+				message:action.payload.data
+			}
 		default:
 			return state
-			break;
 	}
 }	
 

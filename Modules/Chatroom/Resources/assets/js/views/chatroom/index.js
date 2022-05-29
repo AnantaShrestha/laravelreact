@@ -14,23 +14,24 @@ const ChatRoom = () =>{
 		page:1,
 		search:''
 	})
-	const [userId,setUserId]=useState();
-	const [activeUsers,setActiveUsers]=useState([]);
+	const [receiverUserId,setReceiverUserId]=useState();
+	const [activeUsers,setActiveUsers]=useState([])
+
 	useEffect(() => {
 		dispatch(ChatListUserAction(data))
 	}, [data])
+
 	const selectUser = (userId) =>{
 		dispatch(UserMessageAction(userId))
-		setUserId(userId)
+		setReceiverUserId(userId)
 	}
-	console.log(activeUsers)
 	return(
 		<>	
 		<div className="chat-room-wrapper">
 			<div className="chat-row-message-wrapper">
 				<Message
 					messages={messages}
-					userId={userId}
+					receiverUserId={receiverUserId}
 				/>
 				
 			</div>
@@ -46,7 +47,7 @@ const ChatRoom = () =>{
 									<div className="chat-user-item" key={rowIndex} onClick={()=>selectUser(user.id)}>
 										<div className="chat-user-image">
 											<span>{shortName(user.name)}</span>
-											<div className="chat-online-status"></div>
+											<div className={`chat-online-status  ${(activeUsers[user.id]!=undefined || activeUsers[user.id]!=null ) && 'green'}`}></div>
 										</div>
 										<div className="chat-user-name">
 											<span>{user.name}</span>

@@ -2,11 +2,13 @@ import React, {useState,useEffect} from 'react'
 import { capitalFirstLetter } from 'lodash';
 const useForm = (callback) =>{
 	//values
-	const [values, setValues] = useState({});
+	const [values,setValues] = useState({});
     //Errors
     const [errors,setErrors] = useState({})
     //validation
     const [validation,setValidation]=useState({})
+    //reset
+    const [reset,setReset] = useState(false)
     //form button loading and disable
     const [isLoading,setLoading]=useState(false)
 	const [isDisable,setDisable]=useState(false)
@@ -82,6 +84,8 @@ const useForm = (callback) =>{
             validate()
     		setLoading(false)
     		setDisable(false)
+            if(reset)
+                event.target.reset();
            	if(callback())
                 callback()
     	},2000)
@@ -95,6 +99,7 @@ const useForm = (callback) =>{
         isDisable,
         handleChange,
         handleSubmit,
+        setReset
     }
 }
 
