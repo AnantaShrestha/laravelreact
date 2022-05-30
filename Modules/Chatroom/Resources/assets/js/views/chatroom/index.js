@@ -5,10 +5,13 @@ import { ChatListUserAction } from '@/services/redux/user/UserAction'
 import {UserMessageAction} from '@/services/redux/message/MessageAction'
 import {currentUser} from '@/core/globalFunction'
 import Message from './message'
+import {initiateSocketConnection,connectedToSocket} from '@/socket/services'
+
 const ChatRoom = () =>{
 	const dispatch=useDispatch()
 	const users=useSelector((state) => state.user.chatUsers.data)
 	const messages=useSelector((state) => state.message.messages)
+	const {user} =useSelector((state) => state.auth)
 	const [data,setData]=useState({
 		length:10,
 		page:1,
@@ -16,15 +19,23 @@ const ChatRoom = () =>{
 	})
 	const [receiverUserId,setReceiverUserId]=useState();
 	const [activeUsers,setActiveUsers]=useState([])
-
 	useEffect(() => {
 		dispatch(ChatListUserAction(data))
 	}, [data])
-
+	useEffect(()=>{
+		connectedToSocket(user.id)
+	},[])
+	useEffect(()=>{
+		let socket=initiateSocketConnection()
+		socket.on('updateUserStatus',(data)=>{
+			setActiveUsers(data)
+		})
+	},[])
 	const selectUser = (userId) =>{
 		dispatch(UserMessageAction(userId))
 		setReceiverUserId(userId)
 	}
+	console.log(activeUsers)
 	return(
 		<>	
 		<div className="chat-room-wrapper">

@@ -32,3 +32,4 @@ export function shortName(data){
 	
 }
 
+//get current user
