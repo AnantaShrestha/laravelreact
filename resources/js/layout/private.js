@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect,useState} from 'react'
 import {useSelector} from "react-redux";
 import {Navigate} from 'react-router-dom'
 import SideBar from '@/components/admin/SideNav'
@@ -6,17 +6,17 @@ import TopHeader from '@/components/admin/TopHeader'
 import FlashMessage from '@/components/admin/FlashMessage'
 import checkPermission from '@/hooks/checkPermission'
 const PrivateLayout = ({children}) =>{
-	const isAuthenticate =useSelector(
-		(state) => state.auth.isLoggedIn
+	const {isLoggedIn,user} =useSelector(
+		(state) => state.auth
 	);
-	const {access} = checkPermission(isAuthenticate)
+	const {access,viewPermissions} = checkPermission(isLoggedIn)
 	return (
 		<>
 		<FlashMessage />
 			{
-				isAuthenticate ? 
+				isLoggedIn ? 
 				(
-					<div className="body-wrapper">
+					<div className="body-compose">
 						<SideBar />
 						<div className="main-content-wrapper">
 							<TopHeader />

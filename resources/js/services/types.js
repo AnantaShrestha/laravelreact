@@ -10,7 +10,7 @@ export const AuthActionType = {
 	LOGOUT_SUCCESS:'LOGOUT_SUCCESS',
 	LOGOUT_FAILED:'LOGOUT_FAILED',
 	SET_USER_PERMISSION:'SET_USER_PERMISSION',
-};
+}
 
 //log types
 export const LogActionType ={
@@ -19,7 +19,8 @@ export const LogActionType ={
 
 //message types
 export const MessageActionType={
-	SET_USER_MESSAGE : "SET_USER_MESSAGE"
+	SET_USER_MESSAGE : "SET_USER_MESSAGE",
+	MESSAGE_CREATED_SUCCESS:"MESSAGE_CREATED_SUCCESS"
 }
 //permission types
 export const PermissionActionType={
