@@ -31,7 +31,6 @@ const Select = (props) =>{
 		}else{
 			setCheckedValue(checkedValues => [...checkedValues, value])
 		}
-		setDropDown(false)
 	}
 	const selectFilter = (e) =>{
 		setData(
@@ -40,6 +39,7 @@ const Select = (props) =>{
      				event.target.value.toLowerCase()) !== -1;
      		})
 		)
+
 	}
 	return(
 		<>
@@ -73,8 +73,8 @@ const Select = (props) =>{
 							items.length > 0 && items?.map(item=>{
 								return(
 									<div key={item[0]} className="select-option">
-										<CheckBox name={name} handleChange={handleChange} value={item[0]} className='select-input' multiple={multiple} selectedValues={selectedValues} />
-										<label onClick={handleClick} htmlFor={item[0]}>{item[1]}</label>
+										<CheckBox id={`${name}-select-checked-${item[0]}`} name={name} handleChange={handleChange} value={item[0]} className='select-input' multiple={multiple} selectedValues={selectedValues ?? null} />
+										<label onClick={handleClick} htmlFor={`${name}-select-checked-${item[0]}`}>{item[1]}</label>
 									</div>
 								)
 							})

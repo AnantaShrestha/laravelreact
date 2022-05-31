@@ -3041,6 +3041,14 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3091,7 +3099,12 @@ var RoleForm = function RoleForm() {
       setValidation = _useForm.setValidation,
       errors = _useForm.errors,
       handleChange = _useForm.handleChange,
-      handleSubmit = _useForm.handleSubmit; //selector
+      handleSubmit = _useForm.handleSubmit;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      permissionsId = _useState2[0],
+      setPermissionsId = _useState2[1]; //selector
 
 
   var permissionLists = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
@@ -3115,17 +3128,18 @@ var RoleForm = function RoleForm() {
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!isAddMode) {
-      var permissions = [];
       role.permissions && Object.entries(role.permissions).map(function (_ref, i) {
         var _ref2 = _slicedToArray(_ref, 2),
             key = _ref2[0],
             permission = _ref2[1];
 
-        permissions.push(permission.id);
+        setPermissionsId(function (permissionsId) {
+          return [].concat(_toConsumableArray(permissionsId), [permission.id]);
+        });
       });
       setValues(_objectSpread(_objectSpread({}, values), {}, {
-        name: role.name || '',
-        permissions: permissions || []
+        name: (role === null || role === void 0 ? void 0 : role.name) || '',
+        permissions: permissionsId || []
       }));
     }
   }, [role]);
@@ -3192,7 +3206,7 @@ var RoleForm = function RoleForm() {
                   multiple: "true",
                   datas: permissionLists,
                   handleChange: handleChange,
-                  selectedValues: values.permissions,
+                  selectedValues: permissionsId !== null && permissionsId !== void 0 ? permissionsId : null,
                   optionValue: "name",
                   optionKey: "id"
                 })
@@ -3431,6 +3445,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/services/redux/role/RoleAction */ "./resources/js/services/redux/role/RoleAction.js");
 /* harmony import */ var _services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/services/redux/user/UserAction */ "./resources/js/services/redux/user/UserAction.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3442,12 +3470,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -3491,6 +3513,11 @@ var UserForm = function UserForm() {
       handleChange = _useForm.handleChange,
       handleSubmit = _useForm.handleSubmit;
 
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      rolesId = _useState2[0],
+      setRolesId = _useState2[1];
+
   var rolesList = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.role.roles;
   });
@@ -3504,23 +3531,22 @@ var UserForm = function UserForm() {
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!isAddMode) {
-      var _user$phone_no;
-
-      var roles = [];
-      setValues(_objectSpread(_objectSpread({}, values), {}, {
-        name: user.name || '',
-        username: user.username,
-        email: user.email,
-        phone_no: (_user$phone_no = user.phone_no) !== null && _user$phone_no !== void 0 ? _user$phone_no : '',
-        roles: roles !== null && roles !== void 0 ? roles : []
-      }));
       user.roles && Object.entries(user.roles).map(function (_ref, i) {
         var _ref2 = _slicedToArray(_ref, 2),
             key = _ref2[0],
             role = _ref2[1];
 
-        roles.push(role.id);
+        setRolesId(function (rolesId) {
+          return [].concat(_toConsumableArray(rolesId), [role.id]);
+        });
       });
+      setValues(_objectSpread(_objectSpread({}, values), {}, {
+        name: user.name || '',
+        username: user.username || '',
+        email: user.email || '',
+        phone_no: user.phone_no || '',
+        roles: user.roles || []
+      }));
     }
   }, [user]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -3720,7 +3746,7 @@ var UserForm = function UserForm() {
                   multiple: "true",
                   datas: rolesList,
                   handleChange: handleChange,
-                  selectedValues: values.roles,
+                  selectedValues: rolesId !== null && rolesId !== void 0 ? rolesId : null,
                   optionValue: "name",
                   optionKey: "id"
                 })
@@ -4558,8 +4584,6 @@ var Select = function Select(props) {
         return [].concat(_toConsumableArray(checkedValues), [value]);
       });
     }
-
-    setDropDown(false);
   };
 
   var selectFilter = function selectFilter(e) {
@@ -4609,15 +4633,16 @@ var Select = function Select(props) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "select-option",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_admin_checkBox__WEBPACK_IMPORTED_MODULE_1__["default"], {
+                id: "".concat(name, "-select-checked-").concat(item[0]),
                 name: name,
                 handleChange: handleChange,
                 value: item[0],
                 className: "select-input",
                 multiple: multiple,
-                selectedValues: selectedValues
+                selectedValues: selectedValues !== null && selectedValues !== void 0 ? selectedValues : null
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 onClick: handleClick,
-                htmlFor: item[0],
+                htmlFor: "".concat(name, "-select-checked-").concat(item[0]),
                 children: item[1]
               })]
             }, item[0]);
@@ -4981,38 +5006,35 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var CheckBox = function CheckBox(props) {
+  var checkBox = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var handleChange = props.handleChange,
       name = props.name,
       value = props.value,
       selectedValues = props.selectedValues,
       multiple = props.multiple,
-      className = props.className;
+      className = props.className,
+      id = props.id;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       checkedValues = _useState2[0],
       setCheckedValues = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState4 = _slicedToArray(_useState3, 2),
-      checkedStatus = _useState4[0],
-      setCheckedStatus = _useState4[1];
-
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setCheckedValues(selectedValues);
+    if (selectedValues != null) setCheckedValues(selectedValues);
   }, [selectedValues]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setCheckedStatus(false);
-    checkedValues.includes(value) ? setCheckedStatus('checked') : setCheckedStatus('');
+    if (checkedValues && checkedValues.includes(value)) checkBox.current.checked = true;else checkBox.current.checked = false;
   }, [checkedValues]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+      id: id,
+      ref: checkBox,
       className: className,
       name: name,
       value: value,
       type: multiple ? 'checkbox' : 'radio',
-      onChange: handleChange,
-      checked: checkedStatus
+      onChange: handleChange
     })
   });
 };
@@ -5289,20 +5311,18 @@ var useForm = function useForm(callback) {
 
     switch (event.target.type) {
       case 'checkbox':
-        if (!values[name]) {
-          setValues(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, [val])));
-          event.target.setAttribute('checked', 'checked');
-        } else {
-          if (values.hasOwnProperty(name) && event.target.checked) {
-            values[name] = [].concat(values[name], val);
-            event.target.setAttribute('checked', 'checked');
-          } else {
-            var index = values[name].indexOf(val);
+        var checkedStatus = event.target.checked;
 
-            if (index > -1) {
-              values[name].splice(index, 1);
-              event.target.removeAttribute('checked');
-            }
+        if (checkedStatus) {
+          if (values[name] === undefined) {
+            setValues(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, [val])));
+          } else {//values[name] = [].concat(values[name],val); 
+          }
+        } else {
+          var index = values[name].indexOf(val);
+
+          if (index > -1) {
+            values[name].splice(index, 1);
           }
         }
 
@@ -5312,8 +5332,9 @@ var useForm = function useForm(callback) {
         setValues(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, val)));
         break;
     }
-  }; //input change handler
+  };
 
+  console.log(values); //input change handler
 
   var handleChange = function handleChange(event) {
     event.persist();

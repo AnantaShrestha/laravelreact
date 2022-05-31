@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect,useState} from 'react'
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router";
@@ -23,6 +23,8 @@ const UserForm = () => {
         }
     }
     const { isLoading, isDisable, values,setValues,setValidation,errors, handleChange, handleSubmit } = useForm(userForm);
+    const [rolesId,setRolesId]=useState([])
+    
     const rolesList =useSelector((state) =>state.role.roles)
     const user=useSelector((state) => state.user.user)
     useEffect(()=>{
@@ -32,18 +34,18 @@ const UserForm = () => {
 	},[])
     useEffect(()=>{
 		if(!isAddMode){
-			let roles=[]
+            user.roles && Object.entries(user.roles).map(([key,role],i)=>{
+                setRolesId(rolesId=>[...rolesId,role.id])
+            })
 			setValues({
 				...values,
 				name:user.name  || '',
-                username:user.username,
-                email:user.email,
-                phone_no:user.phone_no ?? '',
-				roles:roles ?? [],
+                username:user.username || '',
+                email:user.email || '',
+                phone_no:user.phone_no || '',
+				roles:user.roles || [],
 			}) 
-			user.roles && Object.entries(user.roles).map(([key,role],i)=>{
-				roles.push(role.id)
-			})
+			
 
 		}
 	},[user])
@@ -164,7 +166,7 @@ const UserForm = () => {
                                         multiple="true" 
                                         datas={rolesList} 
                                         handleChange={handleChange}  
-                                        selectedValues={values.roles}
+                                        selectedValues={rolesId ?? null}
                                         optionValue="name"
                                         optionKey="id"
                                     />

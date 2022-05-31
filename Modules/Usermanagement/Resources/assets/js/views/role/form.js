@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import {Link,useParams } from "react-router-dom"
 import {useSelector,useDispatch} from 'react-redux'
 import { useNavigate } from "react-router";
@@ -24,7 +24,7 @@ const RoleForm = () =>{
 		}
 	}
 	const {isLoading,isDisable,values,setValues,setValidation,errors,handleChange,handleSubmit} = useForm(roleForm);
-
+	const [permissionsId,setPermissionsId]=useState([])
 	//selector
 	const permissionLists=useSelector((state)=>state.permission.permissions)
 	const role=useSelector((state)=>state.role.role)
@@ -43,14 +43,13 @@ const RoleForm = () =>{
 	},[])
 	useEffect(()=>{
 		if(!isAddMode){
-			let permissions=[]
 			role.permissions && Object.entries(role.permissions).map(([key,permission],i)=>{
-				permissions.push(permission.id)
+				setPermissionsId(permissionsId=>[...permissionsId,permission.id])
 			})
 			setValues({
 				...values,
-				name:role.name  || '',
-				permissions:permissions || []
+				name:role?.name  || '',
+				permissions:permissionsId || []
 			}) 
 
 		}
@@ -90,7 +89,7 @@ const RoleForm = () =>{
 									multiple="true" 
 									datas={permissionLists} 
 									handleChange={handleChange} 
-									selectedValues={values.permissions} 
+									selectedValues={permissionsId ?? null} 
 									optionValue="name" 
 									optionKey="id"
 								/>
