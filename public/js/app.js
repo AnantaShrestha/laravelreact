@@ -3041,14 +3041,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3104,15 +3096,15 @@ var RoleForm = function RoleForm() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       permissionsId = _useState2[0],
-      setPermissionsId = _useState2[1]; //selector
+      setPerissionsId = _useState2[1]; //selector
 
 
   var permissionLists = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.permission.permissions;
   });
-  var role = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+  var role = !isAddMode ? (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.role.role;
-  });
+  }) : [];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setValidation({
       name: {
@@ -3120,26 +3112,25 @@ var RoleForm = function RoleForm() {
       }
     });
     dispatch((0,_services_redux_permission_PermissionAction__WEBPACK_IMPORTED_MODULE_6__.PermissionsListAction)());
-  }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+
     if (!isAddMode) {
       dispatch((0,_services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_5__.EditRoleAction)(id));
     }
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!isAddMode) {
+      var ids = [];
       role.permissions && Object.entries(role.permissions).map(function (_ref, i) {
         var _ref2 = _slicedToArray(_ref, 2),
             key = _ref2[0],
             permission = _ref2[1];
 
-        setPermissionsId(function (permissionsId) {
-          return [].concat(_toConsumableArray(permissionsId), [permission.id]);
-        });
+        ids.push(permission.id);
       });
+      setPerissionsId(ids);
       setValues(_objectSpread(_objectSpread({}, values), {}, {
         name: (role === null || role === void 0 ? void 0 : role.name) || '',
-        permissions: permissionsId || []
+        permissions: ids || []
       }));
     }
   }, [role]);
@@ -3451,14 +3442,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3521,34 +3504,9 @@ var UserForm = function UserForm() {
   var rolesList = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.role.roles;
   });
-  var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+  var user = !isAddMode ? (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.user.user;
-  });
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (!isAddMode) {
-      dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_6__.EditUserAction)(id));
-    }
-  }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (!isAddMode) {
-      user.roles && Object.entries(user.roles).map(function (_ref, i) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            key = _ref2[0],
-            role = _ref2[1];
-
-        setRolesId(function (rolesId) {
-          return [].concat(_toConsumableArray(rolesId), [role.id]);
-        });
-      });
-      setValues(_objectSpread(_objectSpread({}, values), {}, {
-        name: user.name || '',
-        username: user.username || '',
-        email: user.email || '',
-        phone_no: user.phone_no || '',
-        roles: user.roles || []
-      }));
-    }
-  }, [user]);
+  }) : [];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setValidation({
       name: {
@@ -3568,7 +3526,32 @@ var UserForm = function UserForm() {
       }
     });
     dispatch((0,_services_redux_role_RoleAction__WEBPACK_IMPORTED_MODULE_5__.RoleListAction)());
+
+    if (!isAddMode) {
+      dispatch((0,_services_redux_user_UserAction__WEBPACK_IMPORTED_MODULE_6__.EditUserAction)(id));
+    }
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!isAddMode) {
+      var ids = [];
+      user.roles && Object.entries(user.roles).map(function (_ref, i) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            key = _ref2[0],
+            role = _ref2[1];
+
+        ids.push(role.id);
+      });
+      setRolesId(ids);
+      setValues(_objectSpread(_objectSpread({}, values), {}, {
+        name: (user === null || user === void 0 ? void 0 : user.name) || '',
+        username: (user === null || user === void 0 ? void 0 : user.username) || '',
+        email: (user === null || user === void 0 ? void 0 : user.email) || '',
+        phone_no: (user === null || user === void 0 ? void 0 : user.phone_no) || '',
+        roles: ids || []
+      }));
+    }
+  }, [user]);
+  console.log(values);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
     className: "content-body",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
@@ -4575,10 +4558,13 @@ var Select = function Select(props) {
 
   var handleClick = function handleClick(e) {
     var value = e.target.lastChild.data;
-    var index = checkedValues.indexOf(value);
+    var checkedStatus = e.target.previousElementSibling.checked;
 
-    if (index > -1) {
-      checkedValues.splice(index, 1);
+    if (checkedStatus) {
+      var remainingItems = checkedValues.filter(function (item) {
+        return item != value;
+      });
+      setCheckedValue(remainingItems);
     } else {
       setCheckedValue(function (checkedValues) {
         return [].concat(_toConsumableArray(checkedValues), [value]);
@@ -5248,6 +5234,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -5312,18 +5306,20 @@ var useForm = function useForm(callback) {
     switch (event.target.type) {
       case 'checkbox':
         var checkedStatus = event.target.checked;
+        console.log(checkedStatus);
 
         if (checkedStatus) {
           if (values[name] === undefined) {
             setValues(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, [val])));
-          } else {//values[name] = [].concat(values[name],val); 
+          } else {
+            setValues(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, [].concat(_toConsumableArray(values[name]), [val]))));
           }
         } else {
-          var index = values[name].indexOf(val);
-
-          if (index > -1) {
-            values[name].splice(index, 1);
-          }
+          var remainingItems = values[name].filter(function (item) {
+            return item != val;
+          });
+          console.log(remainingItems, val, values[name]);
+          setValues(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, remainingItems)));
         }
 
         break;
@@ -5332,9 +5328,8 @@ var useForm = function useForm(callback) {
         setValues(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, val)));
         break;
     }
-  };
+  }; //input change handler
 
-  console.log(values); //input change handler
 
   var handleChange = function handleChange(event) {
     event.persist();

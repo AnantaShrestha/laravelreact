@@ -23,11 +23,12 @@ const RoleForm = () =>{
 			isAddMode ? dispatch(CreateRoleAction(values,navigate)) : dispatch(UpdateRoleAction(values,id,navigate))
 		}
 	}
-	const {isLoading,isDisable,values,setValues,setValidation,errors,handleChange,handleSubmit} = useForm(roleForm);
-	const [permissionsId,setPermissionsId]=useState([])
+	const {isLoading,isDisable,values,setValues,setValidation,errors,handleChange,handleSubmit} = useForm(roleForm)
+
+	const [permissionsId,setPerissionsId]=useState([])
 	//selector
 	const permissionLists=useSelector((state)=>state.permission.permissions)
-	const role=useSelector((state)=>state.role.role)
+	const role=!isAddMode ? useSelector((state)=>state.role.role) : []
 	useEffect(()=>{
 		setValidation({
 			name:{
@@ -35,25 +36,25 @@ const RoleForm = () =>{
 			}
 		})
 		dispatch(PermissionsListAction())
-	},[])
-	useEffect(()=>{
 		if(!isAddMode){
 			dispatch(EditRoleAction(id))
 		}
 	},[])
 	useEffect(()=>{
 		if(!isAddMode){
+			var ids = []
 			role.permissions && Object.entries(role.permissions).map(([key,permission],i)=>{
-				setPermissionsId(permissionsId=>[...permissionsId,permission.id])
+				ids.push(permission.id)
 			})
+			setPerissionsId(ids)
 			setValues({
 				...values,
 				name:role?.name  || '',
-				permissions:permissionsId || []
+				permissions:ids || []
 			}) 
-
 		}
 	},[role])
+
 	return(
 		<div className="content-body">
 			<>

@@ -18,37 +18,16 @@ const UserForm = () => {
     const isAddMode = !id
     const userForm = () => {
         if(Object.keys(errors).length  === 0){
-
            isAddMode ? dispatch(CreateUserAction(values,navigate)) : dispatch(UpdateUserAction(values,id,navigate))
         }
     }
-    const { isLoading, isDisable, values,setValues,setValidation,errors, handleChange, handleSubmit } = useForm(userForm);
-    const [rolesId,setRolesId]=useState([])
-    
-    const rolesList =useSelector((state) =>state.role.roles)
-    const user=useSelector((state) => state.user.user)
-    useEffect(()=>{
-		if(!isAddMode){
-			dispatch(EditUserAction(id))
-		}
-	},[])
-    useEffect(()=>{
-		if(!isAddMode){
-            user.roles && Object.entries(user.roles).map(([key,role],i)=>{
-                setRolesId(rolesId=>[...rolesId,role.id])
-            })
-			setValues({
-				...values,
-				name:user.name  || '',
-                username:user.username || '',
-                email:user.email || '',
-                phone_no:user.phone_no || '',
-				roles:user.roles || [],
-			}) 
-			
+    const { isLoading, isDisable, values,setValues,setValidation,errors,handleChange,handleSubmit } = useForm(userForm);
 
-		}
-	},[user])
+    const [rolesId,setRolesId]=useState([])
+
+    const rolesList =useSelector((state) =>state.role.roles)
+    const user= !isAddMode ? useSelector((state) => state.user.user) : []
+    
     useEffect(()=>{
         setValidation({
             name: {
@@ -68,7 +47,30 @@ const UserForm = () => {
             }
         })
         dispatch(RoleListAction())
+        if(!isAddMode){
+            dispatch(EditUserAction(id))
+        }
     },[])
+ 
+    useEffect(()=>{
+		if(!isAddMode){
+            var ids=[]
+            user.roles && Object.entries(user.roles).map(([key,role],i)=>{
+                ids.push(role.id)
+            })
+            setRolesId(ids)
+            setValues({
+                ...values,
+                name:user?.name  || '',
+                username:user?.username || '',
+                email:user?.email || '',
+                phone_no:user?.phone_no || '',
+                roles:ids || [],
+            }) 
+		}
+	},[user])
+
+    console.log(values)
     return (
         <div className="content-body">
             <>

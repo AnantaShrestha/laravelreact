@@ -12,24 +12,23 @@ const useForm = (callback) =>{
     //form button loading and disable
     const [isLoading,setLoading]=useState(false)
 	const [isDisable,setDisable]=useState(false)
-    
     const findInputType = (event) =>{
         let name=event.target.name
         let val=event.target.value
         switch(event.target.type){
             case 'checkbox':
                 let checkedStatus=event.target.checked
+                console.log(checkedStatus)
                 if(checkedStatus){
                     if(values[name] === undefined){
                         setValues({...values,[name]:[val]})
                     }else{
-                        //values[name] = [].concat(values[name],val); 
+                       setValues({...values,[name]:[...values[name],val]})
                     }
                 }else{
-                    let index=values[name].indexOf(val)
-                    if (index > -1) {
-                        values[name].splice(index, 1);
-                    }
+                    let remainingItems = values[name].filter((item) => {return item != val});
+                    console.log(remainingItems,val,values[name])
+                    setValues({...values,[name]:remainingItems})
                 }
                 break;
             default:
@@ -38,7 +37,6 @@ const useForm = (callback) =>{
 
         }
     } 
-    console.log(values)
     //input change handler
     const handleChange = (event) =>{
         event.persist();

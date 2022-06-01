@@ -25,12 +25,14 @@ const Select = (props) =>{
 	},[data])
 	const handleClick = (e) =>{
 		let value=e.target.lastChild.data
-		let index =  checkedValues.indexOf(value);
-		if (index > -1) {
-			checkedValues.splice(index, 1);
+		let checkedStatus=e.target.previousElementSibling.checked
+		if(checkedStatus){
+			let remainingItems = checkedValues.filter((item) => {return item != value});
+			setCheckedValue(remainingItems)
 		}else{
-			setCheckedValue(checkedValues => [...checkedValues, value])
+			setCheckedValue(checkedValues=>[...checkedValues,value])
 		}
+		
 	}
 	const selectFilter = (e) =>{
 		setData(
