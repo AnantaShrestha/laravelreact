@@ -5,15 +5,11 @@ import SideBar from '@/components/admin/SideNav'
 import TopHeader from '@/components/admin/TopHeader'
 import FlashMessage from '@/components/admin/FlashMessage'
 import checkPermission from '@/hooks/checkPermission'
-import {connectedToSocket} from '@/socket/services'
 const PrivateLayout = ({children}) =>{
-	const {isLoggedIn,user} =useSelector(
+	const {isLoggedIn} =useSelector(
 		(state) => state.auth
 	);
 	const {access,viewPermissions} = checkPermission(isLoggedIn)
-	useEffect(()=>{
-		connectedToSocket(user.id)
-	},[])
 	return (
 		<>
 		<FlashMessage />

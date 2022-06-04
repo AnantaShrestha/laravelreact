@@ -11,20 +11,28 @@ var users=[]
 server.listen(8005,()=>{
 	console.log('Server is running')
 });
-// redis.subscribe('private-channel',function(){
-// 	console.log('subscribe to private channel')
-// })
-// redis.on('message',function(channel,message){
-// 	console.log(channel)
-// 	message=JSON.parse(message)
-// 	console.log(message)
-// 	if(channel== 'private-channel'){
-// 		let data =message.data.data
-// 		let receiver_id=data.receiver_id
-// 		let event =message.event
-// 	}
-// 	io.to(`${users[receiver_id]}`).emit(channel + ':' + message.event,data)
-// })
+redis.subscribe('private-channel',function(){
+	console.log('subscribe to private channel')
+})
+
+redis.subscribe('user-online-channel',function(){
+	console.log('subscribe to user online channel')
+})
+redis.on('message',function(channel,message){
+	console.log(channel)
+	message=JSON.parse(message)
+	console.log(message)
+	if(channel=='user-online-channel'){
+
+	}
+	// if(channel== 'private-channel'){
+	// 	let data =message.data.data
+	// 	let receiver_id=data.receiver_id
+	// 	let event =message.event
+	// 	io.to(`${users[receiver_id]}`).emit(channel + ':' + message.event,data)
+
+	// }
+})
 io.on('connection',(socket)=>{
 	socket.on("userConnected",function(userId){
 		users[userId] = socket.id

@@ -4,7 +4,7 @@ export const UserListAction = (data) => (dispatch) => {
 	return new Promise((resolve, reject) => { 
 		let get=data ? '?page='+data.page+'&&length='+data.length+'&&search='+data.search: ''
 		Api.get('/admin/user'+get).then(resp => {
-			dispatch({ type: UserActionType.SET_USERS, payload: resp.data })
+			dispatch({ type: UserActionType.USER_PAGINATION, payload: resp.data })
 			resolve(resp)
 		}).catch(err => {
 			if (err.resp) {
@@ -113,22 +113,3 @@ export const DeleteUserAction = (id) =>(dispatch)=>{
 	})
 }
 
-//chat list user action
-export const ChatListUserAction = (data) => (dispatch)=>{
-	return new Promise((resolve,reject)=>{
-		let get=data ? '?page='+data.page+'&&length='+data.length+'&&search='+data.search: ''
-		Api.get('/admin/user/chatListUser'+get).then(resp => {
-			dispatch({ type: UserActionType.SET_CHAT_USERS, payload: resp.data })
-			resolve(resp)
-		}).catch(err => {
-			if (err.resp) {
-				dispatch({
-					type: NotificationActionType.MESSAGE_OBJ, payload: {
-						type: 'danger', message: err.response.data.message
-					}
-				})
-			}
-			reject(err)
-		})
-	})
-}

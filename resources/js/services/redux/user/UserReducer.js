@@ -3,23 +3,16 @@ import {UserActionType} from '../../types'
 const userState= {
 	users:{},
 	user:{},
-    chatUsers:{},
 	errors:{},
 
 }
 
 const UserReducer = (state=userState,action) =>{
     switch(action.type){
-        case UserActionType.SET_USERS:
+        case UserActionType.USER_PAGINATION:
             return{
                 ...state,
                 users:action.payload.data
-            }
-
-        case UserActionType.SET_CHAT_USERS:
-            return{
-                ...state,
-                chatUsers:action.payload.data
             }
         case UserActionType.USER_CREATED_SUCCESS:
             return{
@@ -41,6 +34,7 @@ const UserReducer = (state=userState,action) =>{
 				...state,
 				users:state.users.filter(user => user.id != action.payload.id)
 			}
+    
         default:
             return state
     }

@@ -4,11 +4,10 @@ export const RouteListAction = () => (dispatch) =>{
 	return new Promise((resolve,reject)=>{
 		Api.get('/admin/permission/route/list').then(resp=>{
 			dispatch({
-				type:PermissionActionType.SET_ROUTELIST,
+				type:PermissionActionType.PERMISSION_ROUTE_LIST,
 				payload:resp.data
 			})
 			resolve(resp)
-
 		}).catch(err=>{
 			if(err.response){
 				dispatch({type:NotificationActionType.MESSAGE_OBJ,payload:{
@@ -25,7 +24,7 @@ export const PermissionsListAction = (data) => (dispatch) =>{
 		let get=data ? '?page='+data.page+'&&length='+data.length+'&&search='+data.search : ''
 		Api.get('/admin/permission'+get).then(resp=>{
 			dispatch({
-				type:PermissionActionType.SET_PERMISSIONS,
+				type:PermissionActionType.PERMISSION_PAGINATION,
 				payload:resp.data
 			})
 			resolve(resp)

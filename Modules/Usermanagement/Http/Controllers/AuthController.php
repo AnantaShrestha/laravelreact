@@ -24,7 +24,6 @@ class AuthController extends Controller
             return $this->apiResponse->responseError($validator->errors(),'Invalid Data',VALIDATIONERROR);
         }
         if (! $token = JWTAuth::attempt($validator->validated())) {
-           
             return $this->apiResponse->responseError(NULL,'Unauthorized', UNAUTHORIZED);
         }
         return $this->createNewToken($token);
@@ -38,8 +37,17 @@ class AuthController extends Controller
             'expires_in' => auth('api')->factory()->getTTL() * 60 * 24,
             'user' =>$user
         ];
-        \Session::put('user',$user);
+        $this->onlineUser($user->id);
         return $this->apiResponse->responseSuccess($data,'Login successfully',SUCCESS);
+    }
+
+    protected function onlineUser($userId){
+        $onlineUser=\Cache::get('onlineUser');
+        if(!in_array($userId,$onlineUser)){
+            $onlineUser[] = $userId;
+        }
+        $cacheOnlineUSer = \Cache::put('onlineUser',$onlineUser);
+        return $cacheOnlineUSer;
     }
 
     public function refresh() {
@@ -53,9 +61,18 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        \Cache::flush('user-permissions'.auth('api')->user()->id);
+        $user=auth('api')->user();
+        \Cache::forget('user-permissions'.$user->id);
+        $this->removeOnlineUser($user->id);
         auth()->logout();
-        \Session::forget('user');
         return $this->apiResponse->responseSuccess(NULL,'Logout Successfully',SUCCESS);
     } 
+
+    protected function removeOnlineUser($userId){
+        $onlineUser=\Cache::get('onlineUser');
+        if (($key = array_search($userId, $onlineUser)) !== false) {
+            unset($onlineUser[$key]);
+        }
+        return \Cache::put('onlineUser',$onlineUser);
+    }
 }

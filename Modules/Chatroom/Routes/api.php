@@ -13,9 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 $router->prefix('admin')->name('admin.')->group(function() use($router){ 
-    $router->prefix('message')->name('message.')->group(function() use($router){
+    $router->prefix('chat')->name('chat.')->group(function() use($router){
+        $router->get('online',['as'=>'getonlineUser','uses'=>'MessageController@getonlineUser']);
         $router->get('/{id}',['as'=>'getConversation','uses'=>'MessageController@getConversation']);
-        $router->post('/store',['as'=>'sendMessage','uses'=>'MessageController@sendMessage']);
+        $router->post('store',['as'=>'sendMessage','uses'=>'MessageController@sendMessage']);
+       
     });
 });
 

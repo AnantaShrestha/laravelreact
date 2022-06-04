@@ -56,7 +56,7 @@ class PermissionRouteRepository{
 		}
 		$finalRoute=array_merge_recursive($adminRoutes,$childRoutes);
 		unset($finalRoute['api']);
-		unset($finalRoute['message']);
+		unset($finalRoute['chat']);
 		return $finalRoute;
 	}
 	public function without()
@@ -68,7 +68,6 @@ class PermissionRouteRepository{
             $prefix.'dashboard',
             $prefix.'permission/route/list',
 			$prefix.'user/permission',
-			$prefix.'message/{id}',
 			$prefix.'user/chatListUser'
         ];
     }

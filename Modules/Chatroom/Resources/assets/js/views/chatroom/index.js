@@ -1,16 +1,14 @@
 import React,{useState,useEffect} from 'react'
 import {useDispatch,useSelector} from "react-redux";
 import {shortName} from '@/core/globalFunction'
-import { ChatListUserAction } from '@/services/redux/user/UserAction'
-import {UserMessageAction} from '@/services/redux/message/MessageAction'
+import { ChatListUserAction,ChatOnlineUserAction } from '@/services/redux/chat/ChatAction'
 import {currentUser} from '@/core/globalFunction'
 import Message from './message'
 import {initiateSocketConnection,connectedToSocket} from '@/socket/services'
 
 const ChatRoom = () =>{
 	const dispatch=useDispatch()
-	const users=useSelector((state) => state.user.chatUsers.data)
-	const messages=useSelector((state) => state.message.messages)
+	const {chatUserList,chatActiveUser,messages}=useSelector((state) => state.chatState)
 	const {user} =useSelector((state) => state.auth)
 	const [data,setData]=useState({
 		length:10,
@@ -24,18 +22,22 @@ const ChatRoom = () =>{
 	}, [data])
 	useEffect(()=>{
 		connectedToSocket(user.id)
-	},[])
+	},[connectedToSocket])
 	useEffect(()=>{
+		dispatch(ChatOnlineUserAction());
 		let socket=initiateSocketConnection()
-		socket.on('updateUserStatus',(data)=>{
-			setActiveUsers(data)
+		socket.on("user-online-channel:Modules\\Chatroom\\Events\\UserStatusEvent",function(activeUsers){
+			console.log(activeUsers)
 		})
+		socket.on('updateUserStatus',(data)=>{
+		
+		})
+
 	},[])
 	const selectUser = (userId) =>{
 		dispatch(UserMessageAction(userId))
 		setReceiverUserId(userId)
 	}
-	console.log(activeUsers)
 	return(
 		<>	
 		<div className="chat-room-wrapper">
@@ -53,7 +55,7 @@ const ChatRoom = () =>{
 					</div>
 					<div className="chat-user-list">
 						{
-							users && Object.entries(users)?.map(([rowIndex, user], i)=>{
+							chatUserList.data && Object.entries(chatUserList.data )?.map(([rowIndex, user], i)=>{
 								return(
 									<div className="chat-user-item" key={rowIndex} onClick={()=>selectUser(user.id)}>
 										<div className="chat-user-image">

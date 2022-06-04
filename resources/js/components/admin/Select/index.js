@@ -41,7 +41,6 @@ const Select = (props) =>{
      				event.target.value.toLowerCase()) !== -1;
      		})
 		)
-
 	}
 	return(
 		<>

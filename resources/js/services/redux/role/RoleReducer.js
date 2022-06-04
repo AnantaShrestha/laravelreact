@@ -8,7 +8,7 @@ const roleState= {
 
 const RoleReducer = (state=roleState,action) =>{
 	switch(action.type){
-		case RoleActionType.SET_ROLES:
+		case RoleActionType.ROLE_PAGINATION:
 			return{
 				...state,
 				roles:action.payload.data

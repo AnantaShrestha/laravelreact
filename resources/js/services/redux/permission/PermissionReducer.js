@@ -9,12 +9,12 @@ const permissionState= {
 
 const PermissionReducer = (state=permissionState,action) =>{
 	switch(action.type){
-		case PermissionActionType.SET_ROUTELIST:
+		case PermissionActionType.PERMISSION_ROUTE_LIST:
 			return{
 				...state,
 				routeLists:action.payload.data
 			}
-		case PermissionActionType.SET_PERMISSIONS:
+		case PermissionActionType.PERMISSION_PAGINATION:
 			return{
 				...state,
 				permissions:action.payload.data

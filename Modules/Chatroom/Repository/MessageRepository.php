@@ -3,6 +3,8 @@ namespace Modules\Chatroom\Repository;
 use Modules\Chatroom\Entities\Message;
 use Modules\Chatroom\Entities\UserMessage;
 use Modules\Chatroom\Events\PrivateMessageEvent;
+use Modules\Chatroom\Events\UserStatusEvent;
+
 class MessageRepository{
 	private $message,$userMessage;
 
@@ -40,6 +42,18 @@ class MessageRepository{
 		}
 		return $datas;
 	}
+
+	/**
+	 * @return online user
+	 */
+
+	public function getOnlineUser(){
+		$onlineUser=\Cache::get('onlineUser');
+		event(new UserStatusEvent($onlineUser));
+		return $onlineUser;
+	}
+
+
 
 	
 }

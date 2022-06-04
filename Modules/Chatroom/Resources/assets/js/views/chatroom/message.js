@@ -3,16 +3,18 @@ import {useDispatch,useSelector} from "react-redux";
 
 import useForm from '@/hooks/useForm'
 import Button from '@/components/admin/Button'
-import {UserMessageSendAction} from '@/services/redux/message/MessageAction'
+import {ChatUserMessageAction} from '@/services/redux/chat/ChatAction'
+import {initiateSocketConnection} from '@/socket/services'
 const Message = (props) =>{
 	const {messages,receiverUserId}=props
 	const dispatch=useDispatch()
 	const messageForm = (e) =>{
 		if(Object.keys(errors).length  === 0){
-			dispatch(UserMessageSendAction(values))
-			// socket.on("private-channel:App\\Events\\PrivateMessageEvent",function(message){
-			// 	console.log(message)
-			// })
+			let socket =initiateSocketConnection()
+			dispatch(ChatUserMessageAction(values))
+			socket.on("private-channel:Modules\\Chatroom\\Events\\PrivateMessageEvent",function(message){
+				console.log(message)
+			})
 		}	
 	}
 	const {isLoading,isDisable,values,setValues,setValidation,errors,handleChange,handleSubmit,setReset} = useForm(messageForm);

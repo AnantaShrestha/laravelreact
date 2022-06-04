@@ -44,4 +44,16 @@ class MessageController extends Controller
             return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
         }
     }
+     /**
+     * @return online user
+     */
+
+    public function getonlineUser(){
+        try{
+            $onlineUser=$this->messageRepo->getOnlineUser();
+            return $this->apiResponse->responseSuccess($onlineUser,'Success',SUCCESS);
+        }catch(Exception $e){
+            return $this->apiResponse->responseError(null,$e->getMessage(),$e->statusCode());
+        }
+    }
 }
